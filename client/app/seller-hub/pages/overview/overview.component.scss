@@ -1,0 +1,27 @@
+.mat-card {
+    .mat-card-actions {
+        a {
+            text-decoration: none;
+            cursor: pointer;
+            color: #ffca05;
+        }
+    }
+}
+
+.overview-item-info {
+    label {
+        width: 100%;
+    }
+    p {
+        width: 30%;
+        text-align: right;
+        font-weight: 800;
+    }
+    label.child {
+        margin-left: 10px;
+    }
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}

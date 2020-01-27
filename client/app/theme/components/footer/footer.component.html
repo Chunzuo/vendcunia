@@ -1,0 +1,57 @@
+<footer class="bg-primary footer">
+    <div fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutAlign="center center" class="border-bottom-mute subscribe-block theme-container">
+        <div fxFlex="100" fxFlex.gt-sm="40" fxLayout="column" fxLayoutAlign="center center"> 
+            <h2 class="fw-500">Subscribe to our Newsletter</h2>
+            <h4 class="fw-300 secondary-color">Stay up-to-date with our latest news and products.</h4>
+        </div>
+        <form method="get" class="subscribe-search-form" fxLayout="row" fxFlex="100" fxFlex.gt-sm="42.4" ngClass.sm="mt-2" ngClass.xs="mt-2">
+            <input type="text" placeholder="Your email address..." fxFlex>
+            <button mat-raised-button color="accent" (click)="subscribe()" type="button" class="mat-elevation-z0 text-muted">Subscribe</button>
+        </form>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between" class="py-3 border-bottom-mute theme-container">        
+        <div fxFlex="100" fxFlex.gt-sm="20" fxFlex.sm="40"> 
+            <h3 class="col-title">USEFUL LINKS</h3>
+            <p class="mt-2"><a href="javascript:void(0);" class="link secondary-color">My Account</a></p>
+            <p class="mt-1"><a routerLink="/contact" class="link secondary-color">Contact</a></p>
+            <p class="mt-1"><a routerLink="/compare" class="link secondary-color">Compare</a></p>
+            <p class="mt-1"><a routerLink="/wishlist" class="link secondary-color">Wishlist</a></p>
+            <p class="mt-1"><a routerLink="/checkout" class="link secondary-color">Checkout</a></p>
+            <p class="mt-1"><a href="javascript:void(0);" class="link secondary-color">FAQ</a></p>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="30" fxFlex.sm="60" ngClass.xs="mt-2"> 
+            <h3 class="col-title">CONTACT INFORMATION</h3>            
+            <p fxLayout="row" fxLayoutAlign="start center" class="mt-2 secondary-color">
+                <mat-icon class="mr-1">location_on</mat-icon>
+                <span>College House, 2nd Floor,17 King Edwards Road.</span>
+            </p>
+            <p fxLayout="row" fxLayoutAlign="start center" class="mt-1 secondary-color">
+                <mat-icon class="mr-1">mail_outline</mat-icon>
+                <span>info@vendasity.com</span>
+            </p>
+            <p fxLayout="row" fxLayoutAlign="start center" class="mt-1 secondary-color">
+                <mat-icon class="mr-1">directions</mat-icon>
+                <a href="javascript:void(0);" class="link secondary-color">London HA4 7AE,United Kingdom.</a>
+            </p>
+            <p fxLayout="row" fxLayoutAlign="start center" class="mt-1 secondary-color">
+                <mat-icon class="mr-1">directions_bus</mat-icon>
+                <span>Routes to us</span>
+            </p>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="50" ngClass.sm="mt-2" ngClass.xs="mt-2"> 
+            <!--
+            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeControl]="true">
+                <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true"></agm-marker>
+            </agm-map>
+            -->
+        </div>
+    </div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="copyright secondary-color theme-container">
+        <p ngClass.xs="mt-1">Copyright © 2018 VENDASITY
+            <a mat-button href="#" target="_blank">Terms of Service</a>
+            <a mat-button href="#" target="_blank">Privacy Policy</a>
+            <a mat-button href="#" target="_blank"> User Agreemen</a>
+        </p>
+        <p>Designed & Developed by <a mat-button href="http://c3guru.com/" target="_blank">c3guru</a></p>
+    </div>
+</footer>

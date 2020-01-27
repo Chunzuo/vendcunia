@@ -1,0 +1,101 @@
+.rvi-header {
+    border-bottom: 1px solid #e4e4e4;
+    margin-bottom: -1px;
+    line-height: initial;
+}
+.rvi-header h3 {
+    font-size: 20px;
+    color: #333;
+    font-weight: 400;
+    padding: 15px 20px;
+    margin: 0;
+    width: 300px;
+    display: inline-block;
+}
+.clearAll {
+    float: right;
+    display: block;
+    padding: 18px;
+    font-size: 16px;
+    color: #0a3dab;
+    text-decoration: none;
+}
+.rvi-items ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.rvi-itemslist {
+    min-height: 800px;
+}
+
+.item-card {
+    float: left;
+    width: 33%;
+    height: 490px;
+    box-sizing: border-box;
+    border: 1px solid #e4e4e4;
+    overflow: hidden;
+    margin: 0 0 1px 2px;
+    position: relative;
+}
+
+.item {
+    margin: 20px;
+}
+
+.item-details .price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #262626;
+}
+
+.item-image .image-card {
+    width: 286px;
+    height: 284px;
+    background: 50% 50% no-repeat;
+}
+.item-shipping {
+    font-size: 12px;
+    font-weight: bold;
+    color: #262626;
+    margin: 8px 0;
+}
+.item-hotness {
+    font-size: 12px;
+    color: #dd1e31;
+}
+.item-hotness .item-hotness-label {
+    font-weight: bold;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+.item .anchor-title {
+    text-decoration: none;
+    height: 45px;
+}
+.item-title a {
+    font-size: 14px;
+    color: #0654ba;
+    height: 34px;
+    overflow: hidden;
+    display: block;
+    font-weight: 400;
+    margin: 10px 0 15px;
+    padding: 0;
+}
+.item-details div {
+    display: inline-block;
+}
+.item-details .type {
+    font-size: 12px;
+    color: #262626;
+    margin-left: 6px;
+}
+.item-details .time-left {
+    float: right;
+    margin-top: 5px;
+}

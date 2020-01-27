@@ -1,0 +1,42 @@
+<div>
+    <div class="rvi-header">
+        <h3>Recently viewed</h3>
+        <a href="javascript:;" class="clearAll" (click)="clearAll()">Clear all</a>
+    </div>
+    <div>
+        <ul class="rvi-itemslist">
+            <li class="item-card" *ngFor="let product of dataSource?.filteredData">
+                <div class="item">
+                    <div class="item-image">
+                        <a href="javascript:;" class="anchor-image">
+                            <img class="image-card" src="{{product?.product_image_path}}">
+                        </a>
+                    </div>
+                    <div class="item-title">
+                        <a href="javascript:;" class="anchor-title">
+              {{product?.name}}
+            </a>
+                    </div>
+                    <div class="item-details">
+                        <div class="price">{{product?.current_price}}afcash</div>
+                        <div class="type">Buy It Now</div>
+                        <div class="time-left" *ngIf="product?.selling_format === 2"><span>{{ product?.duration }}s</span></div>
+                    </div>
+                    <div class="item-shipping" *ngIf="product?.sales_tax">+ {{product?.sales_tax}} afcash</div>
+                    <div class="item-shipping" *ngIf="!product?.sales_tax">+ Free Shipping</div>
+                    <!--<div class="item-hotness">
+                        <div class="item-hotness-label">Almost gone</div>
+                    </div>-->
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--<div style="margin-top: 25px;width: 100%;">
+    <div style="width: 30%;float:left;margin-top: 15px;">
+        {{recentlyProductList?.length}} items total
+    </div>
+    <div style="width: 70%;float:left;">
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" style="background-color: transparent;"></mat-paginator>
+    </div>
+</div>-->

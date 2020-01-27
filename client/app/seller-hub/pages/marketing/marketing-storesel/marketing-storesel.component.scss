@@ -1,0 +1,29 @@
+a {
+    text-decoration: none;
+    color: #3a64a5;
+    font-size: 12px;
+}
+
+.btn_cancel {
+    border: 1px solid #ddd;
+    background: -webkit-gradient(linear,left top,left bottom,from(#fefefe),to(#f8f8f8));
+    text-decoration: none;
+    color: #0654ba!important;
+}
+.btn_publish {
+    cursor: pointer;
+    color: #fff!important;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+    text-decoration: none;
+    background: -webkit-gradient(linear,left top,left bottom,from(#0079bc),to(#00509d));
+    display: inline-block;
+    zoom: 1;
+    vertical-align: baseline;
+    font-weight: 500;
+    border-radius: 3px;
+    box-shadow: 0 3px 0 #ddd;
+    font-size: 16px;
+    border: 1px solid transparent;
+    margin: 0;
+    overflow: visible;
+}

@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{data.name}}</h1>
+<div mat-dialog-content style="height: 200px;">
+    <p>{{data.content}}</p>
+    <div fxLayout="row" style="margin-top: 10px;">
+      <input matInput placeholder="Search to refine the selection of listings" [(ngModel)]="search_val" maxlength="30" style="width: 40%;" >
+      <button mat-raised-button style="margin-left: 15px;"><p style="color:#0654ba;">Search</p></button>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <div style="width: 100%; text-align: right;">
+        <input id="psn-fl-oly-close" value="Cancel" type="button" (click)="onNoClick()">
+    </div>
+</div>

@@ -1,0 +1,462 @@
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+    <div style="width: 100%">
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" style="background: #eeeeee;border-bottom: 1px solid #cccccc;">
+            <h3 [fxFlex]="40">Promotional Shipping Discounts</h3>
+            <div [fxFlex]="60" style="text-align: right;">
+                <a href="javascript:;">Learn more</a> |
+                <a href="javascript:;">Tell us what you think</a>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+            <h1 class="pt-tl">Create an order shipping offer</h1>
+        </div>
+        <div class="hl-ar13 sod-pb20 sod-pt10">
+            An order shipping offer is a conditional based offer in which you provide a promotional shipping cost and class of service for a group of eligible items when the buyer meets your specified condition. You can select up to 3 promotional shipping classes
+            and respective costs per offer. This type of offer is a great way to extend the holiday shopping season.
+            <div class="sod-ex sod-pt10">Example offers:</div>
+            <div class="sod-ex">
+                <ul class="ml-20" style='color:#777'>
+                    <li>
+                        <b>
+                      <span>Free Economy Shipping on orders over AFCASH 25.</span>
+                   </b>
+                    </li>
+                    <li>
+                        <b>
+                     <span>Free Expedited Shipping on orders over AFCASH 49.</span>
+                   </b>
+                    </li>
+                    <li>
+                        <b><span>Upgrade to 2-day shipping for AFCASH 10.</span></b>
+                    </li>
+                    <li><b><span>Upgrade to Overnight shipping for AFCASH 25.</span></b></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 1 -->
+        <div style="margin-left:20px;margin-top:20px;">
+            <div fxLayout="row">
+                <h3 style="border-bottom: 1px solid #999;width:100%">1. Set offer condition and choose promotional shipping service with respective ship costs</h3>
+            </div>
+            <div fxLayout="row">
+                <div class="hl-ar13 sod-pb20 sod-pt10">
+                    You can set a conditional purchase requirement of either a minimum spend amount or item quantity. When select buyers have clicked through your offer and meet your requirements on purchases of qualifying inventory, they'll receive the discount amount you
+                    have specified.
+                </div>
+            </div>
+            <div fxLayout="row" style="margin-top:10px">
+                <mat-card style="width:100%;">
+                    <mat-card-content style="width:30%;border-right:solid 1px #ccc;float:left;height: 100%;">
+                        <mat-radio-group [(ngModel)]="method">
+                            <div fxLayout="row">
+                                <mat-radio-button value="1">Minimum order</mat-radio-button>
+                            </div>
+                            <p class="ml_p">(Example: Spend AFCASH 50 or more)</p>
+                            <div fxLayout="row" style="margin-top:10px">
+                                <mat-radio-button value="2">Minimum quantity</mat-radio-button>
+                            </div>
+                            <p class="ml_p">(Example: Buy at least 3 items)</p>
+                            <div fxLayout="row" style="margin-top:10px">
+                                <mat-radio-button value="3">No minimum</mat-radio-button>
+                            </div>
+                            <p class="ml_p">(Example: Flat rate shipping)</p>
+                        </mat-radio-group>
+                    </mat-card-content>
+                    <mat-card-content style="width:65%;float:right">
+                        <div fxLayout="row" *ngIf="method==1">
+                            <span> Select minimum purchase amount: </span>
+                            <select [(ngModel)]="shippingDiscountObject.min_price">
+                                <option value="0">---</option>
+                                <option value="5">AFCASH 5</option>
+                                <option value="10">AFCASH 10</option>
+                                <option value="15">AFCASH 15</option>
+                                <option value="20">AFCASH 20</option>
+                                <option value="25">AFCASH 25</option>
+                            </select>
+                        </div>
+                        <div fxLayout="row" *ngIf="method==2">
+                            <span> Select minimum purchase quantity: </span>
+                            <select [(ngModel)]="shippingDiscountObject.min_quantity">
+                                <option value="0">---</option>
+                                <option value="5">2 items</option>
+                                <option value="10">3 items</option>
+                                <option value="15">4 items</option>
+                                <option value="20">5 items</option>
+                                <option value="25">6 items</option>
+                            </select>
+                        </div>
+                        <div fxLayout="row" *ngIf="method==3">
+                            <span> No minimum spend or quantity threshold </span>
+                        </div>
+                        <div fxLayout="row" style="margin-top:10px">
+                            <span> Select promotional shipping method and ship price: </span>
+                        </div>
+                        <div fxLayout="row" style="margin-top:10px">
+                            <select [(ngModel)]="displayMode" (change)="onDisplayModeChange()">
+                              <option value="0" selected="selected">Specified delivery day range (recommended)</option>
+                              <option value="1" >Unspecified delivery day range</option>
+                          </select>
+                        </div>
+                        <div *ngIf="displayMode == 0">
+                            <div fxLayout="row" style="width:100%;margin-top:10px">
+                                <mat-checkbox [(ngModel)]="shippingDiscountObject.economy_check" (click)="onClickEconomyCheck()">
+                                    Economy (1-10 days + handling)
+                                </mat-checkbox>
+                                <span class='mtl'> Cost: </span>
+                                <select [(ngModel)]="economySelect" [disabled]="shippingDiscountObject.standard_check" (change)="onEconomySelectChange()">
+                                    <option value="0">Free</option>
+                                    <option value="1">Flat</option>
+                                </select>
+                                <div *ngIf="economySelect == 1" style="margin-left: 10px;">
+                                    <input type="text" [(ngModel)]="shippingDiscountObject.economy_price" [disabled]="shippingDiscountObject.standard_check">
+                                    <label>AFCASH</label>
+                                </div>
+                            </div>
+                            <div fxLayout="row" style="width:100%;margin-top:10px">
+                                <mat-checkbox [(ngModel)]="shippingDiscountObject.standard_check" (click)="onClickStandardCheck()">
+                                    Standard (1-5 days + handling)
+                                </mat-checkbox>
+                                <span class='mtl'> Cost: </span>
+                                <select [(ngModel)]="standardSelect" [disabled]="shippingDiscountObject.economy_check" (change)="onStandardSelectChange()">
+                                    <option value="0">Free</option>
+                                    <option value="1">Flat</option>
+                                </select>
+                                <div *ngIf="standardSelect == 1" style="margin-left: 10px;">
+                                    <input type="text" [(ngModel)]="shippingDiscountObject.standard_price" [disabled]="shippingDiscountObject.economy_check">
+                                    <label>AFCASH</label>
+                                </div>
+                            </div>
+                            <div class="nod-pt5 nod-line"></div>
+                            <div fxLayout="row" style="width:100%;margin-top:10px">
+                                <mat-checkbox [(ngModel)]="shippingDiscountObject.expected_check" (click)="onClickExpectedCheck()">
+                                    Expedited (1-3 days + 0-1 day handling)
+                                </mat-checkbox>
+                                <span class='mtl'> Cost: </span>
+                                <select [(ngModel)]="expectedSelect" [disabled]="shippingDiscountObject.twoday_check" (change)="onExpectedSelectChange()">
+                                    <option value="0">Free</option>
+                                    <option value="1">Flat</option>
+                                </select>
+                                <div *ngIf="expectedSelect == 1" style="margin-left: 10px;">
+                                    <input type="text" [(ngModel)]="shippingDiscountObject.expected_price" [disabled]="shippingDiscountObject.twoday_check" />
+                                    <label>AFCASH</label>
+                                </div>
+                            </div>
+                            <div fxLayout="row" style="width:100%;margin-top:10px">
+                                <mat-checkbox [(ngModel)]="shippingDiscountObject.twoday_check" (click)="onClickTwodayCheck()">
+                                    Two-day (1-2 days + 0-1 day handing)
+                                </mat-checkbox>
+                                <span class='mtl'> Cost: </span>
+                                <select [(ngModel)]="twodaySelect" [disabled]="shippingDiscountObject.expected_check" (change)="onTwodaySelectChange()">
+                                    <option value="0">Free</option>
+                                    <option value="1">Flat</option>
+                                </select>
+                                <div *ngIf="twodaySelect == 1" style="margin-left: 10px">
+                                    <input type="text" [(ngModel)]="shippingDiscountObject.twoday_price" [disabled]="shippingDiscountObject.expected_check" />
+                                    <label>AFCASH</label>
+                                </div>
+                            </div>
+                            <div class="nod-pt5 nod-line"></div>
+                            <div fxLayout="row" style="width:100%;margin-top:10px">
+                                <mat-checkbox [(ngModel)]="shippingDiscountObject.overnight_check">
+                                    Overnight (1 day + 0-1 day handling)
+                                </mat-checkbox>
+                                <span class='mtl'> Cost: </span>
+                                <select [(ngModel)]="overnightSelect" (change)="onOvernightSelectChange()">
+                                    <option value="0">Free</option>
+                                    <option value="1">Flat</option>
+                                </select>
+                                <div *ngIf="overnightSelect == 1" style="margin-left: 10px;">
+                                    <input type="text" [(ngModel)]="shippingDiscountObject.overnight_price" />
+                                    <label>AFCASH</label>
+                                </div>
+                            </div>
+                            <div class="nod-pr10" style="white-space:normal;">
+                                <div class="nod-prepad">- Expedited options are not recommended unless you support order handling times of 1 day or less.</div>
+                                <div class="nod-pt5 nod-prepad">- Your lowest cost shipping service will be marketed to buyers in key placements. Buyers will see your upgrade options when they checkout.</div>
+                                <div class="nod-pt5 nod-prepad nod-pr10 nod-pr10">- Shipping promotion spend threshold rules are always evaluated against the order subtotal of eligible items after all item discounts have been applied.
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="displayMode == 1">
+                            <div fxLayout="row" style="width:100%;margin-top:10px">
+                                <div>Promotional shipping (varies)</div>
+                                <span class='mtl'> Cost: </span>
+                                <select [(ngModel)]="promotionalSelect">
+                                    <option value="0">Free</option>
+                                    <option value="1">Flat</option>
+                                </select>
+                                <div *ngIf="promotionalSelect == 1" style="margin-left: 10px;">
+                                    <input type="text" [(ngModel)]="shippingDiscountObject.promotional_price" />
+                                    <label>AFCASH</label>
+                                </div>
+                            </div>
+                            <div class="nod-pr10" style="white-space:normal;">
+                                <div class="nod-prepad">- Shipping promotion spend threshold rules are always evaluated against the order subtotal of eligible items after all item discounts have been applied.</div>
+                            </div>
+                        </div>
+                        <div fxLayout="row" style="margin-top:10px;">
+                            <div class="nod-pre">
+                                <span class="nod-col33 nod-fb nod-t16c3">Preview:</span> &nbsp;
+                                <span id="nod-m-o-prE" class="nod-col448600 nod-fb nod-t16c4">-offer preview area-</span>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div style="margin-left:20px;margin-top:20px;">
+            <div fxLayout="row">
+                <h3 [fxFlex]="40" style="border-bottom: 1px solid #999;">2. Choose qualifying items for your offer</h3>
+                <div [fxFlex]="60" style="text-align: right;border-bottom: 1px solid #999;">
+                    |
+                    <a href="javascript:;">Minimum requirements for items to be included in an offer</a>
+                </div>
+            </div>
+            <div fxLayout="row">
+                <div class="hl-ar13 sod-pb20 sod-pt10">
+                    Select items that are eligible for this offer.
+                </div>
+            </div>
+            <div fxLayout="row" style="margin-top:10px">
+                <mat-card style="width:100%">
+                    <mat-card-content>
+                        <mat-radio-group [(ngModel)]="offerModeSelect">
+                            <div fxLayout="row">
+                                <mat-radio-button value="0">Restrict inventory by rules</mat-radio-button>
+                            </div>
+                            <div class="ml_p" style="background: #efefef" *ngIf="offerModeSelect==0">
+                                <a href="javascript:;">Create inclusion rule</a> |
+                                <a href="javascript:;">Create exclusion rule</a>
+                            </div>
+                            <div fxLayout="row" style="margin-top:10px">
+                                <mat-radio-button value="1">Restrict inventory by SKUs</mat-radio-button>
+                            </div>
+                            <div style="background: #efefef" *ngIf="offerModeSelect == 1">
+                                <p class="ml_p">You can select up to 500 individual SKUs. SKUs or stock keeping units are your product identifiers for your listings and are also known on Vendasity as Custom Labels.</p>
+                                <div fxLayout="row" style="margin-top:10px" class="ml_p">
+                                    <a href="javascript:;">Enter SKUs</a> |
+                                    <a href="javascript:;">Select individual SKUs</a>
+                                </div>
+                            </div>
+                            <div fxLayout="row" style="margin-top:10px">
+                                <mat-radio-button value="2">Restrict inventory by Item IDs</mat-radio-button>
+                            </div>
+                            <div style="background: #efefef" *ngIf="offerModeSelect == 2">
+                                <p class="ml_p">You can select up to 500 items or listings. If you assign SKUs aka custom labels to your items, we recommend that you restrict by SKU since an Item ID can change when you relist an item.</p>
+                                <div fxLayout="row" style="margin-top:10px" class="ml_p">
+                                    <a href="javascript:;" (click)="visible_inputProducts = true;">
+                                        Enter Item IDs
+                                    </a> |
+                                    <a href="javascript:;" (click)="openSelectProductsDialog()">
+                                        Select individual items
+                                    </a>
+                                </div>
+                                <input type="text" placeholder="Input product ids.(Separate by comma)" style="margin-top: 10px;" *ngIf="visible_inputProducts == true" />
+                            </div>
+                        </mat-radio-group>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div style="margin-left:20px;margin-top:20px;">
+            <div fxLayout="row">
+                <h3 style="border-bottom: 1px solid #999;width:100%">3. Describe the items that are eligible for the offer</h3>
+            </div>
+            <div fxLayout="row">
+                <div class="hl-ar13 sod-pb20 sod-pt10">
+                    Enter a brief description of what is eligible for the offer. If possible, this should include category and brands of the merchandise included in the offer, see examples below. This is displayed to shoppers, see preview area below. You have a 50 character
+                    limit.
+                </div>
+            </div>
+            <div fxLayout="row" style="margin-top:10px">
+                <mat-card style="width:100%;">
+                    <mat-card-content>
+                        <span style="font-weight: bold;float:left">Enter description:</span>
+                        <div style="margin-left:30px;float:left">
+                            <div fxLayout="row">
+                                <input type="text" [(ngModel)]="shippingDiscountObject.description" />
+                            </div>
+                            <div fxLayout="row">
+                                <div class="sl-c777">
+                                    <p>Examples:</p>
+                                    <p>1. Brand &amp; categories: On Michael Kors hand bags &amp; shoes</p>
+                                    <p>2. All brands - Coach, DKNY, Christian Dior &amp; Chloe</p>
+                                    <p>3. Subset of brands - Top brands including Nike, Adidas &amp; Puma</p>
+                                    <p>4. Categories - Consumer electronics &amp; TVs</p>
+                                </div>
+                            </div>
+                            <div fxLayout="row" style="margin-top:10px;">
+                                <div class="nod-pre">
+                                    <span class="nod-col33 nod-fb nod-t16c3">Preview:</span> &nbsp;
+                                    <span id="nod-m-o-prE" class="nod-col448600 nod-fb nod-t16c4">-offer preview area-</span>
+                                </div>
+                            </div>
+                            <div fxLayout="row">
+                                <div class="sl-c777">
+                                    <p>Marked down item price reflects all savings. Items provided by vendasity.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div style="margin-left:20px;margin-top:20px;">
+            <div fxLayout="row">
+                <h3 style="border-bottom: 1px solid #999;width:100%">4. Schedule your offer</h3>
+            </div>
+            <div fxLayout="row">
+                <div class="hl-ar13 sod-pb20 sod-pt10">
+                    Select a start date and end date for your offer. Discounts will only be applied during this time period as long as the buyer has started the checkout process. As the offer comes to an end, a countdown will be presented on the offer page to create a sense
+                    of urgency.
+                </div>
+            </div>
+            <div fxLayout="row" style="margin-top:10px">
+                <mat-card style="width:100%;">
+                    <mat-card-content>
+                        <div fxLayout="row">
+                            <span style="font-weight: bold;float:left">Enter offer title:</span>
+                            <input style="float:left;margin-left:20px;" type="text" [(ngModel)]="shippingDiscountObject.title">
+                            <p style="font-style: italic;float:left;margin-left:20px;">(Example: Summer sale)</p>
+                        </div>
+                        <div fxLayout="row" style="margin-top:10px">
+                            <span style="font-weight: bold;float:left;margin-top:14px">Start date:</span>
+                            <mat-form-field style="float:left;margin-left:20px">
+                                <input matInput [matDatepicker]="startPicker" placeholder="Choose a date" [formControl]="dateCtrl">
+                                <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                                <mat-datepicker #startPicker></mat-datepicker>
+                            </mat-form-field>
+                            <mat-checkbox (click)="toggleEnableState()" [(ngModel)]="checkValue" style="float:left;margin-left:20px;margin-top:14px">Start immediately</mat-checkbox>
+                        </div>
+                        <div fxLayout="row" style="margin-top:10px">
+                            <span style="font-weight: bold;float:left;margin-top:14px">End date:</span>
+                            <mat-form-field style="float:left;margin-left:20px">
+                                <input matInput [matDatepicker]="endPicker" placeholder="Choose a date">
+                                <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                                <mat-datepicker #endPicker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div style="margin-left:20px;margin-top:20px;">
+            <div fxLayout="row">
+                <h3 style="border-bottom: 1px solid #999;width:100%">5. Add a picture to improve promotion of your offer</h3>
+            </div>
+            <div fxLayout="row">
+                <div class="hl-ar13 sod-pb20 sod-pt10">
+                    Please upload an image that best characterizes the inventory available for this offer.The image should be of high quality and have a transparent or white background. You can also use the primary item picture from any of your live items by entering the
+                    item ID below. If you cannot enter an item ID or upload a high quality image, we will automatically select an image from your selected inventory, if you choose the Auto-select option.
+                </div>
+            </div>
+            <div fxLayout="row" style="margin-top:10px">
+                <mat-card style="width:100%;">
+                    <mat-card-content style="width:30%;float:left">
+                        <div style='border:solid 1px #ccc;min-height:200px;' class="drop-container" [ngStyle]="{'background-image': 'url(' + shippingDiscountObject.image_path + ')'}">
+                            <span *ngIf="shippingDiscountObject.image_path == ''">
+                                Image not available
+                            </span>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-content style="width:65%;float:left;margin-left:20px">
+                        <input class="upl-fileInp" type="file" value="" title="Upload picture" multiple="" (change)="selectFile($event)">
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div style="margin-left:20px;margin-top:20px;">
+            <div fxLayout="row">
+                <h3 style="border-bottom: 1px solid #999;width:100%">6. Offer Priority</h3>
+            </div>
+            <div fxLayout="row">
+                <div class="hl-ar13 sod-pb20 sod-pt10">
+                    If you have multiple offers, Offers are displayed on the page based on Priority. Select a Priority for this offer.
+                </div>
+            </div>
+            <div fxLayout="row" style="margin-top:10px">
+                <mat-card style="width:100%;">
+                    <mat-card-content>
+                        <p style="float:left"> Priority :</p>
+                        <select style="float:left;margin-left:15px" [(ngModel)]="shippingDiscountObject.priority">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div fxLayout="row">
+                <div class="hl-ar13 sod-pb20 sod-pt10">
+                    By submitting this form, you acknowledge that you've reviewed and accepted
+                    <a style="color:#0654ba;cursor:pointer;">Vendasity Promotions Manager's Terms and Conditions.</a>
+                </div>
+            </div>
+            <div fxLayout="row">
+                <button mat-raised-button color="primary" style="float:left;" (click)="onSubmitClick()">
+                    Submit
+                </button>
+                <button mat-raised-button color="primary" style="float:left;margin-left:20px;">Cancel</button>
+            </div>
+            <div fxLayout="row">
+                <div class="coreFooterLinks" id="glbfooter">
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                            <tr>
+                                <td class="g-pipe">
+                                    <!-- <img src="Promotional%20Shipping%20Discounts_files/s.gif" alt="" width="1" height="10"> -->
+                                    <br>
+                                    <a href="http://www.Vendasity.com/">About Vendasity</a> |
+                                    <a href="http://www2.Vendasity.com/aw/marketing.shtml">Announcements</a> |
+                                    <a href="http://hub.shop.Vendasity.com/">Buy Hub</a> |
+                                    <a href="http://pages.Vendasity.com/securitycenter/index.html">Security Center</a> |
+                                    <a href="http://resolutioncenter.Vendasity.com/">Resolution Center</a> |
+                                    <a href="http://pages.Vendasity.com/buy/tools.html">Buyer Tools</a> |
+                                    <a href="http://pages.Vendasity.com/help/policies/overview.html">Policies</a> |
+                                    <a href="http://stores.Vendasity.com/">Stores</a> |
+                                    <a href="http://pages.Vendasity.com/sitemap.html">Site Map</a> |
+                                    <a href="http://pages.Vendasity.com/help/index.html">Help</a> |
+                                    <a href="http://viv.Vendasity.com/ws/VendasityISAPI.dll?VendasityTime">Vendasity official time</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="5"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" height="1" bgcolor="#CCCCCC"></td>
+                            </tr>
+                            <tr>
+                                <td height="10"></td>
+                            </tr>
+                            <tr class="g-hlp" valign="top">
+                                <td class="g-nav coreFooterLegalNotice">Copyright© 2018 Africunia Inc. All Rights Reserved. Designated trademarks and brands are the property of their respective owners. Use of this Web site constitutes acceptance of the Vendasity <a title=" " href="http://pages.Vendasity.com/help/policies/user-agreement.html?rt=nc"
+                                        target="_blank">User Agreement</a> and <a title=" " href="http://pages.Vendasity.com/help/policies/privacy-policy.html?rt=nc" target="_blank">Privacy Policy</a>.
+                                    <br>
+                                    <!-- <img src="Promotional%20Shipping%20Discounts_files/s.gif" alt="" height="20"> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="cobrandFooter"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

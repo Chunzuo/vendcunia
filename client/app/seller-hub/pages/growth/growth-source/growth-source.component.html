@@ -1,0 +1,63 @@
+<div fxLayout="row">
+    <h2 style="width: 80%">Get sourcing guidance</h2>
+    <div style="width: 10%;text-align: right; margin-top: 10px;">
+      <p>Active Site:</p>
+    </div>
+    <div style="width: 10%; text-align: right;">
+      <button mat-raised-button color="primary">US Site only</button>
+    </div>
+</div>
+  
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <p style="font-size: 20px;">Start by finding a category</p>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="row">
+        <div [fxFlex]="30" fxFlexFill>
+            <mat-form-field>
+                <input matInput placeholder="searching by product name,brand or UPC...">
+            </mat-form-field>
+        </div>
+        <div fxFlex fxFlexFill>
+            <button mat-raised-button color="primary" style="margin-top: 5px;">Search</button>
+        </div>
+      </div>
+    </mat-card-content>
+</mat-card>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+          <h2 style="width: 80%">Categories</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-tab-group [@.disabled]="true" [selectedIndex]="0">
+            <mat-tab label="Browse">
+                <hr class="mt-20">
+                <div fxLayout="row" class="mt-20 icon">
+                  <div [fxFlex]="25" fxFlexFill fxLayoutAlign="left left">
+                      Antiques
+                  </div>
+                </div>
+                <hr class="mt-20">
+                <div fxLayout="row" class="mt-20 icon">
+                  <div [fxFlex]="25" fxFlexFill fxLayoutAlign="left left">
+                      Art
+                  </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Following">
+              
+            </mat-tab>
+            <mat-tab label="Your categories">
+              
+            </mat-tab>
+            <mat-tab label="Recently viewed">
+              
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>

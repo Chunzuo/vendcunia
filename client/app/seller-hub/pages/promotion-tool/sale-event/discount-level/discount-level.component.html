@@ -1,0 +1,21 @@
+<div fxLayout="row">
+    <div class="offer-type-container">
+        <mat-radio-button value="{{ optionValue }}" style="float: left">
+            Take
+        </mat-radio-button>
+        <mat-form-field style="margin-left: 10px; margin-top: -10px; width: 50px;">
+            <mat-select formControlName="{{ discountSelectControlName }}">
+                <mat-option [value]="5">5</mat-option>
+                <mat-option [value]="30" selected="selected">30</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <p class="n_p"> % off each item</p>
+        <mat-form-field style="margin-left: 10px; margin-right: 20px; margin-top: -10px; width: 50px;">
+            <mat-select formControlName="{{ saleSelectControlName }}">
+                <mat-option [value]="50" selected="selected">50</mat-option>
+                <mat-option [value]="100">100</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <p (click)="removeLevel()" class="n_p" style="margin-left:10px;color:#0654ba;cursor: pointer;"> remove</p>
+    </div>
+</div>

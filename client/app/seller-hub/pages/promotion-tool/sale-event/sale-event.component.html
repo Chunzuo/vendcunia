@@ -1,0 +1,538 @@
+<div fxLayout="row">
+    <h2 style="width: 40%">Create a sale event</h2>
+</div>
+<mat-horizontal-stepper #horizontalStepper linear="true" class="mat-elevation-z2" fxShow="false" fxShow.gt-sm>
+    <mat-step [stepControl]="offerTypeForm" label="Set offer type">
+        <form [formGroup]="offerTypeForm" (ngSubmit)="onOfferTypeFormSubmit(offerTypeForm.value)">
+            <mat-card class="mt-10">
+                <mat-card-header>
+                    <mat-card-title>
+                        <h2>Choose your discount</h2>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-radio-group formControlName="discount_sale_type">
+                        <div fxLayout="row" class="mt-10">
+                            <div class='field'>
+                                <label class='field_label'>Discount + sale event</label>
+                                <div class='field_control'>
+                                    <fieldset>
+                                        <div id="addLayout" *ngFor='let one of levelArray; let num = index'>
+                                            <div fxLayout="row">
+                                                <div class="offer-type-container">
+                                                    <mat-radio-button value="discount_sale_percent_{{ num + 1 }}" style="float: left">
+                                                        Take
+                                                    </mat-radio-button>
+                                                    <mat-form-field style="margin-left: 10px; margin-top: -10px; width: 50px;">
+                                                        <mat-select formControlName="discount_select_{{ num + 1 }}">
+                                                            <mat-option value="5">5</mat-option>
+                                                            <mat-option value="30">30</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <p class="n_p"> % off each item</p>
+                                                    <mat-form-field style="margin-left: 10px; margin-right: 20px; margin-top: -10px; width: 50px;">
+                                                        <mat-select formControlName="sale_select_{{ num + 1 }}">
+                                                            <mat-option value="50">50</mat-option>
+                                                            <mat-option value="100">100</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <p (click)="removeLevel(num)" class="n_p" style="margin-left:10px;color:#0654ba;cursor: pointer;">remove</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div fxLayout="row">
+                                            <a (click)="addDiscount()" style='color:#0654ba;cursor: pointer;margin-left: 35px;margin-bottom: 10px;'> Add another discount level </a>
+                                        </div>
+                                        <div fxLayout="row">
+                                            <div class="offer-type-container">
+                                                <mat-radio-button value="discount_sale_afcash" style="float: left">
+                                                    Take AFCASH
+                                                </mat-radio-button>
+                                                <mat-form-field style="margin-left: 10px; margin-top: -10px; width: 50px;">
+                                                    <mat-select formControlName="discount_select_afcash">
+                                                        <mat-option value="5">5</mat-option>
+                                                        <mat-option value="30">30</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <p class="n_p"> off each item</p>
+                                                <mat-form-field style="margin-left: 10px; margin-top: -10px; width: 50px;">
+                                                    <mat-select formControlName="sale_select_afcash">
+                                                        <mat-option value="50">50</mat-option>
+                                                        <mat-option value="100">100</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div fxLayout="row">
+                                            <div class="offer-type-container">
+                                                <mat-radio-button value="free_shipping_discount" style="float: left">
+                                                    Offer free shipping for all discounted items (applies to first domestic shipping service)
+                                                </mat-radio-button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <div class="flyout-alert flyout-alert--information flyout-alert--left-middle" role="region" aria-label="Information" style="margin-top:40px;margin-left:20px">
+                                        <p style="margin-bottom: 0;">Create a sale event with a percentage off discount.</p>
+                                        <p>Add up to 10 levels of discounts in a single sale event.</p>
+                                        <p>e.g. Save up to 50% on designer accessories or Save 20% off designer handbags</p>
+                                        <p>You'll choose the inventory for each level of discount in the next step.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div fxLayout="row" class="mt-10">
+                            <div class='field'>
+                                <label class='field_label'>Sale event only</label>
+                                <div class='field_control'>
+                                    <fieldset>
+                                        <div fxLayout="row">
+                                            <div class="offer-type-container">
+                                                <mat-radio-button value="sale_event_only" style="float:left">
+                                                    Save up to
+                                                </mat-radio-button>
+                                                <mat-form-field style="margin-left: 10px; margin-top: -10px; width: 50px;">
+                                                    <mat-select formControlName="sale_event_only_select">
+                                                        <mat-option value="5">5</mat-option>
+                                                        <mat-option value="20" selected="selected">20</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <p class="n_p"> % </p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-radio-group>
+                    <mat-error *ngIf="offerTypeForm.controls.discount_sale_type.errors?.required">Please choose discount type</mat-error>
+                    <input type="hidden" autocomplete="discount value" formControlName="discount_value">
+                    <input type="hidden" autocomplete="type" formControlName="type">
+                    <input type="hidden" autocomplete="event value" formControlName="event_value">
+                    <input type="hidden" autocomplete="message" formControlName="message">
+                </mat-card-content>
+            </mat-card>
+            <div fxLayout="row" class="mt-20" style="float:right">
+                <button mat-raised-button matStepperNext color="primary" style="width:250px">Select items</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="selectItemsForm" label="Select items">
+        <form [formGroup]="selectItemsForm" (ngSubmit)="onSelectItemsFormSubmit(selectItemsForm.value)">
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" *ngIf="selectClick === 1">
+                <mat-card fxFlex="50%">
+                    <mat-card-header fxLayoutAlign="center">
+                        <mat-card-title>
+                            <h3>Select items</h3>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content fxLayout="column">
+                        <p fxLayoutAlign="center">500 items per promotion</p>
+                        <p fxLayoutAlign="center">Choose items from your inventory. Items can be removed at any time</p>
+                        <button mat-raised-button color="primary" class="mt-20" fxLayoutAlign="center" (click)="selectItems()">Select items</button>
+                        <a fxLayoutAlign="center" href="javascript:;" class="mt-20">
+                            I want to enter specific SKUs or item IDs(advanced)
+                        </a>
+                    </mat-card-content>
+                </mat-card>
+                <!--<mat-card fxFlex="50%">
+                    <mat-card-header fxLayoutAlign="center">
+                        <mat-card-title>
+                            <h3>Create rules</h3>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content fxLayout="column">
+                        <p fxLayoutAlign="center">10,000 listings per promotion</p>
+                        <p fxLayoutAlign="center">Set rules using categories or filters. Items can be removed at any time</p>
+                        <button mat-raised-button color="primary" class="mt-20" fxLayoutAlign="center">Create rules</button>
+                    </mat-card-content>
+                </mat-card>-->
+            </div>
+            <div fxLayout="column" *ngIf="selectClick === 0">
+                <mat-card style="width:100%">
+                    <mat-card-content>
+                        <div fxLayout="row">
+                            <h4>Select items: </h4>
+                            <span style="color: darkred; margin-left: 15px; margin-top: 4px;">
+                                {{ saleDiscountMessage }}
+                            </span>
+                        </div>
+                        <div fxLayout="row">
+                            <mat-form-field class="example-user-input" style="width:200px;height: 20px">
+                                <mat-select formControlName="category">
+                                    <mat-option *ngFor="let category of categoryList" [value]="category.id">
+                                        {{ category.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <span style="margin-top: 15px; margin-left: 10px;"> MIN AFCASH</span>
+                            <mat-form-field style="margin-left: 10px; margin-right: 10px; width: 100px; height: 20px;">
+                                <input type="number" matInput formControlName="min_price" min="0" max="100000" autocomplete="min afcash" placeholder="Min Afcash">
+                            </mat-form-field>
+                            <span style="margin-top: 15px; margin-left: 10px;"> ~ MAX AFCASH</span>
+                            <mat-form-field style="margin-left: 10px; margin-right: 10px; width: 100px; height: 20px;">
+                                <input type="number" matInput formControlName="max_price" min="0" max="100000" autocomplete="max afcash" placeholder="Max Afcash">
+                                <mat-error *ngIf="selectItemsForm.controls.max_price.hasError('dateRangeError')">Max afcash should be more than min afcash.</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row">
+                            <mat-form-field style="margin-top: 10px; height: 20px;">
+                                <input matInput formControlName="search_keyword" autocomplete="search keyword" placeholder="Search by item title">
+                            </mat-form-field>
+                            <button mat-raised-button style="margin-top: 15px; margin-left: 20px;" (click)="onSearchClick()">
+                                Search
+                            </button>
+                        </div>
+                    </mat-card-content>
+                    <div fxLayout="row">
+                        <mat-card style="width: 100%;">
+                            <div fxLayout="row">
+                                <h4>Items found ({{ count }})</h4>
+                            </div>
+                            <div fxLayout="row">
+                                <table mat-table [dataSource]="dataSource" matSort style='width:100%'>
+                                    <ng-container matColumnDef="checked">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            #
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <mat-checkbox class="example-margin" (click)="onCheckBoxClick()" formControlName="item_checked" [(ngModel)]="element.checked"></mat-checkbox>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Name">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <div class="mb-20" fxLayout="row" fxLayoutGap="20px">
+                                                <img src="{{ element.imagePath }}" style="width: 100px;height: 70px;">
+                                                <p>{{element.name}}</p>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Price">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+                                        <td mat-cell *matCellDef="let element"> {{ element.Price }} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Shipping">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Shipping </th>
+                                        <td mat-cell *matCellDef="let element"> {{ element.Shipping }} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Available">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Available </th>
+                                        <td mat-cell *matCellDef="let element"> {{ element.Available }} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Sold">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sold </th>
+                                        <td mat-cell *matCellDef="let element"> {{ element.Sold }} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Views">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Views </th>
+                                        <td mat-cell *matCellDef="let element"> {{ element.Views }} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Watchers">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Watchers </th>
+                                        <td mat-cell *matCellDef="let element"> {{ element.Watchers }} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="DaysOnSite">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Days On Site </th>
+                                        <td mat-cell *matCellDef="let element"> {{ element.DaysOnSite }} </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+                                </table>
+                            </div>
+                            <hr>
+                            <div fxLayout="row" style="margin-top: 25px;">
+                                <mat-paginator #paginator [length]="count" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)"></mat-paginator>
+                            </div>
+                        </mat-card>
+                    </div>
+                </mat-card>
+            </div>
+            <div fxLayout="column" *ngIf="selectClick === 2">
+                <mat-card style="width:100%">
+                    <mat-card-content>
+                        <div fxLayout="row">
+                            <h4>Confirm you selection: </h4>
+                            <span style="color: darkred; margin-left: 10px; margin-top: 4px;">
+                                {{ saleDiscountMessage }}
+                            </span>
+                        </div>
+                        <div fxLayout="row">
+                            <span>Items selected &nbsp;</span>
+                            <span> ({{ selectedCount }}) &nbsp;</span>
+                            <a style="cursor:pointer;color:blue" (click)="deleteAllFunc()">Delete all</a>
+                        </div>
+                        <div fxLayout="row">
+                            <table mat-table [dataSource]="dataSource" matSort style='width:100%'>
+                                <ng-container matColumnDef="checked">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        #
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <mat-checkbox class="example-margin" (click)="onCheckBoxClick()"></mat-checkbox>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="Name">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <div class="mb-20" fxLayout="row" fxLayoutGap="20px">
+                                            <img src="{{row.imagePath}}" style="width: 100px;height: 70px;">
+                                            <p>{{row.name}}</p>
+                                        </div>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="Price">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.Price}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="Shipping">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Shipping </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.Shipping}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="Available">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Available </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.Available}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="Sold">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Sold </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.Sold}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="Views">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Views </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.Views}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="Watchers">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Watchers </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.Watchers}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="DaysOnSite">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Days On Site </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.DaysOnSite}} </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div fxLayout="row" *ngIf="selectClick === 0">
+                <div class="sme-bottom-nav" id="w0-bottom-nav">
+                    <button style="width:211px;color:#0654ba" mat-raised-button color="" class="nav-element cancel" fxLayoutAlign="center" (click)="prevClick()">Back</button>
+                    <div class="nav-element draft throbber-container">
+                        <div class="throbber" id="w0-bottom-nav-draftThrobber">
+                            <span class="spinner" role="img" aria-label="Busy animation"></span>
+                        </div>
+                    </div>
+                    <div class="nav-element link">
+                        <span>{{ selectedCount }}/{{ count }}</span> selected
+                    </div>
+                    <div class="nav-element next throbber-container">
+                        <div class="throbber" id="w0-bottom-nav-nextThrobber" style="display: none;">
+                            <span class="spinner" role="img" aria-label="Busy animation"></span>
+                        </div>
+                        <button style="width:211px;color:white" mat-raised-button color="primary" class="nav-element cancel" fxLayoutAlign="center" (click)='confirmClick()'>Confirm selections</button>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" *ngIf="selectClick === 2">
+                <div class="sme-bottom-nav" id="w0-bottom-nav">
+                    <button style="width:211px;color:white" mat-raised-button color="primary" class="nav-element cancel" fxLayoutAlign="center">Add more items</button>
+                    <div class="nav-element draft throbber-container">
+                        <div class="throbber" id="w0-bottom-nav-draftThrobber">
+                            <span class="spinner" role="img" aria-label="Busy animation"></span>
+                        </div>
+                    </div>
+                    <div class="nav-element link">
+                        <span>{{selectedCount}}/{{count}}</span> selected
+                    </div>
+                    <select placeholder="Save and select for next discount">
+                        <option>30 %</option>
+                    </select>
+                    <div class="nav-element next throbber-container">
+                        <div class="throbber" id="w0-bottom-nav-nextThrobber" style="display: none;">
+                            <span class="spinner" role="img" aria-label="Busy animation"></span>
+                        </div>
+                        <button style="width:211px;color:white" matStepperNext mat-raised-button color="primary" class="nav-element cancel" fxLayoutAlign="center" (click)='saveReview()'>Save and review</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="reviewForm" label="Review & Launch">
+        <form [formGroup]="reviewForm" (ngSubmit)="onReviewFormSubmit(reviewForm.value)">
+            <mat-card class="mt-20">
+                <mat-card-header>
+                    <mat-card-title>
+                        <h2>Review your sale event</h2>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div fxLayout="row" class="mt-10">
+                        <div class='field'>
+                            <label class='field_label'>Sale event name*</label>
+                            <div class='field_control'>
+                                <div fxLayout="row">
+                                    <mat-form-field>
+                                        <input matInput placeholder="Input" formControlName="event_name">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row">
+                        <p style="margin-left:190px;font-size:12px;color:gray">This will not be visible to buyers.</p>
+                    </div>
+                    <div fxLayout="row" class="mt-10">
+                        <div class='field'>
+                            <label class='field_label'>Discount type and items</label>
+                            <div class='field_control'>
+                                <fieldset>
+                                    <div fxLayout="row">
+                                        <div class="offer-type-container">
+                                            <div value="primary" style="float:left">
+                                                {{selectedCount}} item selected
+                                            </div>
+                                            <a style="float:left;margin-left:20px;cursor:pointer;color:#436ac5;">
+                                                Add items
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" style="margin-top: 10px;">
+                                        <div class="offer-type-container">
+                                            <div value="primary" style="float:left;margin-top:7px;">
+                                                {{ saleDiscountMessage }}
+                                            </div>
+                                            <a class="n_p" style="cursor:pointer;color:#436ac5;"> Edit </a>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" style="margin-top: 10px;">
+                                        <div class="offer-type-container">
+                                            <div value="primary" style="float:left;margin-top:15px;">
+                                                <mat-checkbox>Keep items in this sale and block price increases.</mat-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row" class="mt-10">
+                        <div class='field'>
+                            <label class='field_label'>Date range*</label>
+                            <div class='field_control'>
+                                <fieldset>
+                                    <div fxLayout="row" style="margin-top: 10px;">
+                                        <mat-form-field>
+                                            <input matInput [matDatepicker]="startPicker" placeholder="Choose a date">
+                                            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #startPicker></mat-datepicker>
+                                        </mat-form-field>
+                                        <span class="dash">—</span>
+                                        <mat-form-field>
+                                            <input matInput [matDatepicker]="endPicker" placeholder="Choose a date">
+                                            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #endPicker></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+                                    <p>If you have a sale ending today we recommended leaving at least two hours before your next sale starts.</p>
+                                    <div fxLayout="row" style="margin-top: 10px;">
+                                        <a style='cursor:pointer;color:#436ac5;'>Show retail calendar</a>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="mt-20">
+                <mat-card-header>
+                    <mat-card-title>
+                        <h2>Sale event banner</h2>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div fxLayout="row" class="mt-10">
+                        <div style="width: 100%;">
+                            <label class='field_label'>Sale event description*</label>
+                            <div class='field_control'>
+                                <div fxLayout="row">
+                                    <mat-form-field>
+                                        <input matInput placeholder="Input" maxlength="50" formControlName="description">
+                                    </mat-form-field>
+                                    <p class='t_p'>{{50 - sale_desc?.length}}/50</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row">
+                        <p style="margin-left:190px;font-size:12px;color:gray">Example: All handbags or Across all brands.</p>
+                    </div>
+                    <div fxLayout="row">
+                        <div class='field'>
+                            <label class='field_label'>Sale event image</label>
+                            <div class='field_control'>
+                                <fieldset>
+                                    <div fxLayout="row">
+                                        <div class="offer-type-container">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutGap="20px" style="margin-top:20px;">
+                            <div *ngFor="let image of eventImages">
+                                <img src="{{ image }}" width="150px" height="150px" (click)="eventImagePath = image" />
+                            </div>
+                            <mat-card fxLayoutAlign="center center" style="height: 150px!important; width: 150px;min-height: 150px;">
+                                <a class="addPicBtn" style="font-size: 50px;color: #436ac5;text-decoration: none;">
+                                    <b>Add photos</b>
+                                    <input class="upl-fileInp" type="file" name="d" value="" title="Add photos" multiple="" id="upl-1538455113913" (change)="selectFile($event)">
+                                </a>
+                            </mat-card>
+                        </div>
+                    </div>
+                    <div fxLayout="row" class="mt-10">
+                        <div class='field'>
+                            <label class='field_label'>Preview sale event banner</label>
+                        </div>
+                        <div style="border: 1px solid #d0d0d0; width: 380px; height: 180px;" [ngStyle]="{'background-image': 'url(' + eventImagePath + ')'}">
+                            <div fxLayout="row" style="margin-top: 16px;">
+                                <div style="text-align: right;">
+                                    <p style="font-weight: bold; font-size:20px;float:left;">SAVE UP TO</p>
+                                    <p style="color: #ff4141;float:left;margin-left:10px; font-size:20px;"> 5%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <div fxLayout="row" *ngIf="selectClick === 3">
+                <div class="sme-bottom-nav" id="w0-bottom-nav">
+                    <button style="width:211px;color:white" mat-raised-button color="primary" class="nav-element cancel" fxLayoutAlign="center" (click)="save_later()">Save for later</button>
+                    <div class="nav-element draft throbber-container">
+                        <div class="throbber" id="w0-bottom-nav-draftThrobber">
+                            <span class="spinner" role="img" aria-label="Busy animation"></span>
+                        </div>
+                    </div>
+                    <div class="nav-element link">
+                        <span>By launching, I agree to the</span>
+                        <a href="http://pages.vendasity.com/specialoffers/sellerterms.html" target="_blank" id="w0-bottom-nav-w0">
+                            vendasity Promotions Manager Terms and Conditions
+                        </a>
+                    </div>
+                    <div class="nav-element next throbber-container">
+                        <div class="throbber" id="w0-bottom-nav-nextThrobber" style="display: none;">
+                            <span class="spinner" role="img" aria-label="Busy animation"></span>
+                        </div>
+                        <button style="width: 211px; color:white" matStepperNext mat-raised-button color="primary" class="nav-element cancel" fxLayoutAlign="center">
+                            Launch
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-step>
+</mat-horizontal-stepper>
+<div fxLayout="row" style="margin-top:50px;margin-bottom:50px">
+    <p>Copyright© 2018 Africunia Inc. All Rights Reserved. Accessibility, User Agreement, Privacy, Cookies and AdChoice</p>
+</div>

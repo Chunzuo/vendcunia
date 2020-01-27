@@ -1,0 +1,54 @@
+<h1>Review your impressions</h1>
+<div fxLayout="column">
+  <mat-card>
+    <mat-card-content>
+      <div fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field>
+          <input matInput [matDatepicker]="pickerStart" placeholder="Satrt date">
+          <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+          <mat-datepicker #pickerStart></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [matDatepicker]="pickerEnd" placeholder="End date">
+          <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+          <mat-datepicker #pickerEnd></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="All listing formats">
+            <mat-option value="0">
+              Listing1
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Listed on vendsity.com">
+            <mat-option value="0">
+              Listing1
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+        <mat-form-field>
+          <input matInput [matDatepicker]="pickerBenchmark" placeholder="Benchmark date">
+          <mat-datepicker-toggle matSuffix [for]="pickerBenchmark"></mat-datepicker-toggle>
+          <mat-datepicker #pickerBenchmark></mat-datepicker>
+        </mat-form-field>
+
+        <span style="color: rgb(118, 118, 118)">Benchmark end: Sep 20, 2018 (31 day period)</span>
+
+        <a mat-button>Reset</a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card style="margin-top: 20px;" fxFlex="300px" fxLayoutAlign="center center">
+    <mat-card-content>
+      <span class="warning">We couldn't find any recent info from listings created on this site. Try changing the date range.</span>
+    </mat-card-content>
+  </mat-card>
+</div>

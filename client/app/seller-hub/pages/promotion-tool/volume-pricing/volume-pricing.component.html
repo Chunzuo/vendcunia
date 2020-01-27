@@ -1,0 +1,187 @@
+<div fxLayout="row">
+    <h2 style="width: 40%">Create volume pricing</h2>
+    <div [fxFlex]="60" style="text-align: right;">
+        <a href="javascript:;">Help</a>
+    </div>
+</div>
+
+<div>
+    <form [formGroup]="volumePricingForm" (ngSubmit)="onVolumePricingFormSubmit(volumePricingForm.value)">
+        <mat-card class="mt-20">
+            <mat-card-header>
+                <mat-card-title>
+                    <h2>Set tier pricing</h2>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div fxLayout="row" class="mt-10">
+                    <div class='field'>
+                        <label class='field_label'>Offer name*</label>
+                        <div class='field_control'>
+                            <div fxLayout="row">
+                                <mat-form-field>
+                                    <input matInput placeholder="Input" formControlName="offer_name" autocomplete="offer name">
+                                    <mat-error *ngIf="volumePricingForm.controls.offer_name.errors?.required">Offer name is required</mat-error>
+                                </mat-form-field>
+                                <p class='t_p'>62/90</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row">
+                    <p style="margin-left:190px;font-size:12px;color:gray">This will not be visible to buyers.</p>
+                </div>
+                <div fxLayout="row" class="mt-10">
+                    <div class='field'>
+                        <label class='field_label'>Pricing tiers*</label>
+                        <div class='field_control'>
+                            <fieldset>
+                                <div fxLayout="row">
+                                    <div class="offertype-container">
+                                        <div value="primary" style="float:left">
+                                            Buy 1 item, no discount
+                                        </div>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" style="margin-top: 10px;">
+                                    <div class="offertype-container" style="display: flex;">
+                                        <div value="primary" style="float:left;margin-top:7px;">
+                                            Buy 2 items, take
+                                        </div>
+                                        <mat-form-field style="margin-left: 15px; margin-right: 15px; margin-top: -10px;">
+                                            <mat-select placeholder="discount for 2 items" formControlName="two_items_percent">
+                                                <mat-option [value]="5">5</mat-option>
+                                                <mat-option [value]="10" selected="selected">10</mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="volumePricingForm.controls.two_items_percent.errors?.required">Please select discount policy for 2 items</mat-error>
+                                        </mat-form-field>
+                                        <p class="n_p"> % off each item</p>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" style="margin-top: 10px;">
+                                    <div class="offertype-container" style="display: flex;">
+                                        <div value="primary" style="float:left;margin-top:7px;">
+                                            Buy 3 items, take
+                                        </div>
+                                        <mat-form-field style="margin-left: 15px; margin-right: 15px; margin-top: -10px;">
+                                            <mat-select placeholder="discount for 3 items" formControlName="three_items_percent">
+                                                <mat-option [value]="5">5</mat-option>
+                                                <mat-option [value]="10">10</mat-option>
+                                                <mat-option [value]="0" selected="selected">--</mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="volumePricingForm.controls.three_items_percent.errors?.required">Please select discount policy for 3 items</mat-error>
+                                        </mat-form-field>
+                                        <p class="n_p"> % off each item</p>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" style="margin-top: 10px;">
+                                    <div class="offertype-container" style="display: flex;">
+                                        <div value="primary" style="float:left;margin-top:7px;">
+                                            Buy 4 items, take
+                                        </div>
+                                        <mat-form-field style="margin-left: 15px; margin-right: 15px; margin-top: -10px;">
+                                            <mat-select placeholder="discount for 4 items" formControlName="four_items_percent" style="float: left; margin-left: 10px;">
+                                                <mat-option [value]="5">5</mat-option>
+                                                <mat-option [value]="10">10</mat-option>
+                                                <mat-option [value]="0" selected="selected">--</mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="volumePricingForm.controls.four_items_percent.errors?.required">Please select discount policy for 4 items</mat-error>
+                                        </mat-form-field>
+                                        <p class="n_p"> % off each item</p>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" style="margin-top: 10px;">
+                                    <mat-checkbox style="margin-left: 20px;" formControlName="check_item_id">Item ID</mat-checkbox>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row" class="mt-10">
+                    <div class='field'>
+                        <label class='field_label'>Enter Item IDs*</label>
+                        <div class='field_control'>
+                            <fieldset>
+                                <div fxLayout="row" style="margin-top: 10px;">
+                                    <div class="textbox">
+                                        <textarea class="textbox__control" id="textarea-inventory" aria-required="true" aria-invalid="false" placeholder="Enter or paste item IDs here. One per row or separated by commas." formControlName="item_ids">
+                                        </textarea>
+                                        <mat-error *ngIf="volumePricingForm.controls.item_ids.hasError('invalidItemIds')">Invalid item ids</mat-error>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" style="margin-top: 10px;">
+                                    <span style="color: #767676; font-size: 12px;">Note: This discount pricing will be applied across all items/SKUs in this promotion in addition to multiple quantities of the same item/SKU</span>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row" class="mt-10">
+                    <div class='field'>
+                        <label class='field_label'>Date range*</label>
+                        <div class='field_control'>
+                            <fieldset>
+                                <div fxLayout="row" style="margin-top: 10px;">
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="from_date">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        <mat-error *ngIf="volumePricingForm.controls.from_date.errors?.required">Please select from date</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field class="example-user-input" style="margin-left: 20px;">
+                                        <mat-select id='matSelect' formControlName="from_time">
+                                            <mat-option *ngFor="let positionOption of positionOptions" [value]="positionOption.id">
+                                                {{ positionOption.value }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="volumePricingForm.controls.from_time.errors?.required">Please select from time</mat-error>
+                                    </mat-form-field>
+                                    <span class="dash">&nbsp;&nbsp;—&nbsp;&nbsp;</span>
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="picker1" placeholder="Choose a date" formControlName="to_date">
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                        <mat-error *ngIf="volumePricingForm.controls.to_date.errors?.required">Please select to date</mat-error>
+                                        <mat-error *ngIf="volumePricingForm.controls.to_date.hasError('dateRangeError')">To date should not be less than from date.</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field class="example-user-input" style="margin-left: 20px;">
+                                        <mat-select id='matSelect1' formControlName="to_time">
+                                            <mat-option *ngFor="let positionOption of positionOptions" [value]="positionOption.id">
+                                                {{ positionOption.value }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="volumePricingForm.controls.to_time.errors?.required">Please select to time</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <div fxLayout="row" style="margin-top:50px;margin-bottom:50px">
+            <p>Copyright © 2018 Africunia Inc. All Rights Reserved. Accessibility, User Agreement, Privacy, Cookies and AdChoice</p>
+        </div>
+        <div fxLayout="row" style="margin-top:20px;margin-bottom:30px;width:100%">
+            <div class="sme-bottom-nav" id="w0-bottom-nav">
+                <button style="width:211px;color:#0654ba" mat-raised-button color="" class="nav-element cancel" fxLayoutAlign="center" (click)="cancel()">Cancel</button>
+                <div class="nav-element draft throbber-container">
+                    <div class="throbber" id="w0-bottom-nav-draftThrobber">
+                        <span class="spinner" role="img" aria-label="Busy animation"></span>
+                    </div>
+                </div>
+                <div class="nav-element link"><span>By launching, I agree to the</span>
+                    <a href="http://pages.vendasity.com/specialoffers/sellerterms.html" target="_blank" id="w0-bottom-nav-w0">vendasity Promotions Manager's Terms and Conditions
+                        <span class="clipped">opens in a new window or tab</span>
+                    </a>
+                </div>
+                <div class="nav-element next throbber-container">
+                    <div class="throbber" id="w0-bottom-nav-nextThrobber" style="display: none;">
+                        <span class="spinner" role="img" aria-label="Busy animation"></span>
+                    </div>
+                    <button style="width: 211px; color: white;" mat-raised-button color="primary" class="nav-element cancel" fxLayoutAlign="center">Launch</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

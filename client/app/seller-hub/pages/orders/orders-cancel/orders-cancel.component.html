@@ -1,0 +1,79 @@
+<div fxLayout="row">
+    <h2>Cancelled orders({{orderList.length}})</h2>
+</div>
+<!--<mat-card class="mt-20">
+    <mat-card-content>
+        <div fxLayout="row">
+            <mat-form-field class="example-user-input">
+                <mat-select formControlName="searchType">
+                    <mat-option *ngFor="let searchTypeOption of searchTypeOptionList" [value]="searchTypeOption">
+                        {{searchTypeOption}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput formControlName="searchKeyword">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row">Period:</div>
+        <div fxLayout="row">
+            <mat-form-field class="example-user-input">
+                <mat-select formControlName="period">
+                    <mat-option *ngFor="let periodOption of periodOptionList" [value]="periodOption">
+                        {{periodOption}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row">
+            <button mat-raised-button color="white" style="margin-right:10px;" (click)="search()">Search</button>
+            <!--<a class="clear" (click)="clearSearch()">Clear Search</a>
+        </div>
+    </mat-card-content>
+</mat-card>-->
+
+<mat-card class="mt-20">
+    <mat-card-content>
+        <div fxLayout="row">
+            <table mat-table [dataSource]="dataSource" matSort style='width:100%'>
+                <ng-container matColumnDef="No">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> No </th>
+                    <td mat-cell *matCellDef="let row;">{{row.rowIdx}}</td>
+                </ng-container>
+                <ng-container matColumnDef="ordererEmail">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Orderer Email </th>
+                    <td mat-cell *matCellDef="let row">{{row.ordererEmail}}</td>
+                </ng-container>
+                <ng-container matColumnDef="productName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
+                    <td mat-cell *matCellDef="let row">{{row.productName}}</td>
+                </ng-container>
+                <ng-container matColumnDef="productPrice">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Price </th>
+                    <td mat-cell *matCellDef="let row">{{row.productPrice}}</td>
+                </ng-container>
+                <ng-container matColumnDef="orderingPrice">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Ordering Price </th>
+                    <td mat-cell *matCellDef="let row">{{row.orderingPrice}}</td>
+                </ng-container>
+                <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+                    <td mat-cell *matCellDef="let row">{{row.quantity}}</td>
+                </ng-container>
+                <ng-container matColumnDef="statusText">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                    <td mat-cell *matCellDef="let row">{{row.statusText}}</td>
+                </ng-container>
+                <ng-container matColumnDef="orderedAt">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Order Time </th>
+                    <td mat-cell *matCellDef="let row">{{row.orderedAt}}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        <div fxLayout="row">
+            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" style='float:right'></mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

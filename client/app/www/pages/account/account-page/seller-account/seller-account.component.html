@@ -1,0 +1,44 @@
+<h1>Seller Account</h1>
+
+<mat-card>
+    <mat-card-header>
+        <div fxFlex fxFlexFill fxLayout="row" fxLayoutGap="2%">
+            <div fxFlex="30%" fxLayout="column" class="square">
+
+                <h2>Basic</h2>
+                <h1 style="color: #767676;">AFCASH 21.95 /mo</h1>
+                <p style="height: 40px;">with 1-yr plan* or<br/> AFCASH 27.95/mo without</p>
+                <br/>
+                <label>For sellers who want lower selling fees.</label>
+                <button mat-raised-button style="margin: 20px;" *ngIf="user.member_ship == 0" (click)="clickAnchor()" color="accent"><p>Using</p></button>
+                <button mat-raised-button style="margin: 20px;" *ngIf="user.member_ship == 1" (click)="clickBasic()" color="primary"><p>Downgrade</p></button>
+                <button mat-raised-button style="margin: 20px;" *ngIf="user.member_ship == 2" (click)="clickBasic()" color="primary"><p>Downgrade</p></button>
+            </div>
+            <div fxFlex="30%" fxLayout="column" class="square">
+                <h2>Premium</h2>
+                <h1 style="color: #767676;">AFCASH 59.95 /mo</h1>
+                <p style="height: 40px;">with 1-yr plan* or<br/> AFCASH 7.95/mo without</p>
+                <br/>
+                <label>For seller wanting lower listing fees and more business tools.</label>
+                <button mat-raised-button style="margin: 20px;" *ngIf="user.member_ship == 0" (click)="clickPremium()" color="primary"><p>Upgrade</p></button>
+                <button mat-raised-button style="margin: 20px;" *ngIf="user.member_ship == 1" (click)="clickAnchor()" color="accent"><p>Using</p></button>
+                <button mat-raised-button style="margin: 20px;" *ngIf="user.member_ship == 2" (click)="clickPremium()" color="primary"><p>Downgrade</p></button>
+            </div>
+            <div fxFlex="30%" fxLayout="column" class="square">
+
+                <h2>Anchor</h2>
+                <h1 style="color: #767676;">AFCASH 299.95 /mo</h1>
+                <p style="height: 40px;">with 1-yr plan* or<br/> AFCASH 349.95/mo without</p>
+                <br/>
+                <label>For high volume sellers who want lower fees.</label>
+                <button mat-raised-button style="margin: 20px;" *ngIf="user.member_ship == 0" (click)="clickAnchor()" color="primary"><p>Upgrade</p></button>
+                <button mat-raised-button style="margin: 20px;" *ngIf="user.member_ship == 1" (click)="clickAnchor()" color="primary"><p>Upgrade</p></button>
+                <button mat-raised-button style="margin: 20px;" *ngIf="user.member_ship == 2" (click)="clickAnchor()" color="accent"><p>Using</p></button>
+            </div>
+
+        </div>
+    </mat-card-header>
+    <mat-card-content fxLayout="column" fxLayoutGap="20px">
+
+    </mat-card-content>
+</mat-card>

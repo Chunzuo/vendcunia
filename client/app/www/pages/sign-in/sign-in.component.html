@@ -1,0 +1,35 @@
+<mat-card>
+    <div fxLayout="row wrap">
+        <div fxFlex="100" fxFlex.gt-sm="100" ngClass.sm="mt-2" ngClass.xs="mt-2" id="text">
+            <h1 class="text-center" style="font-size:38px">Sign In To Vendasity</h1>
+            <div class="text-center" style="font-size:15px;">Not Active Yet? <a style="color:blue; text-decoration: none;" [routerLink]="['/verify']">Verify Your Email</a></div>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="100" class="p-2" ngClass.sm="mt-2" ngClass.xs="mt-2">
+            <div fxFlex="50" fxFlex.gt-sm="50" fxLayoutAlign="center center">
+                <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit(loginForm.value)" class="signin-form">
+                    <mat-form-field class="w-100 mt-2">
+                        <input matInput placeholder="Email" formControlName="email" required autocomplete="email">
+                        <mat-error *ngIf="loginForm.controls.email.errors?.required">Please enter your email address.</mat-error>
+                        <mat-error *ngIf="loginForm.controls.email.hasError('invalidEmail')">Invalid email address</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100 mt-1">                     
+                        <input matInput placeholder="Password" type="password" formControlName="password" required autocomplete="password">
+                        <mat-error *ngIf="loginForm.controls.password.errors?.required">Please enter your password.</mat-error>
+                        <mat-error *ngIf="loginForm.controls.password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</mat-error>
+                    </mat-form-field> 
+                    <div class="text-center mt-2">
+                        <button mat-raised-button color="primary" class="btn signin-btn">
+                            Sign In
+                        </button>
+                    </div> 
+                </form>
+            </div>          
+            <div fxFlex="50" fxFlex.gt-sm="50">
+                <div class="line"></div>
+                <p class="text">or</p>
+                <div class="line"></div>
+                <button class="google_btn w3-ripple" (click) = "socialSignIn('google')"><img src="../../../../assets/images/google_button.png"></button>
+            </div>                       
+        </div>       
+    </div> 
+</mat-card>

@@ -1,0 +1,43 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <h2>Sales</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div fxLayout="row">
+            <mat-form-field class="example-user-input">
+                <mat-select formControlName="selYear" placeholder="Year" (change)="yearChange()">
+                    <mat-option *ngFor="let yearOption of yearOptionList" [value]="yearOption">
+                        {{yearOption}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
+    </canvas>
+        <!--<mat-card>
+      <div fxLayout="row" class="overview-item-info">
+        <label>Today</label>
+        <p>AFCASH 100</p>
+      </div>
+      <div fxLayout="row" class="overview-item-info">
+        <label>Last 7 days</label>
+        <p>AFCASH200</p>
+      </div>
+      <div fxLayout="row" class="overview-item-info">
+        <label>Last 31days</label>
+        <p>AFCASH 300</p>
+      </div>
+      <div fxLayout="row" class="overview-item-info">
+        <label>Last 90days</label>
+        <p>AFCASH 400</p>
+      </div>
+    </mat-card>-->
+    </mat-card-content>
+    <mat-card-actions>
+        <a href="javascript:void(0)" class="float-right card-inverse">
+        View Details
+    </a>
+    </mat-card-actions>
+</mat-card>

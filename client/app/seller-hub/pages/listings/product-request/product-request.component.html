@@ -1,0 +1,99 @@
+<div fxLayout="row"  fxLayout.lt-md="column" fxLayoutGap="20px">
+    <h2 [fxFlex]="40">Manage product submissions</h2>
+</div>
+<div style="margin-top:10px;">
+  <p style="float:left">You can review the status of any products that you've created or updated. </p>
+  <a style="color:#0654ba;cursor:pointer"> Learn more</a>
+</div>
+<mat-card style="margin-top:10px">
+  <mat-card-content>
+      <div fxLayout="row">
+          <mat-form-field class="example-user-input">
+              <mat-select id='matSelect_statue' placeholder="All statues">
+                  <mat-option *ngFor="let positionOption of positionOptions" [value]="positionOption">
+                      {{ positionOption }}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-user-input" style="margin-left:20px">
+              <mat-select id='matSelect_submissions' placeholder="All submissions">
+                  <mat-option *ngFor="let positionOption of positionOptions1" [value]="positionOption">
+                      {{ positionOption }}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-user-input" style="width:97px;margin-left:20px;">
+              <mat-select id='matSelect' placeholder="ePID">
+                  <mat-option *ngFor="let positionOption of positionOption_searchlist" [value]="positionOption">
+                      {{ positionOption }}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput placeholder="Search...">
+          </mat-form-field>
+          <a style="color:#0654ba;cursor:pointer;margin-left:20px;margin-top:20px"> Reset</a>
+        </div>
+  </mat-card-content>
+</mat-card>
+<mat-card style="margin-top:20px;min-height:200px">
+    <mat-card-header>
+        <mat-card-title>
+          <h2 style="float:left;">Result 0</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <div fxLayout="row">
+          <table mat-table  matSort style='width:100%;'>
+              <!-- ID Column -->
+              <ng-container matColumnDef="Record">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+                  <td mat-checkbox *matCellDef="let row">Check</td>
+                  <!-- <mat-checkbox class="example-margin">Checked</mat-checkbox> -->
+              </ng-container>
+  
+              <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Photo </th>
+                  <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+              </ng-container>
+      
+              <!-- Progress Column -->
+              <ng-container matColumnDef="progress">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+                  <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+              </ng-container>
+      
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Format </th>
+                  <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+              </ng-container>
+      
+              <!-- Color Column -->
+              <ng-container matColumnDef="color">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+                  <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+              </ng-container>
+      
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+        <div fxLayout="row">
+            <h1 style="color:#949494">We didn't any results. Try searching with different criteria</h1>
+        </div>
+</mat-card>
+
+<div fxLayout="row" style="float:right;margin-top:10px">
+  <p style="margin-right:10px;margin-top:15px">Products per page</p>
+  <mat-form-field class="example-user-input" style="float:right">
+      <mat-select id='matSelect' placeholder="50">
+          <mat-option *ngFor="let page of pages" [value]="page">
+              {{ page }}
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
+</div>
+
+<div fxLayout="row" style="margin-top:85px">
+  <p style='font-size:12px;'> Copyright © 2018 Africunia Inc. All Rights Reserved. Accessibility, User Agreement, Privacy, Cookies and AdChoice</p>
+</div>

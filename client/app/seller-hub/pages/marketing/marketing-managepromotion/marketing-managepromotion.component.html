@@ -1,0 +1,111 @@
+<div fxLayout="row" style="padding-bottom: 20px;">
+    <h2 style="width: 30%">Manage promotions</h2>
+    <div style="width: 65%; text-align: right;">
+      <a href="javascript:;" style="text-decoration: none;color:#555;">
+        <span>Help me plan</span>
+        |
+        <span>Learn more</span>
+      </a>
+      <!-- <button mat-raised-button color="primary" style="margin-left: 10px;">Create a promotion</button> -->
+      <mat-form-field style="margin-left: 20px;">
+          <mat-select placeholder="Create a Promotion" (selectionChange)="promotionSelected($event.value)">
+              <mat-option value="orderDiscount">Order discount</mat-option>
+              <mat-option value="shippingDiscount">Shipping discount</mat-option>
+              <mat-option value="volumePricing">Volume pricing</mat-option>
+              <!--<mat-option value="codelessCoupon">Codeless coupon</mat-option>-->
+              <mat-option value="saleEvent">Sale event + markdown</mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+</div>
+<mat-card style="margin-bottom: 8px;">
+    <mat-card-content style="width: 1000px; height: 500px;">
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+        [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)" ></canvas>
+    </mat-card-content>
+</mat-card>
+<mat-card>
+  <div fxLayout="row">
+    <div style="width: 100px;">
+      <button mat-raised-button>All Offers</button>
+    </div>
+    <div style="width: 100px;">
+        <button mat-raised-button>Status - all</button>
+    </div>
+    <div style="margin-left: 20px;">
+      <mat-form-field>
+          <input matInput placeholder="Search by promotion name" maxlength="25">
+      </mat-form-field>
+    </div>
+  </div>
+</mat-card>
+<mat-card>
+    <div fxLayout="row" style="padding-bottom: 20px;">
+      <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+              <td mat-cell *matCellDef="let row"> {{row.action}} </td>
+          </ng-container>
+  
+          <!-- Progress Column -->
+          <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+              <td mat-cell *matCellDef="let row"> {{row.status}}% </td>
+          </ng-container>
+  
+          <!-- Name Column -->
+          <ng-container matColumnDef="offer_name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Offer name </th>
+              <td mat-cell *matCellDef="let row"> {{row.offer_name}} </td>
+          </ng-container>
+  
+          <!-- Color Column -->
+          <ng-container matColumnDef="promotion_type">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Promotion type</th>
+              <td mat-cell *matCellDef="let row"> {{row.promotion_type}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="start_date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
+              <td mat-cell *matCellDef="let row"> {{row.start_date}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="end_date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
+              <td mat-cell *matCellDef="let row"> {{row.end_date}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="items">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Items</th>
+              <td mat-cell *matCellDef="let row"> {{row.items}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="promotion_sales">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Promotion sales ($)	</th>
+              <td mat-cell *matCellDef="let row"> {{row.promotion_sales}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="sales_lift">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Sales lift (%)	</th>
+              <td mat-cell *matCellDef="let row"> {{row.sales_lift}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="average_ordersize">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Average order size	</th>
+              <td mat-cell *matCellDef="let row"> {{row.average_ordersize}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="display_priority">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Display priority</th>
+              <td mat-cell *matCellDef="let row"> {{row.display_priority}} </td>
+          </ng-container>
+          
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+    <hr>
+    <div fxLayout="row" style="margin-top: 25px;">
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>      
+    </div>
+</mat-card>

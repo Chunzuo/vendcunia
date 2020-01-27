@@ -1,0 +1,383 @@
+<h2 class="w-100 py-2">Create your Product</h2>
+<form [formGroup]="createProductForm" class="create-product-form">
+    <mat-card fxLayout="row wrap" fxLayoutAlign="space-around">
+        <h2 class="w-100 py-2">Listing details</h2>
+        <div fxFlex="100">
+            <mat-form-field class="w-100 mt-1">
+                <input matInput placeholder="Product name" formControlName="name" required>
+                <mat-error *ngIf="createProductForm.controls.name.errors?.required">Please enter Product name.</mat-error>
+                <mat-error *ngIf="createProductForm.controls.name.hasError('minlength')">Product name isn't long enough, minimum of 6 characters</mat-error>
+                <mat-error *ngIf="createProductForm.controls.name.hasError('maxlength')">Product name is too long, maximum of 80 characters</mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100 mt-1">
+                <input matInput placeholder="Title" formControlName="title" required>
+                <mat-error *ngIf="createProductForm.controls.title.errors?.required">Please enter Title.</mat-error>
+                <mat-error *ngIf="createProductForm.controls.title.hasError('minlength')">Title isn't long enough, minimum of 6 characters</mat-error>
+                <mat-error *ngIf="createProductForm.controls.title.hasError('maxlength')">Title is too long, maximum of 80 characters</mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100 mt-1">
+                <input matInput placeholder="Sub Title" formControlName="sub_title" required>
+                <mat-error *ngIf="createProductForm.controls.sub_title.hasError('minlength')">Sub title isn't long enough, minimum of 6 characters</mat-error>
+                <mat-error *ngIf="createProductForm.controls.sub_title.hasError('maxlength')">Sub title is too long, maximum of 80 characters</mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100 mt-1">
+                <input matInput placeholder="Condition description" formControlName="condition_desc">
+                <mat-error *ngIf="createProductForm.controls.condition_desc.hasError('minlength')">Condition description isn't long enough, minimum of 6 characters</mat-error>
+                <mat-error *ngIf="createProductForm.controls.condition_desc.hasError('maxlength')">Condition description is too long, maximum of 1000 characters</mat-error>
+            </mat-form-field>
+            <div style="display: flex;">
+                <mat-form-field class="w-50 mt-1">
+                    <mat-select placeholder="Condition" formControlName="condition">
+                        <mat-option *ngFor="let condition of product_condition_list" [value]="condition.id">
+                            {{condition.name}}
+                        </mat-option>
+                    </mat-select>
+
+                    <mat-error>Please finish drilling down to the category of the item you’re listing.</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-50 mt-1" style="margin-left: 90px;">
+                    <mat-select placeholder="Category" formControlName="category" required>
+                        <mat-option *ngFor="let category of categorylist" [value]="category.id">
+                            {{category.name}}
+                        </mat-option>
+                    </mat-select>
+
+                    <mat-error>Please finish drilling down to the category of the item you’re listing.</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="w-100 mt-1">
+                <form-upload></form-upload>
+                <!-- <list-upload></list-upload> -->
+            </div>
+            <div style="display:flex;">
+                <mat-form-field class="w-45 mt-1">
+                    <input matInput placeholder="Material" formControlName="material">
+                    <mat-error *ngIf="createProductForm.controls.material.hasError('minlength')">Item description isn't long enough, minimum of 6 characters</mat-error>
+                    <mat-error *ngIf="createProductForm.controls.material.hasError('maxlength')">Item description is too long, maximum of 1000 characters</mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-45 mt-1" style="margin-left: 90px;">
+                    <input matInput placeholder="Provenance" formControlName="provenance">
+                    <mat-error *ngIf="createProductForm.controls.provenance.hasError('minlength')">Material isn't long enough, minimum of 6 characters</mat-error>
+                    <mat-error *ngIf="createProductForm.controls.provenance.hasError('maxlength')">Provenance is too long, maximum of 1000 characters</mat-error>
+                </mat-form-field>
+            </div>
+            <mat-checkbox color="primary">Sell as lot</mat-checkbox>
+            <mat-form-field class="w-100 mt-1">
+                <input matInput placeholder="Item description" formControlName="description" required>
+                <mat-error *ngIf="createProductForm.controls.description.errors?.required">Please enter Item description.</mat-error>
+                <mat-error *ngIf="createProductForm.controls.description.hasError('minlength')">Item description isn't long enough, minimum of 6 characters</mat-error>
+                <mat-error *ngIf="createProductForm.controls.description.hasError('maxlength')">Item description is too long, maximum of 1000 characters</mat-error>
+            </mat-form-field>
+        </div>
+    </mat-card>
+    <mat-card fxLayout="row wrap" fxLayoutAlign="space-around" style="margin-top:20px;">
+        <h2 class="w-100 py-2">Sell details</h2>
+        <div fxFlex="100">
+            <mat-form-field class="w-100 mt-1">
+                <mat-select placeholder="Select Selling Type" formControlName="selling_format" required>
+                    <mat-option *ngFor="let opt of format_array" [value]="opt.id">
+                        {{opt.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>Please enter Format</mat-error>
+            </mat-form-field>
+
+            <!-- Only show for auction product -->
+            <mat-form-field class="w-100 mt-1" *ngIf="createProductForm.controls.selling_format.value === 1">
+                <mat-select placeholder="Duration" formControlName="duration">
+                    <mat-option *ngFor="let time of duration_array" [value]="time.id">{{ time.name }}</mat-option>
+                </mat-select>
+                <mat-error>Please enter Duration Time</mat-error>
+            </mat-form-field>
+            <div style="display:flex;">
+                <mat-form-field class="w-45 mt-1" *ngIf="createProductForm.controls.selling_format.value === 1">
+                    <input matInput placeholder="Starting price (AFCASH)" formControlName="start_price" type="number" [(ngModel)]="template.starting_price" maxlength="10">
+                </mat-form-field>
+                <mat-form-field class="w-45 mt-1" style="margin-left: 30px;" *ngIf="createProductForm.controls.selling_format.value === 1 || createProductForm.controls.selling_format.value === 2">
+                    <input matInput placeholder="Buy It Now price (AFCASH)" formControlName="now_price" type="number" maxlength="10">
+                </mat-form-field>
+                <mat-form-field class="w-45 mt-1" style="margin-left: 30px;" *ngIf="createProductForm.controls.selling_format.value === 1">
+                    <input matInput placeholder="Reserve price(fees apply) (AFCASH)" formControlName="reserve_price" [(ngModel)]="template.reserve_price" type="number" maxlength="10">
+                </mat-form-field>
+            </div>
+            <mat-form-field class="w-100 mt-1">
+                <input matInput placeholder="Quantity" formControlName="quantity" type="number">
+            </mat-form-field>
+            <div style="margin-top:10px;">
+                <h4 class="w-100 py-2">Private listing</h4>
+                <mat-checkbox color="primary" (click)="onclickedPrivateListing()">Allow buyers to remain anonymous to other Vendasity users</mat-checkbox>
+            </div>
+            <div style="margin-top:10px;">
+                <h4 class="w-100 py-2">Make a donation</h4>
+                <mat-checkbox color="primary" (click)="changedonationBuyFlag()">Donate a percentage of your sale to the charity of your choice and we'll give you a credit on basic selling fees for sold items</mat-checkbox>
+            </div>
+            <mat-form-field class="w-100" style="margin-top:10px;">
+                <mat-select placeholder="Sale tax" formControlName="sales_tax">
+                    <mat-option *ngFor="let tax of tax_array" [value]="tax">
+                        {{tax}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div style="display:block;">
+                <h4 class="w-100 py-2">Return options</h4>
+                <div style="display:flex;">
+                    <mat-checkbox color="primary">Domestic returns accepted</mat-checkbox>
+                    <mat-checkbox color="primary" style="margin-left:40px;">International returns accepted</mat-checkbox>
+                </div>
+                <span style="font-size: 12px;margin-top:10px;">Returns will not be accepted unless you select domestic or international return options above. The item can always be returned if it doesn’t match the listing description. Learn more</span>
+            </div>
+        </div>
+    </mat-card>
+    <mat-card fxLayout="row wrap" fxLayoutAlign="space-around" style="margin-top:20px;">
+        <h2 class="w-100 py-2">Shipping details</h2>
+        <div fxFlex="100">
+
+            <!-- domestic shipping section -->
+            <div>
+                <h4 class="w-100 py-2">Domestic shipping</h4>
+                <mat-form-field class="w-100 mt-1">
+                    <mat-select placeholder="Domestic shipping" formControlName="shipping" required>
+                        <mat-option *ngFor="let ship of shipping_array" [value]="ship.id">{{ship.name}}</mat-option>
+                    </mat-select>
+                    <mat-error>Please enter Domestic shipping</mat-error>
+                </mat-form-field>
+                <div *ngIf="createProductForm.controls.shipping.value === 1 || createProductForm.controls.shipping.value === 2">
+                    <div *ngIf="createProductForm.controls.shipping.value === 1">
+                        <p style="font-size: 12px;margin-top:10px;">Shipping rate table</p>
+                        <p style="font-size: 12px;margin-top:10px;">You can set the shipping rates for services to specific countries and regions.Create</p>
+                    </div>
+                    <div style="display: flex;">
+                        <mat-form-field class="w-100 mt-1">
+                            <mat-select placeholder="Services" formControlName="service" required>
+                                <mat-option *ngFor="let service of domestic_shipping_service_array" [value]="service.id">{{service.name}}</mat-option>
+                            </mat-select>
+                            <mat-error>Please enter Services</mat-error>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="createProductForm.controls.shipping.value === 1" class="w-45 mt-1" style="margin-left: 30px;">
+                            <input matInput placeholder="Cost (AFCASH)" formControlName="domestic_shipping_cost" type="number" maxlength="10">
+                            <mat-error *ngIf="createProductForm.controls.domestic_shipping_cost.hasError('min')">Cost should be positive.</mat-error>
+                            <mat-error *ngIf="createProductForm.controls.domestic_shipping_cost.hasError('max')">Cost should be less than 10000.</mat-error>
+                        </mat-form-field>
+                        <mat-checkbox color="primary" style="margin-top: 25px;margin-left: 20px;" formControlName="freeShipping">Free shipping</mat-checkbox>
+                    </div>
+                    <div style="display: flex;">
+                        <mat-checkbox color="primary" style="margin-top: 25px;" formControlName="domestic_offer_local_pickup">Offer local pickup</mat-checkbox>
+                        <mat-form-field class="w-70 mt-1" style="margin-left:30px;">
+                            <input matInput placeholder="Cost (AFCASH)" formControlName="offical_cost" maxlength="10" type="number">
+                            <mat-error *ngIf="createProductForm.controls.offical_cost.hasError('minlength')">Sub title isn't long enough, minimum of 6 characters</mat-error>
+                            <mat-error *ngIf="createProductForm.controls.offical_cost.hasError('maxlength')">Sub title is too long, maximum of 80 characters</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div style="display:flex;">
+                        <span style="margin-top:20px;width:250px;">Handling time</span>
+                        <mat-form-field class="w-100 mt-1">
+                            <mat-select placeholder="Select a handling time" formControlName="businessDay">
+                                <mat-option *ngFor="let business of business_array" [value]="business.id">{{business.name}}</mat-option>
+                            </mat-select>
+                            <mat-error>Please enter a handling time</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="createProductForm.controls.shipping.value === 2" style="display:flex;">
+                        <span style="margin-top:20px;width:250px;">Handling cost - calculated shipping only</span>
+                        <mat-form-field class="w-45 mt-1" style="margin-left: 30px;">
+                            <input matInput placeholder="Cost (AFCASH)" formControlName="domestic_shipping_cost" type="number" maxlength="10">
+                            <mat-error *ngIf="createProductForm.controls.domestic_shipping_cost.hasError('min')">Handling cost should be positive.</mat-error>
+                            <mat-error *ngIf="createProductForm.controls.domestic_shipping_cost.hasError('max')">Handling cost should be less than 10000.</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div *ngIf="createProductForm.controls.shipping.value === 3">
+                    <p style="font-size: 12px;margin-top:10px;">Item uses freight shipping.</p>
+                </div>
+                <div *ngIf="createProductForm.controls.shipping.value === 4">
+                    <p style="font-size: 12px;margin-top:10px;">Item is available for local pickup only.</p>
+                </div>
+            </div>
+
+            <!-- international shipping section -->
+            <div>
+                <h4 class="w-100 py-2">International shipping</h4>
+                <mat-form-field class="w-100 mt-1">
+                    <mat-select placeholder="International shipping" formControlName="intern_shipping" required>
+                        <mat-option *ngFor="let ship of international_array" [value]="ship.id">{{ ship.name }}</mat-option>
+                    </mat-select>
+                    <mat-error>Please enter International shipping</mat-error>
+                </mat-form-field>
+                <div *ngIf="createProductForm.controls.intern_shipping.value !== 3">
+                    <div *ngIf="createProductForm.controls.intern_shipping.value === 1">
+                        <p style="font-size: 12px;margin-top:10px;">Shipping rate table</p>
+                        <p style="font-size: 12px;margin-top:10px;">You can set the shipping rates for services to specific countries and regions.Create</p>
+                    </div>
+                    <div *ngIf="createProductForm.controls.intern_shipping.value === 1" style="display:flex;">
+                        <span style="margin-top:20px;width:250px;">Ship to</span>
+                        <mat-form-field class="w-100 mt-1">
+                            <mat-select placeholder="Select a ship to" formControlName="ship_to">
+                                <mat-option *ngFor="let ship_to_val of ship_to_array" [value]="ship_to_val.id">{{ ship_to_val.name }}</mat-option>
+                            </mat-select>
+                            <mat-error>Please select ship to</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="createProductForm.controls.intern_shipping.value === 1" style="display: flex;">
+                        <mat-form-field class="w-100 mt-1">
+                            <mat-select placeholder="Services" formControlName="service" required>
+                                <mat-option *ngFor="let service of international_shipping_service_array" [value]="service.id">{{ service.name }}</mat-option>
+                            </mat-select>
+                            <mat-error>Please enter Services</mat-error>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="createProductForm.controls.shipping.value === 1" class="w-45 mt-1" style="margin-left: 30px;">
+                            <input matInput placeholder="Cost (AFCASH)" formControlName="international_shipping_cost" type="number" maxlength="10">
+                            <mat-error *ngIf="createProductForm.controls.international_shipping_cost.hasError('min')">Cost should be positive.</mat-error>
+                            <mat-error *ngIf="createProductForm.controls.international_shipping_cost.hasError('max')">Cost should be less than 10000.</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="createProductForm.controls.intern_shipping.value === 2" style="display:flex;">
+                        <span style="margin-top:20px;width:250px;">Ship to</span>
+                        <mat-form-field class="w-100 mt-1">
+                            <mat-select placeholder="Select a ship to" formControlName="ship_to">
+                                <mat-option *ngFor="let ship_to_val of ship_to_array" [value]="ship_to_val.id">{{ ship_to_val.name }}</mat-option>
+                            </mat-select>
+                            <mat-error>Please select ship to</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="w-45 mt-1" style="margin-left: 30px;">
+                            <mat-select placeholder="Services" formControlName="service" required>
+                                <mat-option *ngFor="let service of international_shipping_service_array" [value]="service.id">{{ service.name }}</mat-option>
+                            </mat-select>
+                            <mat-error>Please enter Services</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <p style="font-size: 12px; margin-top: 10px;">Offer another service</p>
+                        <p style="font-size: 12px; margin-top: 10px; margin-bottom: 0;">Additional ship to locations - buyers contact for costs</p>
+                        <mat-form-field class="w-45 mt-1">
+                            <mat-select placeholder="Additional locations" formControlName="additional_location" required>
+                                <mat-option *ngFor="let additional_location of intern_additional_ship_to_array" [value]="additional_location.id">{{ additional_location.name }}</mat-option>
+                            </mat-select>
+                            <mat-error>Please select additional ship locations.</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div style="display: flex;">
+                        <div style="width: 170px;">
+                            <!-- <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;" formControlName="additional_ship_america">N. and S. America</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;" formControlName="additional_ship_canada">Canada</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;" formControlName="additional_ship_mexico">Mexico</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;" formControlName="additional_ship_brazil">Brazil</mat-checkbox> -->
+                            <!-- ================================= -->
+                            <!-- comment by Michael -->
+                            <!-- ================================= -->
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;">N. and S. America</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;">Canada</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;">Mexico</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;">Brazil</mat-checkbox>
+                        </div>
+                        <div style="width: 170px; margin-left: 50px;">
+                            <!-- <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;" formControlName="additional_ship_europe">Europe</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;" formControlName="additional_ship_uk">United Kingdom</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;" formControlName="additional_ship_germany">Germany</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;" formControlName="additional_ship_france">France</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;" formControlName="additional_ship_russia">Russian Federation</mat-checkbox> -->
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;">Europe</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;">United Kingdom</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;">Germany</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;">France</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;">Russian Federation</mat-checkbox>
+                        </div>
+                        <div style="width: 150px; margin-left: 50px;">
+                            <!-- <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;" formControlName="additional_ship_asia">Asia</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;" formControlName="additional_ship_china">China</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;" formControlName="additional_ship_japan">Japan</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;" formControlName="additional_ship_australia">Australia</mat-checkbox> -->
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;">Asia</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;">China</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;">Japan</mat-checkbox>
+                            <mat-checkbox color="primary" style="width: 250px; margin-left: 20px;">Australia</mat-checkbox>
+                        </div>
+                    </div>
+                    <div *ngIf="createProductForm.controls.intern_shipping.value === 2" style="display:flex;">
+                        <span style="margin-top:20px; width:250px;">Handling cost - calculated shipping only</span>
+                        <mat-form-field class="w-45 mt-1" style="margin-left: 30px;">
+                            <input matInput placeholder="Cost (AFCASH)" formControlName="international_shipping_cost" type="number" maxlength="10">
+                            <mat-error *ngIf="createProductForm.controls.international_shipping_cost.hasError('min')">Handling cost should be positive.</mat-error>
+                            <mat-error *ngIf="createProductForm.controls.international_shipping_cost.hasError('max')">Handling cost should be less than 10000.</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div *ngIf="createProductForm.controls.intern_shipping.value === 3">
+                    <p style="font-size: 12px;margin-top:10px;">Item is available for international pickup only.</p>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="w-100 py-2">Package weight & dimensions</h4>
+                <div style="display:flex;">
+                    <mat-form-field class="w-90 mt-1">
+                        <mat-select placeholder="Package type" formControlName="pktype">
+                            <mat-option *ngFor="let pk of pk_array" [value]="pk.id">{{pk.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="w-70 mt-1" style="margin-left:30px;">
+                        <input matInput placeholder="Dimensions" formControlName="dimention_x" maxlength="3" type="number">
+                    </mat-form-field>
+                    <span style="margin-top: 30px;margin-left: 10px;">In.</span>
+                    <mat-form-field class="w-70 mt-1" style="margin-left:30px;">
+                        <input matInput placeholder="" formControlName="dimention_y" maxlength="3" type="number">
+                    </mat-form-field>
+                    <span style="margin-top: 30px;margin-left: 10px;">In.</span>
+                    <mat-form-field class="w-70 mt-1" style="margin-left:30px;">
+                        <input matInput placeholder="" formControlName="dimention_z" maxlength="3" type="number">
+                    </mat-form-field>
+                    <span style="margin-top: 30px;margin-left: 10px;">In.</span>
+                </div>
+                <div style="display:flex;">
+                    <mat-form-field class="w-90 mt-1">
+                        <mat-select placeholder="Weight" formControlName="weight">
+                            <mat-option *ngFor="let weight of weight_array" [value]="weight.id">{{weight.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="w-70 mt-1" style="margin-left:30px;">
+                        <input matInput placeholder="" formControlName="lbs" maxlength="3" type="number">
+                    </mat-form-field>
+                    <span style="margin-top: 30px;margin-left: 10px;">lbs.</span>
+                    <mat-form-field class="w-70 mt-1" style="margin-left:30px;">
+                        <input matInput placeholder="" formControlName="oz" maxlength="3" type="number">
+                    </mat-form-field>
+                    <span style="margin-top: 30px;margin-left: 10px;">oz.</span>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+    <mat-card class="mt-2">
+        <mat-card-content fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
+            <mat-form-field fxFlex="50%">
+                <mat-select placeholder="Select Color" formControlName="colors" multiple>
+                    <mat-option *ngFor="let color of colors" value="{{color.id}}">
+                        <div fxLayout="row">
+                            <h3 fxFlex="30%" [style.color]="color.value">
+                                {{color.name}}
+                            </h3>
+                            <span fxFlex="70%" [style.background]="color.value">
+                            </span>
+                        </div>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="50%">
+                <mat-select placeholder="Select Brand" formControlName="brands" multiple>
+                    <mat-option *ngFor="let brand of brands" value="{{brand.image}}">
+                        {{brand.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
+    <div class="mt-1">
+        <button mat-raised-button (click)="onCreateProductFormSubmit()" color="primary" class="btn save-btn" *ngIf="paramId == null">
+            Create template
+        </button>
+
+        <button mat-raised-button (click)="onClickListItem()" color="primary" class="btn save-btn" *ngIf="paramId != null">
+            list item
+        </button>
+    </div>
+</form>

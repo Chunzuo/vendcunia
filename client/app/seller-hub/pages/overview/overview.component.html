@@ -1,0 +1,10 @@
+<div class="mb-20" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+    <app-stat fxFlex="25" [bgClass]="'danger'" [icon]="'dashboard'" [count]="salesCount" [label]="'Sales'"></app-stat>
+    <app-stat fxFlex="25" [bgClass]="'warn'" [icon]="'view_list'" [count]="ordersCount" [label]="'Orders'"></app-stat>
+    <app-stat fxFlex="25" [bgClass]="'success'" [icon]="'shopping_cart'" [count]="shippingCount" [label]="'Shipping'"></app-stat>
+    <app-stat fxFlex="25" [bgClass]="'info'" [icon]="'contact_support'" [count]="profit" [label]="'Profit'"></app-stat>
+</div>
+
+<div class="mb-20" fxFlexFill>
+    <app-sales></app-sales>
+</div>

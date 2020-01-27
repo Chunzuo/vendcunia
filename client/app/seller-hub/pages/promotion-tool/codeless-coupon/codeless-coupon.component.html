@@ -1,0 +1,321 @@
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+    <div>
+      <app-sidebar></app-sidebar>
+    </div>   
+    <div style="width: 100%">
+        <div fxLayout="row"  fxLayout.lt-md="column" fxLayoutGap="20px" style="background: #eeeeee;border-bottom: 1px solid #cccccc;">
+            <h3 [fxFlex]="40">Codeless coupon</h3>
+            <div [fxFlex]="60" style="text-align: right;">
+              <a href="javascript:;">Learn more</a>
+              |
+              <a href="javascript:;">Tell us what you think</a>
+            </div>
+        </div>
+        <div fxLayout="row"  fxLayout.lt-md="column" fxLayoutGap="20px">
+            <h1 class="pt-tl">Create a targeted offer (digital coupon) that can be shared with select users</h1>
+        </div>
+        <div class="hl-ar13 sod-pb20 sod-pt10">An
+                Targeted offers or digital coupons allow you to provide an order discount to select buyers only. Your offer will not be visible to any general buyers on the site. Only buyers who click through a special link for this offer or enter this special URL in their browser will see or receive this targeted offer. This URL will be generated when you save this offer and can be shared with third party shopping sites, included in marketing emails, or included as a part of your onsite marketing placements to drive traffic to this targeted offer. The offer will automatically be applied for these select buyers that clicked through. No special codes are needed.
+           <div class="sod-ex sod-pt10">Example offers:</div>
+           <div class="sod-ex">
+              <ul class="ml-20" style='color:#777'>
+                  <li>
+                    <b>
+                      <span>Extra AFCASH 10 off.</span>
+                   </b>
+                 </li>
+                 <li>
+                   <b>
+                     <span>Extra 10% off</span>
+                   </b>
+                 </li>
+                 <li>
+                   <b><span>Save AFCASH 10 when you spend AFCASH 100 or more.</span></b>
+                 </li>
+                 <li><b><span>Save 20% when you spend AFCASH 100 or more.</span></b></li>
+               </ul>
+          </div>
+        </div>
+        <!-- 1 -->
+        <div style="margin-left:20px;margin-top:20px;">
+            <div fxLayout="row">
+              <h3 style="border-bottom: 1px solid #999;width:100%">1. Set targeted offer conditions and discounts</h3>
+            </div>
+            <div fxLayout="row">
+                <div class="hl-ar13 sod-pb20 sod-pt10">
+                        You can set a conditional purchase requirement of either a minimum spend amount or item quantity. When select buyers have clicked through your offer and meet your requirements on purchases of qualifying inventory, they'll receive the discount amount you have specified.
+                </div>
+            </div>
+            <div fxLayout="row" style="margin-top:10px">
+              <mat-card style="width:100%;">
+                  <mat-card-content style="width:30%;border-right:solid 1px #ccc;float:left;height: 100%;">
+                      <div fxLayout="row">
+                        <mat-radio-button (click)="radioClick(1)">Minimum order</mat-radio-button>
+                      </div>
+                      <p class="ml_p">(Example: Spend AFCASH 50 or more)</p>
+                      <div fxLayout="row" style="margin-top:10px">
+                        <mat-radio-button (click)="radioClick(2)">Minimum quantity</mat-radio-button>
+                      </div>
+                      <p class="ml_p">(Example: Buy at least 3 items)</p>
+                  </mat-card-content>
+                  <mat-card-content style="width:65%;float:right">
+                      <div fxLayout="row" *ngIf="show_flag==1">
+                        <span> Select minimum purchase amount: </span>
+                        <select>
+                            <option value="0" selected="selected">---</option>
+                            <option value="5">AFCASH 5</option>
+                            <option value="10">AFCASH 10</option>
+                            <option value="15">AFCASH 15</option>
+                            <option value="20">AFCASH 20</option>
+                            <option value="25">AFCASH 25</option>
+                        </select>
+                      </div>
+                      <div fxLayout="row" *ngIf="show_flag==2">
+                          <span> Select minimum purchase quantity: </span>
+                          <select>
+                              <option value="0" selected="selected">---</option>
+                              <option value="5">2 items</option>
+                              <option value="10">3 items</option>
+                              <option value="15">4 items</option>
+                              <option value="20">5 items</option>
+                              <option value="25">6 items</option>
+                          </select>
+                        </div>
+                      <div fxLayout="row" style="margin-top:10px">
+                        <span> Select a discount: </span>
+                      </div>
+                      <div fxLayout="row" style="margin-top:10px;margin-left:5px">
+                        <mat-radio-button value="primary" style="float:left;">
+                            Purchase discount
+                        </mat-radio-button>
+                        <span style="margin-left:20px">(Example: Save AFCASH 10)</span>
+                        <select style="margin-left:10px">
+                            <option selected="selected">---</option>
+                            <option>AFCASH 1 </option>
+                            <option>AFCASH 5 </option>
+                            <option>AFCASH 10 </option>
+                            <option>AFCASH 15 </option>
+                            <option>AFCASH 20 </option>
+                            <option>AFCASH 25 </option>
+                            <option>AFCASH 30 </option>
+                            <option>AFCASH 40 </option>
+                            <option>AFCASH 50 </option>
+                            <option>AFCASH 75 </option>
+                            <option>other</option>
+                        </select>
+                      </div>
+                      <div fxLayout="row" style="margin-top:10px;margin-left:25px">
+                            <span> The discount can be applied only once per transaction </span>
+                      </div>
+                      <div fxLayout="row" style="margin-top:10px;margin-left:25px">
+                            <mat-radio-button value="primary" style="float:left;">
+                                Yes
+                            </mat-radio-button>
+                      </div>
+                      <div fxLayout="row" style="margin-top:10px;margin-left:25px">
+                            <mat-radio-button value="primary" style="float:left;">
+                                No
+                            </mat-radio-button>
+                      </div>
+                      <div fxLayout="row" style="margin-top:10px;margin-left:5px">
+                            <mat-radio-button value="primary" style="float:left;">
+                                Percentage discount
+                            </mat-radio-button>
+                            <span style="margin-left:20px">(Example: 20% off)</span>
+                      </div>
+                      <div fxLayout="row" style="margin-top:10px;margin-left:5px" *ngIf="show_flag==2">
+                            <mat-radio-button value="primary" style="float:left;">
+                                Item discount
+                            </mat-radio-button>
+                            <span style="margin-left:20px">(Example: Get 1 item at 50% off)</span>
+                      </div>
+                      <div fxLayout="row" style="margin-top:10px;">
+                          <div class="nod-pre">
+                            <span class="nod-col33 nod-fb nod-t16c3">Preview:</span>
+                            &nbsp;
+                            <span id="nod-m-o-prE" class="nod-col448600 nod-fb nod-t16c4">-offer preview area-</span>
+                          </div>
+                      </div>
+                  </mat-card-content>
+              </mat-card>
+            </div>
+        </div>
+        <!-- 2 -->
+        <div style="margin-left:20px;margin-top:20px;">
+            <div fxLayout="row">
+                <h3 [fxFlex]="40" style="border-bottom: 1px solid #999;">2. Choose qualifying items for your targeted offer</h3>
+                <div [fxFlex]="60" style="text-align: right;border-bottom: 1px solid #999;">
+                    |
+                    <a href="javascript:;">Minimum requirements for items to be included in an offer</a>
+                </div>
+            </div>
+            <div fxLayout="row">
+                <div class="hl-ar13 sod-pb20 sod-pt10">
+                    Select items that are eligible for this offer.
+                </div>
+            </div>
+            <div fxLayout="row" style="margin-top:10px">
+                <mat-card  style="width:100%">
+                    <mat-card-content>
+                        <div fxLayout="row">
+                            <mat-radio-button (click)="offer2Click(1)">Restrict inventory by rules</mat-radio-button>
+                        </div>
+                        <div class="ml_p" style="background: #efefef" *ngIf="offerFlag==1">
+                            <a href="javascript:;">Create inclusion rule</a>
+                            |
+                            <a href="javascript:;">Create exclusion rule</a>
+                        </div>
+                        <div fxLayout="row" style="margin-top:10px">
+                            <mat-radio-button (click)="offer2Click(2)">Restrict inventory by SKUs</mat-radio-button>
+                        </div>
+                        <div style="background: #efefef" *ngIf="offerFlag==2">
+                            <p class="ml_p">You can select up to 500 individual SKUs. SKUs or stock keeping units are your product identifiers for your listings and are also known on Vendasity as Custom Labels.</p>
+                            <div fxLayout="row" style="margin-top:10px" class="ml_p">
+                                    <a href="javascript:;">Enter SKUs</a>
+                                    |
+                                    <a href="javascript:;">Select individual SKUs</a>
+                            </div>
+                        </div>
+                        <div fxLayout="row" style="margin-top:10px">
+                            <mat-radio-button (click)="offer2Click(3)">Restrict inventory by Item IDs</mat-radio-button>
+                        </div>
+                        <div style="background: #efefef" *ngIf="offerFlag==3">
+                            <p class="ml_p">You can select up to 500 items or listings. If you assign SKUs aka custom labels to your items, we recommend that you restrict by SKU since an Item ID can change when you relist an item.</p>
+                            <div fxLayout="row" style="margin-top:10px" class="ml_p">
+                                    <a href="javascript:;">Enter Item IDs</a>
+                                    |
+                                    <a href="javascript:;">Select individual items</a>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div style="margin-left:20px;margin-top:20px;">
+            <div fxLayout="row">
+                <h3 style="border-bottom: 1px solid #999;width:100%">3. Describe the items that are eligible for the targeted offer</h3>
+            </div>
+            <div fxLayout="row">
+                <div class="hl-ar13 sod-pb20 sod-pt10">
+                    Enter a brief description of what is eligible for the offer. If possible, this should include category and brands of the merchandise included in the offer, see examples below. This is displayed to shoppers, see preview area below. You have a 50 character limit.
+                </div>
+            </div>
+            <div fxLayout="row" style="margin-top:10px">
+                <mat-card style="width:100%;">
+                    <mat-card-content>
+                        <span style="font-weight: bold;float:left">Enter description:</span>
+                        <div style="margin-left:30px;float:left">
+                            <div fxLayout="row">
+                                <input>
+                            </div>
+                            <div fxLayout="row">
+                                <div class="sl-c777">
+                                    <p>Examples:</p>
+                                    <p>1. Brand &amp; categories: On Michael Kors hand bags &amp; shoes</p>
+                                    <p>2. All brands - Coach, DKNY, Christian Dior &amp; Chloe</p>
+                                    <p>3. Subset of brands - Top brands including Nike, Adidas &amp; Puma</p>
+                                    <p>4. Categories - Consumer electronics &amp; TVs</p>
+                                </div>
+                            </div>
+                            <div fxLayout="row" style="margin-top:10px;">
+                                <div class="nod-pre">
+                                <span class="nod-col33 nod-fb nod-t16c3">Preview:</span>
+                                &nbsp;
+                                <span id="nod-m-o-prE" class="nod-col448600 nod-fb nod-t16c4">-offer preview area-</span>
+                                </div>
+                            </div>
+                            <div fxLayout="row">
+                                <div class="sl-c777">
+                                    <p>Marked down item price reflects all savings. Items provided by vendasity.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <!-- 4 -->
+        <div style="margin-left:20px;margin-top:20px;">
+            <div fxLayout="row">
+                <h3 style="border-bottom: 1px solid #999;width:100%">4. Schedule your targeted offer</h3>
+            </div>
+            <div fxLayout="row">
+                <div class="hl-ar13 sod-pb20 sod-pt10">
+                    Select a start date and end date for your offer. Discounts will only be applied during this time period as long as the buyer has started the checkout process. As the offer comes to an end, a countdown will be presented on the offer page to create a sense of urgency.
+                </div>
+            </div>
+            <div fxLayout="row" style="margin-top:10px">
+                <mat-card style="width:100%;">
+                    <mat-card-content>
+                        <div fxLayout="row">
+                            <span style="font-weight: bold;float:left">Enter offer title:</span>
+                            <input style="float:left;margin-left:20px;">
+                            <p style="font-style: italic;float:left;margin-left:20px;">(Example: Summer sale)</p>
+                        </div>
+                        <div fxLayout="row" style="margin-top:10px">
+                            <span style="font-weight: bold;float:left;margin-top:14px">Start date:</span>
+                            <mat-form-field style="float:left;margin-left:20px">
+                                <input id = "datePicker" matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="dateCtrl">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                            <mat-checkbox (click)="checkClick()" [(ngModel)] = "checkValue" style="float:left;margin-left:20px;margin-top:14px">Start immediately</mat-checkbox>
+                        </div>
+                        <div fxLayout="row" style="margin-top:10px">
+                            <span style="font-weight: bold;float:left;margin-top:14px">End date:</span>
+                            <mat-form-field style="float:left;margin-left:20px">
+                                <input matInput [matDatepicker]="picker1" placeholder="Choose a date">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div fxLayout="row">
+            <div class="coreFooterLinks" id="glbfooter">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="g-pipe">
+                                <!-- <img src="Promotional%20Shipping%20Discounts_files/s.gif" alt="" width="1" height="10"> -->
+                                <br>
+                                <a href="http://www.Vendasity.com/">About Vendasity</a> | 
+                                <a href="http://www2.Vendasity.com/aw/marketing.shtml">Announcements</a> | 
+                                <a href="http://hub.shop.Vendasity.com/">Buy Hub</a> | 
+                                <a href="http://pages.Vendasity.com/securitycenter/index.html">Security Center</a> | 
+                                <a href="http://resolutioncenter.Vendasity.com/">Resolution Center</a> | 
+                                <a href="http://pages.Vendasity.com/buy/tools.html">Buyer Tools</a> | 
+                                <a href="http://pages.Vendasity.com/help/policies/overview.html">Policies</a> |
+                                <a href="http://stores.Vendasity.com/">Stores</a> | 
+                                <a href="http://pages.Vendasity.com/sitemap.html">Site Map</a> | 
+                                <a href="http://pages.Vendasity.com/help/index.html">Help</a> | 
+                                <a href="http://viv.Vendasity.com/ws/VendasityISAPI.dll?VendasityTime">Vendasity official time</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="5"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="1" bgcolor="#CCCCCC"></td>
+                        </tr>
+                        <tr>
+                            <td height="10"></td>
+                        </tr>
+                        <tr class="g-hlp" valign="top">
+                            <td class="g-nav coreFooterLegalNotice">Copyright© 2018 Africunia Inc. All Rights Reserved. Designated trademarks and brands are the property of their respective owners. Use of this Web site constitutes acceptance of the Vendasity <a title=" " href="http://pages.Vendasity.com/help/policies/user-agreement.html?rt=nc" target="_blank">User Agreement</a> and <a title=" " href="http://pages.Vendasity.com/help/policies/privacy-policy.html?rt=nc" target="_blank">Privacy Policy</a>.
+                                <br>
+                                <!-- <img src="Promotional%20Shipping%20Discounts_files/s.gif" alt="" height="20"> -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="cobrandFooter"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

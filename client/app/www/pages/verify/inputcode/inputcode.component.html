@@ -1,0 +1,23 @@
+<mat-card>
+  <div fxFlex="100" fxFlex.gt-sm="100" fxLayout="row wrap">
+      <div fxFlex="100" fxFlex.gt-sm="100" ngClass.sm="mt-2" ngClass.xs="mt-2" id="text">
+          <h1 class="text-center" style="font-size:38px">Your Code Here</h1>
+      </div>
+      <div fxFlex="100" fxFlex.gt-sm="100" class="p-2" ngClass.sm="mt-2" ngClass.xs="mt-2">
+          <div fxFlex="100" fxFlex.gt-sm="100" fxLayoutAlign="center center">
+              <form [formGroup]="inputcodeForm" (ngSubmit)="onInputcodeFormSubmit(inputcodeForm.value)" class="verify-form">
+                  <mat-form-field class="w-100 mt-3">
+                      <input matInput placeholder="Verification Code" type="password" formControlName="password" required>
+                      <mat-error *ngIf="inputcodeForm.controls.password.errors?.required">Please enter your code.</mat-error>
+                      <mat-error *ngIf="inputcodeForm.controls.password.hasError('minlength')">Code isn't long enough, minimum of 6 characters</mat-error>
+                  </mat-form-field>
+                  <div class="text-center mt-3">
+                      <button mat-raised-button color="primary" class="btn verify-btn">
+                          Verify Me
+                      </button>
+                  </div> 
+              </form>
+          </div>                      
+      </div>       
+  </div> 
+</mat-card>

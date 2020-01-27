@@ -1,0 +1,49 @@
+<mat-card>
+    <div fxLayout="row wrap">
+        <div fxFlex="100" fxFlex.gt-sm="100" ngClass.sm="mt-2" ngClass.xs="mt-2">
+            <h2 class="text-muted text-center">Create an account</h2>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="100" class="p-2" ngClass.sm="mt-2" ngClass.xs="mt-2">
+            <div fxFlex="50" fxFlex.gt-sm="50" fxLayoutAlign="center center">
+                <form [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit(registerForm.value)" class="register-form">
+                    <mat-form-field class="w-45 mt-2">
+                        <input matInput placeholder="First Name" formControlName="first_name" required autocomplete="first name">
+                        <mat-error *ngIf="registerForm.controls.first_name.errors?.required">First Name is required</mat-error>
+                        <mat-error *ngIf="registerForm.controls.first_name.hasError('minlength')">First Name isn't long enough, minimum of 3 characters</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-45 mt-2" style="float: right;">
+                        <input matInput placeholder="Last Name" formControlName="last_name" required autocomplete="last name">
+                        <mat-error *ngIf="registerForm.controls.last_name.errors?.required">Last Name is required</mat-error>
+                        <mat-error *ngIf="registerForm.controls.last_name.hasError('minlength')">Last Name isn't long enough, minimum of 3 characters</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100 mt-1">
+                        <input matInput placeholder="Email" formControlName="email" required autocomplete="email">
+                        <mat-error *ngIf="registerForm.controls.email.errors?.required">Email is required</mat-error>
+                        <mat-error *ngIf="registerForm.controls.email.hasError('invalidEmail')">Invalid email address</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100 mt-1">
+                        <input matInput placeholder="Password" formControlName="password" type="password" minlength="6" required autocomplete="password">
+                        <mat-error *ngIf="registerForm.controls.password.errors?.required">Password is required</mat-error>
+                        <mat-error *ngIf="registerForm.controls.password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</mat-error>
+                    </mat-form-field> 
+                    <mat-form-field class="w-100 mt-1">
+                        <input matInput placeholder="Confirm Password" formControlName="confirmPassword" type="password" required autocomplete="confirm password">
+                        <mat-error *ngIf="registerForm.controls.confirmPassword.errors?.required">Confirm Password is required</mat-error>
+                        <mat-error *ngIf="registerForm.controls.confirmPassword.hasError('mismatchedPasswords')">Passwords do not match</mat-error>
+                    </mat-form-field>
+                    <div class="text-center mt-2">
+                        <button mat-raised-button color="primary" class="register-btn">
+                            Create Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div fxFlex="50" fxFlex.gt-sm="50">
+                <div class="line"></div>
+                <p class="text">or</p>
+                <div class="line"></div>
+                <button class="google_btn w3-ripple" (click) = "socialSignIn('google')"><img src="../../../../assets/images/google_button.png"></button>
+            </div>
+        </div>
+    </div> 
+</mat-card>

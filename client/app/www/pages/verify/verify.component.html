@@ -1,0 +1,23 @@
+<mat-card>
+  <div fxFlex="100" fxFlex.gt-sm="100" fxLayout="row wrap">
+      <div fxFlex="100" fxFlex.gt-sm="100" ngClass.sm="mt-2" ngClass.xs="mt-2" id="text">
+          <h1 class="text-center" style="font-size:38px">Verify Your Email Address</h1>
+      </div>
+      <div fxFlex="100" fxFlex.gt-sm="100" class="p-2" ngClass.sm="mt-2" ngClass.xs="mt-2">
+          <div fxFlex="100" fxFlex.gt-sm="100" fxLayoutAlign="center center">
+              <form [formGroup]="verifyForm" (ngSubmit)="onVerifyFormSubmit(verifyForm.value)" class="verify-form">
+                  <mat-form-field class="w-100 mt-3">
+                      <input matInput placeholder="Your Email Address" formControlName="email" required>
+                      <mat-error *ngIf="verifyForm.controls.email.errors?.required">Please enter your email address.</mat-error>
+                      <mat-error *ngIf="verifyForm.controls.email.hasError('invalidEmail')">Invalid email address</mat-error>
+                  </mat-form-field>
+                  <div class="text-center mt-3">
+                      <button mat-raised-button color="primary" class="btn verify-btn">
+                          Send Code
+                      </button>
+                  </div> 
+              </form>
+          </div>                      
+      </div>       
+  </div> 
+</mat-card>

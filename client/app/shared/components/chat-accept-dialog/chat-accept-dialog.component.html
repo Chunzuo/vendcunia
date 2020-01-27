@@ -1,0 +1,5 @@
+<h1 mat-dialog-title>Do you want to accept or reject this contact request?</h1>
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Accept</button>
+    <button mat-button (click)="onRejectClick()">Reject</button>
+</div>

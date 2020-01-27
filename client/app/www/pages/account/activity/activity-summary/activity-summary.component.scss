@@ -1,0 +1,91 @@
+
+.more {
+    background: linear-gradient(to bottom,#fff 0%,#e7e7e7 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',endColorstr='#e7e7e7',GradientType=0);
+    color: #666;
+    border: 1px solid #ccc;
+    height: 270px;
+}
+.more .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0 10px 20px;
+}
+.more .sub-title {
+    font-size: 16px;
+    margin: 0 0 0 20px;
+}
+
+.more .actions {
+    margin: 20px 0 0 40px;
+}
+
+.more li {
+    float: left;
+    font-size: 16px;
+    line-height: 21px;
+    text-align: center;
+    width: 130px;
+    margin: 0 40px 0 0;
+    padding: 0;
+}
+.more b {
+    display: block;
+    font-weight: bold;
+}
+.more a {
+    display: block;
+    text-decoration: none;
+}
+.hot .actions li {
+    float: left;
+    width: 230px;
+    margin: 0 34px 0 0;
+    height: 200px;
+    position: relative;
+}
+.gh-ar-hdn {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    color: #000;
+}
+ul {
+    list-style-type: none;
+}
+img {
+    display: block;
+    width: 42px;
+    height: 33px;
+    margin: 0 auto 5px;
+}
+.hot {
+    margin: 20px 0 0 0;
+}
+.hot a {
+    position: absolute;
+}
+.fashion a {
+    top: 44px;
+    left: 10px;
+}
+.hot .actions li {
+    float: left;
+    width: 230px;
+    margin: 0 34px 0 0;
+    height: 200px;
+    position: relative;
+}
+.hot .actions li.electronics {
+    margin: 0;
+}
+.hot .actions li {
+    float: left;
+    width: 230px;
+    height: 200px;
+    position: relative;
+}
+

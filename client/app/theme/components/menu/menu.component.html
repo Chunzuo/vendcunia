@@ -1,0 +1,53 @@
+<mat-toolbar class="top-navbar mat-elevation-z2" fxLayoutAlign="center center">
+    <a mat-button routerLink="/" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Home</a>
+
+    <div *ngFor="let category of categoryList">
+        <div *ngIf="category.has_sub_category === 0">
+            <a mat-button [routerLink]="['/products', category.id]" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact: true}">
+                {{category.name}}
+            </a>
+        </div>
+        <div *ngIf="category.has_sub_category === 1">
+            <a mat-button [matMenuTriggerFor]="subcategorylist" (click)="getSubCategoryList(category.id)">{{ category.name }}
+                <!--<mat-icon class="caret">arrow_drop_down</mat-icon>-->
+            </a>
+            <mat-menu #subcategorylist="matMenu" [overlapTrigger]="false" class="mega-menu app-dropdown">
+                <div fxLayout="row wrap">
+                    <div *ngFor="let subcategory of subCategoryList" fxFlex="20" fxLayout="column" class="p-1">
+                        <a mat-menu-item routerLink="/">
+                            <b>{{ subcategory.name }}</b>
+                        </a>
+                        <mat-divider></mat-divider>
+                        <a *ngFor="let doubleSubCategory of subcategory.children" mat-menu-item routerLink="/">
+                            {{ doubleSubCategory.name }}
+                        </a>
+                    </div>
+                    <div fxFlex="20" class="p-1">
+                        <mat-card class="mega-menu-widget p-0">
+                            <mat-chip-list>
+                                <mat-chip color="warn" selected="true">50% OFF</mat-chip>
+                            </mat-chip-list>
+                            <button mat-raised-button color="primary">Shop now</button>
+                            <img src="{{ category.thumb_image_path }}" alt="" class="w-100">
+                        </mat-card>
+                    </div>
+                </div>
+            </mat-menu>
+            <!--<a mat-button [matMenuTriggerFor]="subcategorylist" (click)="getSubCategoryList(category.id)"
+                routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact: true}">
+                {{category.name}}
+            </a>
+            <mat-menu #subcategorylist="matMenu" [overlapTrigger]="false" class="app-dropdown">
+                <a mat-menu-item [routerLink]="['/products', category.id]" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">All products</a>
+                <div *ngFor="let subcategory of subCategoryList">
+                    <a mat-menu-item [routerLink]="['/products', subcategory.id]" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">
+                        {{subcategory.name}}
+                    </a>
+                </div>
+            </mat-menu>-->
+        </div>
+    </div>
+
+    <a mat-button routerLink="/contact" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">Contact</a>
+
+</mat-toolbar>

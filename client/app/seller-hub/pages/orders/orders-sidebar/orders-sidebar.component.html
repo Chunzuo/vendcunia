@@ -1,0 +1,38 @@
+<div id="sidebar">
+    <mat-nav-list>
+        <label>ORDERS</label>
+        <a mat-list-item [routerLink]="['/sellerhub/orders/all']">
+          All orders
+      </a>
+        <!--  <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/sellerhub/orders/awaiting_pay']">
+          Awaiting payment
+      </a>-->
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/sellerhub/orders/awaiting_ship']">
+          Awaiting shipment
+      </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/sellerhub/orders/archive']">
+          Paid and shipped
+      </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/sellerhub/orders/cancel']">
+        Cancellations
+      </a>
+        <!--<hr>
+      <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/sellerhub/orders/all']">
+        Returns
+      </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/sellerhub/orders/all']">
+        Cases
+      </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/sellerhub/orders/all']">
+        Shipping labels
+      </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/sellerhub/orders/archive']">
+        Archived
+      </a>
+        <hr>
+        <label>SETTINGS</label>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/dashboard']">
+        Return preferences
+      </a>-->
+    </mat-nav-list>
+</div>

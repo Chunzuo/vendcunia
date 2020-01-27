@@ -1,0 +1,373 @@
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+    <h2>Business Infomation</h2>
+</div>
+<mat-card class="mt-20">
+    <mat-card-header>
+        <mat-card-title>
+            <h2>Account Infomation</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td valign="top">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tbody>
+                                <tr height="23px">
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;Account type</td>
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;{{user.account_type}}</td>
+                                </tr>
+                                <tr height="23px">
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;Email</td>
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;
+                                        <mat-form-field>
+                                            <input matInput placeholder="Email..." [(ngModel)]="user.email" required>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr height="23px">
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;Password</td>
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;
+                                        <button mat-raised-button (click)="change_password()" style="margin-top: 10px; margin-bottom: 10px;" color="primary">change password</button>
+                                    </td>
+                                </tr>
+                                <tr height="23px">
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;Phone number</td>
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;
+                                        <!-- <a href="javascript:;" id="AnonBidHelp3"><img src="../../../../../../assets/images/btnHelp.gif" border="0" alt="Click here to know about Secret Question" title="" align="absmiddle"></a> -->
+                                        <mat-form-field>
+                                            <input matInput placeholder="Phone number" [(ngModel)]="user.phone">
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr height="23px">
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;Address</td>
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;
+                                        <mat-form-field>
+                                            <input matInput placeholder="Address..." [(ngModel)]="user.address">
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr height="23px">
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;Address Sub</td>
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;
+                                        <mat-form-field>
+                                            <input matInput placeholder="Address Sub..." [(ngModel)]="user.address_sub">
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr height="23px">
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;City</td>
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;
+                                        <mat-form-field>
+                                            <input matInput placeholder="City..." [(ngModel)]="user.city">
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr height="23px">
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;Rating</td>
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;
+                                        <!-- <app-rating [ratingsCount]="user.ratings_count" [ratingsValue]="user.rating" [direction]="'row'"></app-rating> -->
+                                        <!--<mat-icon *ngFor="let star of stars; let i=index;" class="mat-icon-xs" (click)="rate(i)">{{star}}</mat-icon>-->
+                                        <div class="ratings">
+                                            <mat-icon *ngFor="let star of stars; let i=index;" class="mat-icon-xs">{{star}}</mat-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr height="23px">
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;Balance</td>
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;{{user.balance}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button mat-raised-button color="warn" class="mt-20" (click)="updateUser()">Update</button>
+    </mat-card-content>
+</mat-card>
+<!-- <mat-card class="mt-20">
+    <mat-card-header>
+        <mat-card-title>
+            <h2>Email and Contact Information</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td valign="top">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tbody>
+                                <tr height="23px">
+                                    <td style="border-bottom: solid 1px #c4c4c4;width:50%">&nbsp;Registered email address</td>
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;c...c@gmail.com</td>
+                                    <td nowrap="" style="border-bottom: solid 1px #c4c4c4;"><a href="https://scgi.ebay.com/ws/eBayISAPI.dll?ChangeRegistrationAccountType">Edit</a></td>
+                                </tr>
+                                <tr height="23px">
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;Registered name, address and phone number</td>
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;</td>
+                                    <td nowrap="" style="border-bottom: solid 1px #c4c4c4;"><a href="https://scgi.ebay.com/ws/eBayISAPI.dll?ChangeRegistrationAccountType">Edit</a></td>
+                                </tr>
+                                <tr height="23px">
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;Instant Messenger IM alert provider</td>
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;None</td>
+                                    <td nowrap="" style="border-bottom: solid 1px #c4c4c4;"><a href="https://scgi.ebay.com/ws/eBayISAPI.dll?ChangeRegistrationAccountType">Add</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>
+<mat-card class="mt-20">
+    <mat-card-header>
+        <mat-card-title>
+            <h2>Financial Information</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td colspan="3" valign="top" style="padding-bottom:5px">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="padding-left:15px" valign="top"><span class="B">Automatic payment method</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="80%">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td style="padding-left:15px">Paypal</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td colspan="2" width="20%" nowrap="" align="right" valign="middle"><a href="https://arbd.ebay.com/ws/eBayISAPI.dll?GenericPlaceCC&amp;encryptedparams=AQAAAWWczd5XABMwMjRkZDE5NmM3MDQxNzhhMjhiNTBkZjQ0ZmViYjkxNzo6MTUzNjAwODYwMjc5OOir56M85JsVlnEdd9iaMeFXN98t">Edit</a>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="80%"></td>
+                    <td colspan="2" width="20%" nowrap="" align="right" valign="middle"><a href="">Remove</a>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="3" valign="top">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="padding-left:15px" valign="top"><span class="B">Backup Payment Method</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100%" style="padding-bottom:15px">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td style="padding-left:15px">None</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td colspan="3">
+                                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="padding-left:15px">Update your <a href="https://arbd.ebay.com/ws/eBayISAPI.dll?PaymentSelectionShowV4&amp;v2redirectpage=2534">automatic payment method</a>.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="padding:15px">You can make a <a href="http://cgi3.ebay.com/ws/eBayISAPI.dll?OneTimePayPalPayment">one-time payment</a> using PayPal or another payment method.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tbody>
+                <hr>
+                <tr>
+                    <td colspan="3" valign="top">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="padding-left:15px;" valign="top"><span class="B">Checkout saved payment methods</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100%">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td style="padding-left:15px;">You have no saved payment methods.<a style="cursor: pointer;color:blue">Learn more</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <hr>
+            </tbody>
+        </table>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td colspan="3" valign="top" style="padding-top:5px;padding-bottom:5px">
+                        <table cellpadding="0" cellspacing="0" border="0" style="margin-left:15px">
+                            <tbody>
+                                <tr>
+                                    <td valign="top">
+                                        <img src="../../../../../../assets/images/charityicon_16x16.gif" align="absMiddle" alt="Giving Works Reminder">&nbsp;
+                                        <span class="B">Charity payment method</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" valign="top">
+                        <table cellpadding="0" cellspacing="0" border="0" style="margin-left:15px">
+                            <tbody>
+                                <tr>
+                                    <td valign="top" style="padding-bottom:10px; ">
+                                        In order to donate a percent of your sales to benefit charity, a valid PayPal account is required. This will be automatically used to process any future donations.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-top:solid 1px grey;border-bottom:solid 1px grey">
+            <tr height="23px">
+                <td width="50%" bgcolor="#f9f7ff">&nbsp;PayPal Account</td>
+                <td width="49%" valign="top">Not Specified</td>
+                <td align="right" nowrap="" width="1%"><a href="https://arbd.ebay.com/ws/eBayISAPI.dll?SetupPPDonationPayment">Edit</a>&nbsp;</td>
+            </tr>
+        </table>
+    </mat-card-content>
+</mat-card>
+<mat-card class="mt-20">
+    <mat-card-header>
+        <mat-card-title>
+            <h2>Security Infomation</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td valign="top">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tbody>
+                                <tr height="23px">
+                                    <td style="border-bottom: solid 1px #c4c4c4;width:50%">&nbsp;2 step verification</td>
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;off</td>
+                                    <td nowrap="" style="border-bottom: solid 1px #c4c4c4;"><a href="https://scgi.ebay.com/ws/eBayISAPI.dll?ChangeRegistrationAccountType">Edit</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>
+<mat-card class="mt-20">
+    <mat-card-header>
+        <mat-card-title>
+            <h2>Social accounts</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td valign="top">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tbody>
+                                <tr height="23px">
+                                    <td style="border-bottom: solid 1px #c4c4c4;width:50%">&nbsp;Facebook</td>
+                                    <td style="border-bottom: solid 1px #c4c4c4;">&nbsp;unliked</td>
+                                    <td nowrap="" style="border-bottom: solid 1px #c4c4c4;"><a href="https://scgi.ebay.com/ws/eBayISAPI.dll?ChangeRegistrationAccountType">Edit</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card> -->
+<footer id="glbfooter" role="contentinfo" class="gh-w">
+    <div id="gf-t-box">
+        <table class="gf-t">
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <ul id="gf-l" class="gh-hide-if-nocss">
+                            <li class="gf-li"><a href="https://www.vendasity.com/" _exsp="m571.l2602" class="thrd gf-bar-a">
+  About vendasity</a></li>
+                            <li class="gf-li"><a href="http://announcements.vendasity.com/" _exsp="m571.l2935" class="thrd gf-bar-a">
+  Announcements</a></li>
+                            <li class="gf-li"><a href="http://community.vendasity.com/" _exsp="m571.l1540" class="thrd gf-bar-a">
+  Community</a></li>
+                            <li class="gf-li"><a href="https://pages.vendasity.com/securitycenter/index.html" _exsp="m571.l2616" class="thrd gf-bar-a">
+  Security Center</a></li>
+                            <li class="gf-li"><a href="https://resolutioncenter.vendasity.com/" _sp="m571.l1619" class="thrd gf-bar-a">
+  Resolution Center</a></li>
+                            <li class="gf-li"><a href="http://pages.vendasity.com/sellerinformation/index.html" _exsp="m571.l1613" class="thrd gf-bar-a">
+  Seller Information Center</a></li>
+                            <li class="gf-li"><a href="https://pages.vendasity.com/help/policies/overview.html?fromFeature=My%20eBay&amp;fromFeature=My%20eBay" _exsp="m571.l2604" class="thrd gf-bar-a">
+  Policies</a></li>
+                            <li class="gf-li"><a href="https://www.vendasity.com/files/hub/en-US/index.html" _exsp="m571.l3947" class="thrd gf-bar-a">
+  Affiliates</a></li>
+                            <li class="gf-li"><a href="https://ocsnext.vendasity.com/ocs/home" _sp="m571.l1545" class="thrd gf-bar-a">
+  Help &amp; Contact</a></li>
+                            <li class="gf-li"><a href="https://pages.vendasity.com/sitemap.html" _exsp="m571.l2909" class="thrd gf-bar-a">
+  Site Map</a></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td class="gf-legal">Copyright © 2018 Africunia Inc. <a href="https://www.Africunia.com/accessibility/">Accessibility</a>, <a href="https://pages.vendasity.com/help/policies/user-agreement.html?fromFeature=My%20eBay&amp;fromFeature=My%20eBay">User Agreement</a>,
+                        <a href="https://pages.vendasity.com/help/policies/privacy-policy.html?fromFeature=My%20eBay&amp;fromFeature=My%20eBay">Privacy</a>, <a href="https://pages.vendasity.com/help/account/cookies-web-beacons.html?fromFeature=My%20eBay&amp;fromFeature=My%20eBay">Cookies</a>                        and <a href="https://cgi6.vendasity.com/ws/eBayISAPI.dll?AdChoiceLandingPage&amp;partner=0" id="gf-AdChoice">AdChoice</a></td>
+                    <td nowrap="" align="center">
+                        <a title="Verify site's SSL certificate" _exsp="m571.l3943" href="https://trustsealinfo.websecurity.norton.com/splash?form_file=fdf/splash.fdf&amp;dn=www.vendasity.com&amp;lang=en" onclick="this.href='https://trustsealinfo.websecurity.norton.com/splash?form_file=fdf/splash.fdf&amp;dn=#D#&amp;lang=en'.replace(/#D#/,location.host);return true"
+                            rel="noreferrer"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</footer>

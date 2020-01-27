@@ -1,0 +1,443 @@
+<div id="purchase-history" class="my-container-parent">
+    <!--<div id="commitments" class="my-container item-list " data-lazy="false" data-nav-priority="2" *ngIf="user_role=='2'">
+        <div class="container-header">
+            <h2 class="container-title">Unpaid items</h2>
+        </div>
+        <div class="ajax-wrap">
+            <div class="container-options">
+                <div class="filter-r">
+                    <div class="ph-hide-option" role="radiogroup">
+                        <label class="hide-option" for="m2748-not-hidden">
+                        <input type="radio" role="radio" name="m2748-hide-option" value="not-hidden-check" id="m2748-not-hidden" aria-checked="true" checked="checked" (click)="showUnpaidItems('1')">
+                        <span class="label">Not hidden</span>
+                        </label>
+                        <label class="hide-option" for="m2748-hidden">
+                        <input type="radio" role="radio" name="m2748-hide-option" value="hidden-check" id="m2748-hidden" aria-checked="false" (click)="showUnpaidItems('0')">
+                        <span class="label">Hidden</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="bulk-actions-border"></div>
+            <div class="result-set-r" *ngIf="upaid_flag==true">
+                <div class="no-rows">
+                    <span class="sub-title">You do not have any ready for payment items to display in this view.</span>
+                </div>
+            </div>
+            <div class="container-options  options-footer" *ngIf="upaid_flag==true">
+                <div class="num-items-page">
+                    <span>Items per page:</span>
+                    <ul>
+                        <li class="first">
+                            <a role="button" href="javascript:;">
+                10
+                <b class="gh-ar-hdn">Items per page:</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                25
+                <b class="gh-ar-hdn">Items per page:</b>
+                <b class="gh-ar-hdn">selected</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                50
+                <b class="gh-ar-hdn">Items per page:</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                75
+                <b class="gh-ar-hdn">
+                  Items per page:
+                </b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                100
+                <b class="gh-ar-hdn">Items per page:</b>
+              </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container-footer"></div>
+        </div>
+    </div>-->
+
+    <div id="orders" data-show-status="true" class="my-container  item-list orders " data-name="m2749" data-lazy="false" data-nav-priority="4">
+        <div class="container-header">
+            <h2 class="container-title">Orders</h2>
+        </div>
+        <div class="ajax-wrap">
+            <div class="container-options">
+                <div class="filter-r">
+                    <div class="ph-hide-option" role="radiogroup">
+                        <label class="hide-option" for="m2749-not-hidden">
+              <input type="radio" role="radio" name="m2749-hide-option" value="not-hidden-check" id="m2749-not-hidden" aria-checked="true" checked="checked" (click)="showOders('1')">
+              <span class="label">Not hidden</span>
+            </label>
+                        <label class="hide-option" for="m2749-hidden">
+              <input type="radio" role="radio" name="m2749-hide-option" value="hidden-check" id="m2749-hidden" aria-checked="false" (click)="showOders('2')">
+              <span class="label">Hidden</span>
+            </label>
+                    </div>
+                    <!--<div class="filter-wrap">
+                        <div class="filter">
+                            <div class="dropdown period-menu">
+                                <span class="filter-label" aria-hidden="true">
+                  See orders from:
+                </span>
+                                <mat-form-field style="margin-top: -9px;">
+                                    <mat-select placeholder="The last 60 days">
+                                        <mat-option value="2018">2018</mat-option>
+                                        <mat-option value="2017">2017</mat-option>
+                                        <mat-option value="2016">2016</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="filter">
+                            <div class="dropdown option-menu">
+                                <span class="filter-label" aria-hidden="true">Filter by:</span>
+                                <mat-form-field style="margin-top: -9px;">
+                                    <mat-select placeholder="All">
+                                        <mat-option value="Shipped">Shipped</mat-option>
+                                        <mat-option value="ready_feedback">Ready for feedback</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+            <div class="bulk-actions-border"></div>
+            <div class="result-set-r">
+                <div class="no-rows" *ngIf="order_flag">
+                    <span class="sub-title" *ngIf="orderList?.length == 0">You do not have any orders to display in this view.</span>
+                    <span class="sub-title sub-title-secondary" *ngIf="orderList?.length == 0">TIP: Change the view using the filters at the top of the section.</span>
+                    <div fxLayout="row" *ngIf="orderList?.length != 0">
+                        <table mat-table [dataSource]="dataSource" matSort style='width:100%'>
+                            <ng-container matColumnDef="No">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> No </th>
+                                <td mat-cell *matCellDef="let row; let num = index">{{num + 1}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="ordererEmail">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Orderer Email </th>
+                                <td mat-cell *matCellDef="let row">{{row.ordererEmail}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="productName">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
+                                <td mat-cell *matCellDef="let row">{{row.productName}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="productPrice">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Price </th>
+                                <td mat-cell *matCellDef="let row">{{ row.productPrice }}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="orderingPrice">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ordering Price </th>
+                                <td mat-cell *matCellDef="let row">{{row.orderingPrice}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="quantity">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+                                <td mat-cell *matCellDef="let row">{{row.quantity}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="orderedAt">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Order Time </th>
+                                <td mat-cell *matCellDef="let row">{{row.orderedAt}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="productId">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <button mat-raised-button color="primary" (click)="onCancel(row.id)">Cancel Order</button>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="feedback">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                                <td mat-cell *matCellDef="let row">
+                                    <button *ngIf="row.status === 7 && row.buyerFeedbackId == 0" mat-raised-button color="primary" (click)="onProvideFeedback(row.id)">Provide Feedback</button>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="container-options  options-footer">
+                <div class="num-items-page">
+                    <span>Orders per page:</span>
+                    <ul>
+                        <li class="first">
+                            <a role="button" href="javascript:;">
+                10
+                <b class="gh-ar-hdn">Orders per page:</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                  25
+                  <b class="gh-ar-hdn">Orders per page:</b>
+                  <b class="gh-ar-hdn">selected</b>
+                </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                50
+                <b class="gh-ar-hdn">Orders per page:</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                75
+                <b class="gh-ar-hdn">Orders per page:</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                100
+                <b class="gh-ar-hdn">Orders per page:</b>
+              </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>-->
+            <div class="container-footer"></div>
+        </div>
+    </div>
+
+    <div id="cancel-commits" class="my-container item-list " data-name="m4132" data-lazy="false" data-nav-priority="2">
+        <div class="container-header">
+            <h2 class="container-title">Canceled items</h2>
+        </div>
+        <div class="ajax-wrap">
+            <div class="container-options">
+                <div class="filter-r">
+                    <div class="ph-hide-option" role="radiogroup">
+                        <label class="hide-option" for="m4132-not-hidden">
+              <input type="radio" role="radio" name="m4132-hide-option" value="not-hidden-check" id="m4132-not-hidden" aria-checked="true" checked="checked" (click)="showCanceled('1')">
+              <span class="label">Not hidden</span>
+            </label>
+                        <label class="hide-option" for="m4132-hidden">
+              <input type="radio" role="radio" name="m4132-hide-option" value="hidden-check" id="m4132-hidden" aria-checked="false" (click)="showCanceled('2')">
+              <span class="label">Hidden</span>
+            </label>
+                    </div>
+                </div>
+            </div>
+            <div class="bulk-actions-border"></div>
+            <div class="result-set-r">
+                <div class="no-rows" *ngIf="cancel_flag == true">
+                    <span class="sub-title" *ngIf="canceled_orderList?.length == 0">You do not have any canceled unpaid items to display in this view.</span>
+                    <div fxLayout="row" *ngIf="canceled_orderList?.length != 0">
+                        <table mat-table [dataSource]="canceled_dataSource" matSort style='width:100%'>
+                            <ng-container matColumnDef="No">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> No </th>
+                                <td mat-cell *matCellDef="let row; let num = index">{{num + 1}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="ordererEmail">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Orderer Email </th>
+                                <td mat-cell *matCellDef="let row">{{row.ordererEmail}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="productName">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
+                                <td mat-cell *matCellDef="let row">{{row.productName}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="productPrice">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Price </th>
+                                <td mat-cell *matCellDef="let row">{{row.productPrice}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="orderingPrice">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ordering Price </th>
+                                <td mat-cell *matCellDef="let row">{{row.orderingPrice}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="quantity">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+                                <td mat-cell *matCellDef="let row">{{row.quantity}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="orderedAt">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Order Time </th>
+                                <td mat-cell *matCellDef="let row">{{row.orderedAt}}</td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="canceled_displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: canceled_displayedColumns;"></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="container-options  options-footer">
+                <div class="num-items-page">
+                    <span>Items per page:</span>
+                    <ul>
+                        <li class="first">
+                            <a role="button" href="javascript:;">
+                10
+                <b class="gh-ar-hdn">Items per page:</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                  25
+                  <b class="gh-ar-hdn">Items per page:</b>
+                  <b class="gh-ar-hdn">selected</b>
+                </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                50
+                <b class="gh-ar-hdn">Items per page:</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                75
+                <b class="gh-ar-hdn">Items per page:</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                100
+                <b class="gh-ar-hdn">Items per page:</b>
+              </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>-->
+            <div class="container-footer"> </div>
+        </div>
+    </div>
+    <!--<div id="cancel-invoices" class="my-container item-list orders " data-name="m4133" data-lazy="false" data-nav-priority="3">
+        <div class="container-header">
+            <h2 class="container-title">Canceled invoices</h2>
+        </div>
+        <div class="ajax-wrap">
+            <div class="container-options">
+                <div class="filter-r">
+                    <div class="ph-hide-option" role="radiogroup">
+                        <label class="hide-option" for="m4133-not-hidden">
+              <input type="radio" role="radio" name="m4133-hide-option" value="not-hidden-check" id="m4133-not-hidden" aria-checked="true" checked="checked" >
+              <span class="label">Not hidden</span>
+            </label>
+                        <label class="hide-option" for="m4133-hidden">
+              <input type="radio" role="radio" name="m4133-hide-option" value="hidden-check" id="m4133-hidden" aria-checked="false">
+              <span class="label">Hidden</span>
+            </label>
+                    </div>
+                    <div class="filter-wrap"> </div>
+                </div>
+            </div>
+            <div class="bulk-actions-border"></div>
+            <div class="result-set-r">
+                <div class="no-rows">
+                    <span class="sub-title">You do not have any canceled invoices to display in this view.</span>
+                </div>
+            </div>
+            <div class="container-options  options-footer">
+                <div class="num-items-page">
+                    <span>Invoices per page:</span>
+                    <ul>
+                        <li class="first">
+                            <a role="button" href="javascript:;">
+                10
+                <b class="gh-ar-hdn">Invoices per page:</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                  25
+                  <b class="gh-ar-hdn">Invoices per page:</b>
+                  <b class="gh-ar-hdn">selected</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                75
+                <b class="gh-ar-hdn">Invoices per page:</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                100
+                <b class="gh-ar-hdn">Invoices per page:</b>
+              </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container-footer"></div>
+        </div>
+    </div>
+
+    <div id="returns" data-show-status="true" class="my-container  item-list orders " data-name="m4086" data-lazy="false" data-nav-priority="4">
+        <div class="container-header">
+            <h2 class="container-title">Returns and canceled orders</h2>
+        </div>
+        <div class="ajax-wrap">
+            <div class="container-options">
+                <div class="filter-r">
+                    <div class="ph-hide-option" role="radiogroup">
+                        <label class="hide-option" for="m4086-not-hidden">
+              <input type="radio" role="radio" name="m4086-hide-option" value="not-hidden-check" id="m4086-not-hidden" aria-checked="true" checked="checked">
+              <span class="label">Not hidden</span>
+            </label>
+                        <label class="hide-option" for="m4086-hidden">
+              <input type="radio" role="radio" name="m4086-hide-option" value="hidden-check" id="m4086-hidden" aria-checked="false">
+              <span class="label">Hidden</span>
+            </label>
+                    </div>
+                    <div class="filter-wrap"> </div>
+                </div>
+            </div>
+            <div class="bulk-actions-border"></div>
+            <div class="result-set-r">
+                <div class="no-rows">
+                    <span class="sub-title">You do not have any returned orders to display in this view.</span>
+                    <span class="sub-title sub-title-secondary">TIP: Change the view using the filters at the top of the section.</span>
+                </div>
+            </div>
+            <div class="container-options  options-footer">
+                <div class="num-items-page">
+                    <span>Returns per page:</span>
+                    <ul>
+                        <li class="first">
+                            <a role="button" href="javascript:;">
+                10
+                <b class="gh-ar-hdn">Returns per page:</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                  25
+                  <b class="gh-ar-hdn">Returns per page:</b>
+                  <b class="gh-ar-hdn">selected</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                50
+                <b class="gh-ar-hdn">Returns per page:</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                75
+                <b class="gh-ar-hdn">Returns per page:</b>
+              </a>
+                        </li>
+                        <li>
+                            <a role="button" href="javascript:;">
+                100
+                <b class="gh-ar-hdn">Returns per page:</b>
+              </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container-footer"></div>
+        </div>
+    </div>-->
+
+</div>

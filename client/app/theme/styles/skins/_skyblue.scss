@@ -1,0 +1,5 @@
+$skyblue-primary: mat-palette($mat-custom-light-blue, 700, 50, 900);
+$blue-accent: mat-palette($mat-grey, 300, 100, 700);
+$blue-warn: mat-palette($mat-red, A200);
+
+$skyblue-theme: mat-light-theme($skyblue-primary, $blue-accent, $blue-warn);

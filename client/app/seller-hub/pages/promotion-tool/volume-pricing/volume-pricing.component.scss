@@ -1,0 +1,135 @@
+.mt-20 {
+    margin-top:20px;
+}
+.field {
+    width: 100%;
+}
+.field_label {
+    width: 185px;
+    display: inline-block;
+    margin-right: 8px;
+}
+.field_control {
+    margin-top:10px;
+    display: inline-flex;
+}
+.n_p {
+    margin-top:7px;
+    float:left;
+    margin-left:10px;
+}
+.t_p {
+    margin-top:20px;
+    float:left;
+    margin-left:10px;
+}
+fieldset{
+    border: 0;
+}
+select {
+    padding: 8px;
+    width: 60px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.textbox {
+    font-size: 14px;
+    position: relative;
+}
+.textbox textarea {
+    width: 600px;
+}
+textarea.textbox__control {
+    min-height: 200px;
+    overflow: auto;
+    padding: 10px;
+    resize: vertical;
+    vertical-align: middle;
+}
+.dash {
+    margin-top: 10px;
+    line-height: 36px;
+    float: left;
+    padding: 0 5px;
+}
+.sme-bottom-nav {
+    margin-left: -30px;
+    z-index: 0;
+    background: #767676;
+    position: fixed;
+    height: 70px;
+    width: 100%;
+    bottom: 0;
+    z-index: 1010;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+div.sme-bottom-nav .nav-element {
+    margin: 0 20px;
+}
+div.sme-bottom-nav .cancel {
+    margin-right: auto !important;
+}
+div.sme-bottom-nav .throbber {
+    padding: 0;
+    border-radius: 3px;
+}
+
+.throbber {
+    background: rgba(255,255,255,0.7);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: none;
+    height: 100%;
+    left: 0;
+    padding-top: 100px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.spinner[role="img"][aria-label] {
+    display: inline-block;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiP…wzLjQsMTAuNSw4LjFsNC0xQzI3LjgsNC44LDIxLjksMC4xLDE1LDAuMXoiLz4KPC9zdmc+Cg==) no-repeat center center;
+    background-size: cover;
+    -webkit-animation: spin 600ms linear infinite;
+    animation: spin 600ms linear infinite;
+    height: 30px;
+    width: 30px;
+}
+div.sme-bottom-nav .throbber>span {
+    vertical-align: middle;
+}
+div.sme-bottom-nav div.link {
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+}
+div.sme-bottom-nav .nav-element {
+    margin: 0 20px;
+}
+div.sme-bottom-nav div.link a {
+    color: #fff;
+    text-decoration: underline;
+    display: block;
+}
+.btn.btn--primary {
+    color: #fff;
+    background-color: #0654ba;
+    border-color: #0654ba;
+}
+button.btn, input.btn, a:not([role]):not([href^="javascript"]).btn--faux.btn, a[role="button"]:not([href^="javascript"]).btn--hijax.btn {
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+    font-weight: normal;
+    line-height: normal;
+    text-align: center;
+    vertical-align: middle;
+}

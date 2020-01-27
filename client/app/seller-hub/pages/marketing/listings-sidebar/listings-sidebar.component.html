@@ -1,0 +1,25 @@
+<div id="sidebar" *ngIf="isVisible == true">
+    <mat-nav-list>
+        <a mat-list-item routerLink="summary" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">
+            Summary
+        </a>
+        <hr>
+        <!--<label>BRANDING</label>
+        <a mat-list-item [routerLink]="['store_sel']">
+            Store
+        </a>
+        <hr>-->
+        <label>MERCHANDISING</label>
+        <a mat-list-item routerLink="manage_promotion" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">
+          Promotions
+        </a>
+        <!--<a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/grid']">
+          Markdown sale
+        </a>-->
+        <!-- <hr> -->
+        <!-- <label>ADVERTISING</label>
+        <a mat-list-item routerLink="summary" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">
+          Promoted listings
+        </a> -->
+    </mat-nav-list>
+</div>

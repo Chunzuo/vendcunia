@@ -1,0 +1,8 @@
+.hi-span {
+  text-transform: none;
+}
+
+.hi-span a {
+  padding: 0 4px;
+  color: #ffffff !important;
+}

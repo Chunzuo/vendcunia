@@ -1,0 +1,90 @@
+<div fxLayout="row">
+    <h2>Tell us what you're selling</h2>
+</div>
+<div fxLayout="row" fxLayoutGap="30px">
+    <div [fxFlex]="80">
+        <mat-form-field fxFlexFill>
+            <input matInput placeholder="Enter UPC,ISBN,part number,or product name">
+        </mat-form-field>
+    </div>
+    <div [fxFlex]="10">
+        <button mat-raised-button color="primary">Get Started</button>
+    </div>
+</div>
+<div fxLayout="row">
+    <a href="javascript:;" (click)="onBrowseCategories()" style="color: black;">Browse categorires</a>
+</div>
+<div class="block-wrapper" *ngIf="showCategories">
+    <ul size="8">
+        <li role="option" value="art">
+            Art>
+        </li>
+        <li role="option" value="baby">
+            Baby>
+        </li>
+        <li role="option" value="baby">
+            Books>
+        </li>
+        <li role="option" value="baby">
+            Business & Industrial >
+        </li>
+        <li role="option" value="baby">
+            Business & Industrial >
+        </li>
+        <li role="option" value="baby">
+            Business & Industrial >
+        </li>
+        <li role="option" value="baby">
+            Business & Industrial >
+        </li>
+        <li role="option" value="baby">
+            Business & Industrial >
+        </li>
+        <li role="option" value="baby">
+            Business & Industrial >
+        </li>
+    </ul>
+</div>
+<mat-card class="mt-20">
+    <mat-card-header>
+        <mat-card-title>
+            <h3>Latest drafts</h3>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div fxLayout="row" *ngFor="let draft of drafts" fxLayoutGap="20px" class="mt-2" fxLayoutAlign="start center">
+            <div fxFlex="14%" style="text-align: center;">
+                <img [src]="draft.thumnail_image" width="150px" height="150px">
+            </div>
+            <div fxLayout="column" fxFlex="60%">
+                <div>{{draft.title}}</div>
+                <div>{{draft.category}}</div>
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <a (click)="onClickComplete(draft.id)" href="javascript:;" style="color:#0654ba;">
+                        <span>Complete</span>
+                    </a>
+                    <span>|</span>
+                    <a (click)="onClickDelete(draft.id)" href="javascript:;" style="color:#0654ba;">
+                        <span>Delete</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<mat-card style="margin-top: 20px;">
+    <mat-card-header>
+        <mat-card-title>
+            <h2>Listing templates</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div fxLayout="row">
+            <div style="margin-top:5px;">Create reusable listing templates to help you list items faster.</div>
+        </div>
+        <div fxLayout="row" style="margin-top: 20px;">
+            <button mat-raised-button (click)="click_template()"><span style="color:#0654ba">Create a template</span></button>
+        </div>
+    </mat-card-content>
+</mat-card>

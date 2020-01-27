@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>{{data.name}}</h1>
+<div mat-dialog-content style="margin-top: 20px;">
+    <p>{{data.content}}</p>
+    <div fxLayout="row" style="margin-top: 10px; margin-left: 20px;">
+        <mat-form-field>
+            <input matInput [(ngModel)]="old_password" placeholder="old password" maxlength="40" type="password" style="width: 50%;">
+        </mat-form-field>
+    </div>
+    <div fxLayout="row" style="margin-top: 10px; margin-left: 20px;">
+        <mat-form-field>
+            <input matInput [(ngModel)]="new_password" placeholder="new password" maxlength="40" type="password" style="width: 50%;">
+        </mat-form-field>
+    </div>
+    <div fxLayout="row" style="margin-top: 10px; margin-left: 20px;">
+        <mat-form-field>
+            <input matInput [(ngModel)]="verify_password" placeholder="confirm password" maxlength="40" type="password" style="width: 50%;">
+        </mat-form-field>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <div style="width: 100%; text-align: right;">
+        <button mat-raised-button (click)="onNoClick()" color="warn">Cancel</button>
+        <button mat-raised-button (click)="onOk()" color="primary" cdkFocusInitial>Ok</button>
+    </div>
+</div>

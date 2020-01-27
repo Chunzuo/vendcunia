@@ -1,0 +1,22 @@
+{
+    "dev": {
+        "username": "cksuper",
+        "password": "2018vendasitymarketplace@database",
+        "database": "afcash_db",
+        "host": "localhost",
+        "dialect": "mysql",
+        "logging": false,
+        "timestamps": false,
+        "operatorsAliases": false
+    },
+    "production": {
+        "username": "cksuper",
+        "password": "2018vendasitymarketplace@database",
+        "database": "afcash_db",
+        "host": "localhost",
+        "dialect": "mysql",
+        "logging": false,
+        "timestamps": false,
+        "operatorsAliases": false
+    }
+}

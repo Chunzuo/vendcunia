@@ -1,0 +1,37 @@
+<h1>Live Chat</h1>
+
+<mat-card>
+
+    <div fxLayout="row">
+        <div fxFlex="30%">
+            <form [formGroup]="contactForm" (ngSubmit)="onContactFormSubmit(contactForm.value)" class="contact-form">
+                <mat-form-field class="w-100 mt-2">
+                    <input matInput placeholder="Email" formControlName="email" required>
+                    <mat-error *ngIf="contactForm.controls.email.errors?.required">Please enter email address.</mat-error>
+                    <mat-error *ngIf="contactForm.controls.email.hasError('invalidEmail')">Invalid email address</mat-error>
+                </mat-form-field>
+                <div class="text-center mt-2">
+                    <button mat-raised-button color="primary" class="btn contact-btn">
+                        Send Contact Request
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div fxFlex="70%" style="margin-left: 20px;">
+            <h2 class="text-center">Accept or Reject incoming contacts.</h2>
+            <div fxLayout="row" class="mt-2" fxLayoutAlign="start center" fxLayoutGap="10px" *ngFor="let contact of incomingContacts">
+                <span class="square" style="background: rgb(241, 142, 12)"></span>
+                <span fxFlex="30%">{{contact.email}}</span>
+                <button mat-raised-button color="primary" fxFlex="30%" (click)="acceptIncoming(contact.id)">
+                    Accept
+                </button>
+                <button mat-raised-button color="accent" fxFlex="30%" (click)="rejectIncoming(contact.id)">
+                    Reject
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <ng-chat #ngChatInstance *ngIf="userId" [adapter]="adapter" [userId]="userId" [title]="chatWindowTitle" [historyEnabled]="false" (onUserClicked)="onChatUserClicked(user)"></ng-chat>
+
+</mat-card>

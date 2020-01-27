@@ -1,0 +1,190 @@
+<div fxLayout="row">
+  <p style="font-size: 20px; font-weight: bold;">Edit Store</p>
+</div>
+<div fxLayout="row" style="margin-top:20px;">
+    <div style="width: 40%;">
+        <p style="color: #828282;">In just a few clicks, customize your Vendasity Store to reflect your unique brand and highlight what you sell</p>
+    </div>
+    <div style="width: 60%; text-align: right;">
+        <a href="javascript:;">
+            <span>Revert to my old Store</span>
+            |
+            <span>FAQs</span>
+        </a>
+    </div>
+</div>
+<div fxLayout="row" style="margin-top: 20px;">
+  <a href="javascript:;">
+    View sample Stores
+  </a>
+</div>
+<div fxLayout="row" style="margin-top: 10px;">
+    <p>Store name</p>
+</div>
+<div fxLayout="row">
+  <p style="color:#828282;">Enter your Store name</p>
+</div>
+<div fxLayout="row" style="margin-top: 10px;">
+    <mat-form-field fxFlexFill>
+      <input matInput placeholder="Store name" [(ngModel)]="store_name" maxlength="25">
+    </mat-form-field>
+</div>
+<div fxLayout="row" style="font-size:9px;">
+  <p>{{35 - store_name?.length}} characters remaining</p>
+</div>
+<div fxLayout="row" style="font-size:9px;">
+    <p>25 characters remaining</p>
+</div>
+<div fxLayout="row" style="margin-top: 10px;">
+  <p>Billboard(Optional)</p>
+</div>
+<div fxLayout="row">
+  <p style="color:#828282;">Add an image that expresses your brand, shows your products, or announces a promotion or Store event</p>
+</div>
+<mat-card style="width: 96%; text-align: center; height: 200px; margin-top: 5px;">
+  <div class="w-100 mt-1">
+      <angular-file-uploader [config]="afuConfig">
+      </angular-file-uploader>
+  </div>
+  <!-- <a href="javascript:;">
+    <span>Add Image</span>
+  </a> -->
+</mat-card>
+<div fxLayout="row" style="margin-top:3px;">
+  <p style="font-size: 9px; color:#828282">20MB max file size. 1200px x 270px</p>
+</div>
+<div fxLayout="row" style="margin-top: 10px;">
+  <p>Logo</p>
+</div>
+<div fxLayout="row" style="margin-top: 2px;">
+  <p style="font-size:12px; color:#828282;">Add your logo</p>
+</div>
+<div fxLayout="row" style="margin-top: 10px;">
+  <mat-card style="width: 200px; height: 200px;">
+    <img src="assets//images//_7.PNG" alt="user-image" style="width: 200px;">
+  </mat-card>
+</div>
+<div fxLayout="row" style="margin-top:3px;">
+  <p style="font-size: 9px; color:#828282">20MB max file size. 1200px x 270px</p>
+</div>
+<div fxLayout="row" style="margin-top: 20px;">
+  <p>Description(Optional)</p>
+</div>
+<div fxLayout="row" style="margin-top: 10px;">
+  <p>Write a short description about you and what you sell. Your description will appear when buyers search for your Store on Vendasity.</p>
+</div>
+<div fxLayout="row" style="margin-top: 7px;">
+  <mat-form-field fxFlexFill>
+    <textarea matInput placeholder="Your review" maxlength="1000" style="height: 120px;background-color: white;"  [(ngModel)]="review_val" required></textarea>
+  </mat-form-field>
+</div>
+<div fxLayout="row" style="font-size:9px;margin-top: -10px;">
+  <p>{{1000 - review_val?.length}} characters remaining</p>
+</div>
+<div fxLayout="row" style="font-size:9px;">
+  <p>1000 characters remaining</p>
+</div>
+<hr style="margin-top: 20px;">
+<div fxLayout="row" style="margin-top: 20px;">
+  <p>Featured listings</p>
+</div>
+<div fxLayout="row" style="margin-top: 10px;">
+  <p style="color:#828282;">Select your featured listings</p>
+</div>
+<div fxLayout="row" fxLayoutGap="20px">
+  <mat-card  fxLayoutAlign="center center" style="height: 250px; width: 250px;">
+      <a href="javascript:;" (click)="openDialog()">
+        <span fxLayoutAlign="center" style="font-size: 80px;color: #777;">+</span>
+        <div style="margin-top: -30px;" >Select listing</div>
+      </a>
+  </mat-card>
+  <mat-card  fxLayoutAlign="center center" style="height: 250px; width: 250px;">
+      <a href="javascript:;"  (click)="openDialog()">
+        <span fxLayoutAlign="center" style="font-size: 80px;color: #777;">+</span>
+        <div style="margin-top: -30px;" >Select listing</div>
+      </a>
+  </mat-card>
+  <mat-card  fxLayoutAlign="center center" style="height: 250px; width: 250px;">
+      <a href="javascript:;"  (click)="openDialog()">
+        <span fxLayoutAlign="center" style="font-size: 80px;color: #777;">+</span>
+        <div style="margin-top: -30px;" >Select listing</div>
+      </a>
+  </mat-card>
+  <mat-card  fxLayoutAlign="center center" style="height: 250px; width: 250px;">
+      <a href="javascript:;" (click)="openDialog()">
+        <span fxLayoutAlign="center" style="font-size: 80px;color: #777;">+</span>
+        <div style="margin-top: -30px;" >Select listing</div>
+      </a>
+  </mat-card>
+</div>
+<div fxLayout="row" style="margin-top: 10px;">
+  <p style="color:#777;">Select how you want us to automatically display your featured listings</p>
+</div>
+<div fxLayout="row">
+  <mat-form-field>
+      <mat-select placeholder="Select">
+          <mat-option value="ending">Time: ending soonest</mat-option>
+          <mat-option value="newly">Time: newly listed</mat-option>
+      </mat-select>
+  </mat-form-field>
+</div>
+<div fxLayout="row">
+  <p style="color:#777;">Featured listings will appear on the Store page according to the display settings you've selected, only when you have 30 or more listings.</p>
+</div>
+<div fxLayout="row" style="margin-top:20px;">
+  <a href="javascript:;" style="color:black; margin-left: 100px; font-size: 14px;">
+      <span>Don't show featured listings on my Store page, even when I have 30 or more listings.</span>
+  </a>
+</div>
+<hr style="margin-top:20px;">
+<div fxLayout="row" style="margin-top: 20px;">
+  <p>Listings</p>
+</div>
+<div fxLayout="row">
+    <p style="color:#777;">Select the order in which items are displayed in your Store</p>
+</div>
+<div fxLayout="row">
+  <mat-form-field>
+      <mat-select placeholder="Select">
+          <mat-option value="ending">Time: ending soonest</mat-option>
+          <mat-option value="lowest_first">Price: lowest first</mat-option>
+          <mat-option value="highest_first">Price: highest first</mat-option>
+          <mat-option value="lowest_first">Price + Shipping: lowest first</mat-option>
+          <mat-option value="highest_first">Price + Shipping: highest first</mat-option>
+          <mat-option value="best_match">Best Match</mat-option>
+          <mat-option value="newly_listed">Time: newly listed</mat-option>
+      </mat-select>
+  </mat-form-field>
+</div>
+
+<div fxLayout="row" style="margin-top: 20px;">
+    <p style="color:#777;">Select the layout in which items are displayed in your Store</p>
+</div>
+<div fxLayout="row">
+  <mat-form-field>
+      <mat-select placeholder="Select">
+          <mat-option value="ending">List</mat-option>
+          <mat-option value="lowest_first">Gallery</mat-option>
+      </mat-select>
+  </mat-form-field>
+</div>
+<hr style="margin-top:20px;">
+<div fxLayout="row" style="margin-top: 20px;">
+  <p>Category type</p>
+</div>
+<div fxLayout="row">
+  <p style="color:#777;">Select the category type you would like to display on the left navigation bar</p>
+</div>
+<div fxLayout="row" style="margin-top: 20px;">
+  <a href="javascript:;">Vendasity categories</a>
+</div>
+<div fxLayout="row" style="margin-top: 10px; padding-bottom: 25px;">
+  <a href="javascript:;" style="margin-left: 100px; color:black; font-size: 14px;">eStore categories</a>
+</div>
+<hr>
+<div fxLayout="row" style="margin-top: 20px;">
+  <div style="width: 100%;text-align: right">
+      <button mat-raised-button class="btn_cancel">Cancel</button>
+      <button mat-raised-button class="btn_publish" style="margin-left: 10px;">Publish</button>
+  </div>
+</div>

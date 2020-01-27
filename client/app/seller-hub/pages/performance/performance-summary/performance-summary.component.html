@@ -1,0 +1,127 @@
+<h1>Understand your business performance</h1>
+<div fxLayout="row" fxLayoutGap="20px">
+  <mat-card fxFlex="60%">
+    <mat-card-header>
+      <h3>Sales</h3>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group [@.disabled]="true" [selectedIndex]="0">
+        <mat-tab label="Today">
+        </mat-tab>
+        <mat-tab label="Last 7days">
+          
+        </mat-tab>
+        <mat-tab label="Last 31days">
+
+        </mat-tab>
+        <mat-tab label="Last 90days">
+
+        </mat-tab>
+      </mat-tab-group>
+      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
+      </canvas>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card fxFlex="40%">
+    <mat-card-header>
+      <h3>Sales(lsat 31days)</h3>
+    </mat-card-header>
+    <mat-card-content fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+      <p class="warning">You don't have any active listings, but it doesn't have to stay this way.</p>
+      <a routerLink="/sellerhub/listings">Create a listing </a>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div fxLayout="row" fxLayoutGap="20px" class="mt-20">
+  <mat-card fxFlex="60%">
+    <mat-card-header>
+      <h3>Selling costs</h3>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="column">
+        <div style="margin-left: 100px;">
+          <div fxLayout="row" class="total">
+            <span fxFlex="50%">Total sales</span>
+            <span fxFlex="50%" style="text-align: right;">AFCASH 0.00</span>
+          </div>
+          <hr>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex="50%">
+              <span class="square" style="background: rgb(241, 142, 12)"></span>
+              <span>Vendasity fees</span>
+            </div>
+            <span fxFlex="50%" style="text-align: right;">AFCASH 0.00</span>
+          </div>
+          <div fxLayout="column" style="margin-left: 40px; color: rgb(118, 118, 118)">
+            <div fxLayout="row">
+              <span fxFlex="50%">Listing fees</span>
+              <span fxFlex="50%" style="text-align: right;">AFCASH 0.00</span>
+            </div>
+            <div fxLayout="row">
+              <span fxFlex="50%">Final value fees</span>
+              <span fxFlex="50%" style="text-align: right;">AFCASH 0.00</span>
+            </div>
+            <div fxLayout="row">
+              <span fxFlex="50%">Subscription fees</span>
+              <span fxFlex="50%" style="text-align: right;">--</span>
+            </div>
+            <div fxLayout="row">
+              <span fxFlex="50%">Fee credits</span>
+              <span fxFlex="50%" style="text-align: right;">AFCASH 0.00</span>
+            </div>
+            <div fxLayout="row">
+              <span fxFlex="50%">Discounts</span>
+              <span fxFlex="50%" style="text-align: right;">--</span>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex="50%">
+              <span class="square" style="background: rgba(106, 41, 185, 0.6)"></span>
+              <span>Shipping labels</span>
+            </div>
+            <span fxFlex="50%" style="text-align: right;">AFCASH 0.00</span>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex="50%">
+              <span class="square" style="background: rgb(106, 41, 185)"></span>
+              <span>PayPal fees</span>
+            </div>
+            <span fxFlex="50%" style="text-align: right;">AFCASH 0.00</span>
+          </div>
+          <hr>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex="50%">
+              <span class="square" style="background: rgba(6, 84, 186, 0.2)"></span>
+              <span>Net fees</span>
+            </div>
+            <span fxFlex="50%" style="text-align: right;">AFCASH 0.00</span>
+          </div>
+        </div>
+        <span class="info">Data for Sep 23 – Oct 23 at 1:36pm PDT</span>
+        <span class="info">* The amount you paid for shipping labels purchased on vendasity. May not reflect your latest purchases.</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card fxFlex="40%">
+    <mat-card-header>
+      <h3>Traffic</h3>
+    </mat-card-header>
+    <mat-card-content fxLayoutAlign="center center" fxFlexFill>
+      <p class="warning">We couldn't find any recent info from listings created on this site.</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div fxLayout="row" class="mt-20">
+  <mat-card fxFlex="60%">
+    <mat-card-header>
+      <h3>Seller level(Region: US)</h3>
+    </mat-card-header>
+    <mat-card-content fxLayoutAlign="center center" fxFlexFill>
+      <p class="warning">No seller level information available.</p>
+    </mat-card-content>
+  </mat-card>
+</div>

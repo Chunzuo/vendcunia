@@ -1,0 +1,187 @@
+<h2>Recent Feedback ratings</h2>
+<mat-card class="mt-20">
+    <mat-card-header>
+        <mat-card-title>
+            <p>You can see feedback about your product.</p>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div fxLayout="row" fxFlexFill>
+            <!--<mat-form-field fxFlex="80%">
+                <textarea matInput placeholder="" style="height: 200px;" disabled>{{feedBackInfo?.review}}</textarea>
+            </mat-form-field>-->
+            <mat-tab-group [@.disabled]="true" [selectedIndex]="0">
+                <mat-tab label="Feedback as a seller">
+                    <div class="full-desc lh">
+                        <table mat-table [dataSource]="dataSource1" matSort style='width:100%'>
+                            <ng-container matColumnDef="No">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> No </th>
+                                <td mat-cell *matCellDef="let row; let num = index">{{num + 1}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="From">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> From Buyer </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <div fxLayout="row">
+                                        <span>{{row.From.first_name}}</span>
+                                        <!-- <span>{{row.From.last_name}}</span> -->
+                                    </div>
+                                    <div fxLayout="row">
+                                        <span>{{row.From.email}}</span>
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Product_name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
+                                <td mat-cell *matCellDef="let row">{{row.Product_name}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Feedback">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Feedback </th>
+                                <td mat-cell *matCellDef="let row">{{row.Feedback}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Rating">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Rating </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <app-rating [ratingsCount]="row.Rating" [ratingsValue]="row.Rating" [direction]="'row'"></app-rating>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                </mat-tab>
+                <!-- <mat-tab label="Search seller feedback">
+                    <div class="full-desc lh">
+                    </div>
+                </mat-tab> -->
+                <mat-tab label="Feedback as a buyer">
+                    <div class="full-desc lh">
+                        <table mat-table [dataSource]="dataSource2" matSort style='width:100%'>
+                            <ng-container matColumnDef="No">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> No </th>
+                                <td mat-cell *matCellDef="let row; let num = index">{{num + 1}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="From">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> From Seller </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <div fxLayout="row">
+                                        <span>{{row.From.first_name}}</span>
+                                        <!-- <span>{{row.From.last_name}}</span> -->
+                                    </div>
+                                    <div fxLayout="row">
+                                        <span>{{row.From.email}}</span>
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Product_name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
+                                <td mat-cell *matCellDef="let row">{{row.Product_name}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Feedback">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Feedback </th>
+                                <td mat-cell *matCellDef="let row">{{row.Feedback}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Rating">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Rating </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <app-rating [ratingsCount]="row.Rating" [ratingsValue]="row.Rating" [direction]="'row'"></app-rating>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                </mat-tab>
+                <mat-tab label="All Feedback">
+                    <div class="full-desc lh">
+                        <table mat-table [dataSource]="dataSource" matSort style='width:100%'>
+                            <ng-container matColumnDef="No">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> No </th>
+                                <td mat-cell *matCellDef="let row; let num = index">{{num + 1}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="From">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> From </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <div fxLayout="row">
+                                        <span>{{row.From.first_name}}</span>
+                                        <!-- <span>{{row.From.last_name}}</span> -->
+                                    </div>
+                                    <div fxLayout="row">
+                                        <span>{{row.From.email}}</span>
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Product_name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
+                                <td mat-cell *matCellDef="let row">{{row.Product_name}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Feedback">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Feedback </th>
+                                <td mat-cell *matCellDef="let row">{{row.Feedback}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Rating">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Rating </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <app-rating [ratingsCount]="row.Rating" [ratingsValue]="row.Rating" [direction]="'row'"></app-rating>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="FeedbackType">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> SalesInfo </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <span *ngIf="row.FeedbackType==2">Sell</span>
+                                    <span *ngIf="row.FeedbackType==1">Buy</span>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns_1"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns_1;"></tr>
+                        </table>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Feedback left for others">
+                    <div class="full-desc lh">
+                        <table mat-table [dataSource]="dataSource3" matSort style='width:100%'>
+                            <ng-container matColumnDef="No">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> No </th>
+                                <td mat-cell *matCellDef="let row; let num = index">{{num + 1}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="From">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> From </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <div fxLayout="row">
+                                        <span>{{row.From.first_name}}</span>
+                                        <!-- <span>{{row.From.last_name}}</span> -->
+                                    </div>
+                                    <div fxLayout="row">
+                                        <span>{{row.From.email}}</span>
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Product_name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
+                                <td mat-cell *matCellDef="let row">{{row.Product_name}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Feedback">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Feedback </th>
+                                <td mat-cell *matCellDef="let row">{{row.Feedback}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Rating">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Rating </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <app-rating [ratingsCount]="row.Rating" [ratingsValue]="row.Rating" [direction]="'row'"></app-rating>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="FeedbackType">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> SalesInfo </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <span *ngIf="row.FeedbackType==2">Sell</span>
+                                    <span *ngIf="row.FeedbackType==1">Buy</span>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns_1"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns_1;"></tr>
+                        </table>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </mat-card-content>
+</mat-card>

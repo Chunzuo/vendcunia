@@ -1,0 +1,254 @@
+<div fxLayout="row wrap">
+    <div fxFlex="100" fxFlex.gt-md="35" fxFlex.md="45">
+        <p class="product-badge promotion-name">{{ product?.promotion_name }}</p>
+        <p class="product-badge volume-pricing-name">{{ product?.volume_pricing_name }}</p>
+        <p class="product-badge promotion-name">{{ product?.economy_msg }}</p>
+        <p class="product-badge volume-pricing-name">{{ product?.standard_msg }}</p>
+        <p class="product-badge promotion-name">{{ product?.expected_msg }}</p>
+        <p class="product-badge volume-pricing-name">{{ product?.twoday_msg }}</p>
+        <p class="product-badge promotion-name">{{ product?.overnight_msg }}</p>
+        <p class="product-badge volume-pricing-name">{{ product?.promotional_msg }}</p>
+        <p class="product-badge promotion-name">{{ product?.saleEvent_name }}</p>
+        <mat-card class="product-image">
+            <button mat-icon-button (click)="openZoomViewer()" fxHide="false" fxHide.gt-md><mat-icon>fullscreen</mat-icon></button>
+            <img *ngIf="image" [src]="image" (mousemove)="onMouseMove($event)" (mouseleave)="onMouseLeave($event)" />
+        </mat-card>
+
+        <div class="small-carousel">
+            <div class="swiper-container" [swiper]="config">
+                <div class="swiper-wrapper">
+                    <div *ngFor="let image of product?.images" class="swiper-slide">
+                        <mat-card (click)="selectImage(image)" class="p-1">
+                            <img [attr.src]="image" class="swiper-lazy" />
+                            <!-- <div class="swiper-lazy-preloader"></div> -->
+                        </mat-card>
+                    </div>
+                </div>
+                <button mat-icon-button class="swiper-button-prev swipe-arrow"><mat-icon>keyboard_arrow_left</mat-icon></button>
+                <button mat-icon-button class="swiper-button-next swipe-arrow"><mat-icon>keyboard_arrow_right</mat-icon></button>
+            </div>
+        </div>
+
+
+    </div>
+    <div fxFlex="100" fxFlex.gt-md="45" fxFlex.md="55" ngClass.gt-sm="px-3 m-0" ngClass.sm="mt-2" ngClass.xs="mt-2">
+
+        <div #zoomViewer fxShow="false" fxShow.gt-md>
+            <mat-card *ngIf="zoomImage" class="zoom-viewer mat-elevation-z18" [ngStyle]="{'background-image': 'url(' + zoomImage + ')'}"></mat-card>
+        </div>
+
+        <h2>{{ product?.name }}</h2>
+        <div class="py-1 lh">
+            <p><span class="text-muted fw-500">Title: </span><span>{{ product?.title }}</span></p>
+            <p><span class="text-muted fw-500">SubTitle: </span><span>{{ product?.sub_title }}</span></p>
+            <p><span class="text-muted fw-500">Condition description: </span><span>{{ product?.condition_desc }}</span></p>
+            <p><span class="text-muted fw-500">Product Id: </span><span>{{ product?.id }}</span></p>
+            <p><span class="text-muted fw-500">PackageType: </span><span>{{ packageType }}</span></p>
+            <p><span class="text-muted fw-500">Package Size: </span><span>{{ product?.package_dimens_x }} * {{ product?.package_dimens_y }} * {{ product?.package_dimens_z }}</span></p>
+            <p><span class="text-muted fw-500">WeightType: </span><span>{{ weightType }}</span></p>
+            <p><span class="text-muted fw-500">Weight lbs: </span><span>{{ product?.weight_lbs }}</span></p>
+            <p><span class="text-muted fw-500">Weight oz: </span><span>{{ product?.weight_oz }}</span></p>
+            <p><span class="text-muted fw-500">Category: </span><span>{{ product?.category_name }}</span></p>
+            <p><span class="text-muted fw-500">Availibility: </span><span>{{ (product?.quantity > 0) ? 'In stock':'Unavailable'}}</span></p>
+            <p><span class="text-muted fw-500">Seller Name: </span><span>{{ product?.seller_name }}</span></p>
+            <p><span class="text-muted fw-500">Seller Email: </span><span>{{ product?.seller_email }}</span></p>
+            <p><span class="text-muted fw-500">Price: </span><span class="new-price">{{ product?.current_price }}</span> {{currency}}</p>
+        </div>
+        <div fxLayout="row">
+            <mat-card>
+                <mat-tab-group [@.disabled]="true" [selectedIndex]="0">
+                    <mat-tab label="Domestic">
+                        <div class="full-desc lh">
+                            <div fxLayout="row"><span *ngIf="shipping_type">Shipping Type: {{shipping_type}}</span></div>
+                            <div fxLayout="row"><span *ngIf="shipping_service_type">Shipping Serivce: {{shipping_service_type}}</span></div>
+                            <!-- <span *ngIf="product?.domestic_shipping_cost">Shipping Cost: asdasda</span>
+                            <span *ngIf="product?.domestic_free_shipping">Free Shipping: asdasda</span> -->
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Internal">
+                        <div class="full-desc lh">
+                            <span *ngIf="inter_type">International Type: {{inter_type}}</span>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </mat-card>
+        </div>
+        <div class="py-1">
+            <app-rating [ratingsCount]="product?.ratings_count" [ratingsValue]="product?.ratings_value" [direction]="'row'"></app-rating>
+        </div>
+
+        <p class="py-1 text-muted lh" *ngIf="product?.selling_format == 1 && product?.remain_second != 0">Time left {{ htimeRemaining }} hr {{ mtimeRemaining }} min {{ stimeRemaining }} sec</p>
+        <p class="py-1 text-muted lh" *ngIf="product?.selling_format == 1 && product?.remain_second == 0">Time is up.</p>
+
+        <div fxLayout="row" class="mt-1" *ngIf="product?.selling_format == 2 && isMine == false">
+            <input fxFlex="40%" type="number" placeholder="input discount price" [(ngModel)]="discountPrice">
+            <button fxFlexOffset="10px" mat-raised-button color="primary" (click)="onDiscount()">Offer</button>
+        </div>
+        <div class="divider mt-1"></div>
+        <div class="details text-muted py-1" *ngIf="canBuy == true && isMine === false">
+            <button mat-raised-button color="primary" style="width:95px;" (click)="buyItNow(product?.id)">Buy It Now</button>
+            <!-- <button mat-raised-button color="primary" style="width:95px;" *ngIf="product?.selling_format == 2">Bid</button> -->
+        </div>
+        <!-- <div class="details text-muted py-1" *ngIf="canBuy == true">
+            <span class="fw-500">Quantity:</span> &nbsp;&nbsp;
+            <input matInput type="number" id="product_quantity" placeholder="input quantity..." [(ngModel)]="productQuantity">
+        </div> -->
+        <div fxLayout="row" *ngIf="product?.selling_format == 1 && isMine === false && product?.remain_second != 0">
+            <button mat-raised-button color="primary" style="width:95px;" (click)="bidProduct()">Bid</button>
+            <span style="margin-top: 7px; margin-left: 20px; width: 250px;">Current Cost: {{ currentCost }} afcash</span> &nbsp;&nbsp;
+            <input matInput type="number" style="width: 200px;" id="product_bid" placeholder="Bid this..." [(ngModel)]="bidCost">
+            <span style="margin-top: 7px; margin-left: 20px;">AFCASH</span>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1">
+            <div *ngIf="product?.color" class="color">
+                <span class="fw-500">Select Color:</span>
+                <button mat-raised-button *ngFor="let color of product.colors" [style.background]="color">&nbsp;</button>
+            </div>
+            <div *ngIf="product?.size" class="size" ngClass.xs="mt-1">
+                <span class="fw-500">Select Size:</span>
+                <button mat-raised-button *ngFor="let size of product?.size">{{size}}</button>
+            </div>
+        </div>
+
+        <div class="py-1">
+            <app-controls [product]="product" [type]="'all'" (quantityChangeEvent)="quantityChanged($event)" (addToWishListEvent)="wishListAdded($event)" (addToCartEvent)="cartAdded($event)" (addToCompareEvent)="compareAdded($event)">
+            </app-controls>
+        </div>
+
+        <div class="divider"></div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="text-muted py-1">
+            <button mat-button><mat-icon>mail_outline</mat-icon> Email to a Friend</button>
+            <button mat-icon-button><mat-icon>share</mat-icon></button>
+        </div>
+
+    </div>
+    <div fxFlex="100" fxFlex.gt-md="20" fxHide fxShow.gt-md>
+
+        <div fxLayout="row wrap" class="info-bar" ngClass.gt-md="m-0">
+            <div fxFlex="100" fxFlex.md="25" fxFlex.sm="50">
+                <mat-card class="light-block" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="mat-icon-xlg text-muted m-0">card_giftcard</mat-icon>
+                    <div class="content">
+                        <p>BONUS PLUS</p>
+                        <span class="text-muted m-0">Make fun of shopping and collect bonuses</span>
+                    </div>
+                </mat-card>
+            </div>
+            <div fxFlex="100" fxFlex.md="25" fxFlex.sm="50" class="mt-16">
+                <mat-card class="light-block" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="mat-icon-xlg text-muted m-0">local_shipping</mat-icon>
+                    <div class="content">
+                        <p>FREE SHIPPING</p>
+                        <span class="text-muted m-0">Free shipping on all orders over AFCASH 99</span>
+                    </div>
+                </mat-card>
+            </div>
+            <!--
+            <div fxFlex="100" fxFlex.md="25"fxFlex.sm="50" class="mt-16"> 
+                <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+                    <mat-icon class="mat-icon-xlg text-muted m-0">monetization_on</mat-icon>
+                    <div class="content">
+                        <p>MONEY BACK GUARANTEE</p>
+                        <span class="text-muted m-0">30 Days money return guarantee</span>
+                    </div>
+                </mat-card>
+            </div>
+            -->
+            <div fxFlex="100" fxFlex.md="25" fxFlex.sm="50" class="mt-16">
+                <mat-card class="light-block" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="mat-icon-xlg text-muted m-0">history</mat-icon>
+                    <div class="content">
+                        <p>ONLINE SUPPORT 24/7</p>
+                        <span class="text-muted m-0">Call us: (+100) 123 456 7890</span>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div fxLayout="row wrap" class="mt-2">
+    <div fxFlex="100" fxFlex.gt-md="78" fxFlex.md="74">
+        <mat-card>
+            <mat-tab-group [@.disabled]="true" [selectedIndex]="0">
+                <mat-tab label="Description">
+                    <div class="full-desc lh">
+                        {{product?.description}}
+                    </div>
+                </mat-tab>
+                <mat-tab label="Reviews">
+                    <div class="full-desc lh">
+                        <mat-list class="reviews">
+                            <mat-list-item class="h-100 py-1" *ngFor="let review of reviews" [ngSwitch]="review.rating">
+                                <img matListAvatar [src]="'assets/images/avatars/avatar-1.png'" alt="image" class="review-author">
+                                <p matLine fxLayoutAlign="start center">
+                                    <span class="fw-500">{{review.name}}</span>
+                                    <mat-icon *ngSwitchCase="1" class="text-muted px-1" matTooltip="Very Dissatisfied" matTooltipPosition="after">sentiment_very_dissatisfied</mat-icon>
+                                    <mat-icon *ngSwitchCase="2" class="text-muted px-1" matTooltip="Dissatisfied" matTooltipPosition="after">sentiment_dissatisfied</mat-icon>
+                                    <mat-icon *ngSwitchCase="3" class="text-muted px-1" matTooltip="Neutral" matTooltipPosition="after">sentiment_neutral</mat-icon>
+                                    <mat-icon *ngSwitchCase="4" class="text-muted px-1" matTooltip="Satisfied" matTooltipPosition="after">sentiment_satisfied</mat-icon>
+                                    <mat-icon *ngSwitchCase="5" class="text-muted px-1" matTooltip="Very Satisfied" matTooltipPosition="after">sentiment_very_satisfied</mat-icon>
+                                </p>
+                                <p matLine class="text-muted"><small>{{review.format_time}}</small></p>
+                                <p matLine class="text">{{review.review}}</p>
+                            </mat-list-item>
+                        </mat-list>
+
+                        <h3 class="mt-2">LEAVE YOUR REVIEW</h3>
+                        <div class="divider"></div>
+                        <p class="mt-2 text-muted">Your email address will not be published. Required fields are marked *</p>
+                        <h3 fxLayoutAlign="start center" class="mt-2" *ngIf="isMine == false">
+                            <span>Your Rating:</span>
+                            <button mat-icon-button (click)="reviewRating=1" matTooltip="Very Dissatisfied" matTooltipPosition="above"><mat-icon class="mat-icon-lg">sentiment_very_dissatisfied</mat-icon></button>
+                            <button mat-icon-button (click)="reviewRating=2" matTooltip="Dissatisfied" matTooltipPosition="above"><mat-icon class="mat-icon-lg">sentiment_dissatisfied</mat-icon></button>
+                            <button mat-icon-button (click)="reviewRating=3" matTooltip="Neutral" matTooltipPosition="above"><mat-icon class="mat-icon-lg">sentiment_neutral</mat-icon></button>
+                            <button mat-icon-button (click)="reviewRating=4" matTooltip="Satisfied" matTooltipPosition="above"><mat-icon class="mat-icon-lg">sentiment_satisfied</mat-icon></button>
+                            <button mat-icon-button (click)="reviewRating=5" matTooltip="Very Satisfied" matTooltipPosition="above"><mat-icon class="mat-icon-lg">sentiment_very_satisfied</mat-icon></button>
+                        </h3>
+
+                        <form [formGroup]="form" (ngSubmit)="onSubmitReview(form.value)" fxLayout="row wrap" *ngIf="isMine == false">
+                            <div fxFlex="100" class="px-1 mt-1">
+                                <mat-form-field class="w-100">
+                                    <textarea matInput placeholder="Your review" formControlName="review" required></textarea>
+                                    <mat-error *ngIf="form.controls.review.errors?.required">Review is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="50" class="px-1 mt-2">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Your name" formControlName="name" required>
+                                    <mat-error *ngIf="form.controls.name.errors?.required">Name is required</mat-error>
+                                    <mat-error *ngIf="form.controls.name.hasError('minlength')">Name isn't long enough, minimum of 4 characters</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="50" class="px-1 mt-2">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Your email" formControlName="email" required>
+                                    <mat-error *ngIf="form.controls.email.errors?.required">Email is required</mat-error>
+                                    <mat-error *ngIf="form.controls.email.hasError('invalidEmail')">Invalid email address</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" class="mt-2 text-center w-100">
+                                <button mat-raised-button color="primary" type="submit">SUBMIT REVIEW</button>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card>
+    </div>
+    <div fxFlex="100" fxFlex.gt-md="22" fxFlex.md="26" ngClass.gt-sm="pl-3" fxHide fxShow.gt-sm>
+        <img src="assets/images/advertisement/ads1.jpeg" alt="" class="mw-100 d-block">
+        <img src="assets/images/advertisement/ads2.png" alt="" class="mw-100 d-block mt-3">
+        <img src="assets/images/advertisement/ads3.jpg" alt="" class="mw-100 d-block mt-3">
+    </div>
+</div>
+
+<div class="py-2 mt-2">
+    <h2>Related Products</h2>
+    <div class="divider"></div>
+    <app-products-carousel [products]="relatedProducts"></app-products-carousel>
+</div>

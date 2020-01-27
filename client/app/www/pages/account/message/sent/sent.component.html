@@ -1,0 +1,31 @@
+<h1>Sent: All messages</h1>
+<mat-card>
+    <mat-card-content>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="mt-10">
+            <button mat-raised-button color="primary" (click)="deleteMessage()">Delete</button>
+            <!--<button mat-raised-button color="primary">Archive</button>
+            <button mat-raised-button color="primary">Mark As</button>
+            <button mat-raised-button color="primary">Move To</button>-->
+        </div>
+        <div fxLayout="row" fxLayoutGap="5px" class="mt-10 table-header" style="padding-left:10px;">
+            <mat-checkbox fxFlex="10%" (click)="allCheck()" [(ngModel)]="allChecked"></mat-checkbox>
+            <span fxFlex="10%" style="color:#0654ba">From</span>
+            <span fxFlex="10%" style="color:#0654ba">Subject</span>
+            <span fxFlex="50%" style="color:#0654ba">Content</span>
+            <span fxFlex="20%" style="color:#0654ba">SendTime</span>
+            <!--<mat-select fxFlex="20%" placeholder="Select Option">
+                <mat-option>
+                    Received
+                </mat-option>
+            </mat-select>-->
+        </div>
+        <div *ngFor="let message of messageList; let num = index" fxLayout="row" fxLayoutGap="5px" class="mt-10" style="padding-left:10px;margin-top: 5px;">
+            <mat-checkbox fxFlex="10%" style="margin-left: 5px" [(ngModel)]="message.checked"></mat-checkbox>
+            <span fxFlex="10%">{{message.senderName}}</span>
+            <span fxFlex="10%">{{message.title}}</span>
+            <span fxFlex="50%">{{message.content}}</span>
+            <span fxFlex="20%">{{message.sendTime}}</span>
+            <!--<span fxFlex="20%"></span>-->
+        </div>
+    </mat-card-content>
+</mat-card>

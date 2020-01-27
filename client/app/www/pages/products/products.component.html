@@ -1,0 +1,220 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [opened]="sidenavOpen" [mode]="sidenavOpen ? 'side' : 'over'" class="filter-sidenav" perfectScrollbar>
+
+        <mat-accordion displayMode="flat" multi="true">
+            <mat-expansion-panel expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>Categories</h4>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="categories-wrapper categories-dropdown" perfectScrollbar>
+                    <app-category-list [categories]="categories" [categoryParentId]="0" (change)="onChangeCategory($event)"></app-category-list>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>Price</h4>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div fxLayout="row" fxLayoutAlign="space-between center" class="text-muted">
+                    <span>From: <b>AFCASH {{priceFrom}}</b></span>
+                    <span>To: <b>AFCASH {{priceTo}}</b></span>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center" class="filter-price">
+                    <mat-slider color="primary" max="2000" min="1" thumb-label="true" [(ngModel)]="priceFrom"></mat-slider>
+                    <mat-slider color="warn" max="2000" min="1" thumb-label="true" [(ngModel)]="priceTo"></mat-slider>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>Color</h4>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="filter-buttons">
+                    <button mat-raised-button *ngFor="let color of colors" [style.background]="color">&nbsp;</button>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>Size</h4>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="filter-buttons">
+                    <button mat-raised-button *ngFor="let size of sizes">{{size}}</button>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>Condition</h4>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div fxLayout="column">
+                    <mat-checkbox color="primary">New</mat-checkbox>
+                    <mat-checkbox color="primary">Used</mat-checkbox>
+                    <mat-checkbox color="primary">Not Specified</mat-checkbox>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>Brands</h4>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="filter-brands">
+                    <button mat-raised-button *ngFor="let brand of brands">
+                        <img [src]="brand.image"/>
+                    </button>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>Now starting at AFCASH 1379</h4>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div fxLayout="row wrap" fxLayoutAlign="center center">
+                    <a [routerLink]="['/products/electronics']"><img src="assets/images/products/probook/2-medium.png" alt="" class="mw-100"></a>
+                </div>
+            </mat-expansion-panel>
+
+        </mat-accordion>
+
+    </mat-sidenav>
+    <mat-sidenav-content class="all-products" ngClass.gt-sm="p-left">
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="filter-row mat-elevation-z1 text-muted">
+            <button *ngIf="!sidenavOpen" mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <div>
+                <a mat-button [matMenuTriggerFor]="sortMenu" #sortMenuTrigger="matMenuTrigger">
+                    {{sort}}<mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>
+                </a>
+                <mat-menu #sortMenu="matMenu" xPosition="before" class="app-dropdown">
+                    <span (mouseleave)="sortMenuTrigger.closeMenu()">
+                        <button mat-menu-item *ngFor="let sort of sortings" (click)="changeSorting(sort)">
+                            <span>{{sort}}</span>
+                    </button>
+                    </span>
+                </mat-menu>
+            </div>
+            <div>
+                <a mat-button [matMenuTriggerFor]="countsMenu" #countsMenuTrigger="matMenuTrigger">
+                    Show {{count}}<mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>
+                </a>
+                <mat-menu #countsMenu="matMenu" xPosition="before" class="app-dropdown">
+                    <span (mouseleave)="countsMenuTrigger.closeMenu()">
+                        <button mat-menu-item *ngFor="let count of counts" (click)="changeCount(count)">
+                            <span>{{count}}</span>
+                    </button>
+                    </span>
+                </mat-menu>
+                <button mat-icon-button (click)="changeViewType('list', 100)">
+                    <mat-icon>view_list</mat-icon>
+                </button>
+                <button mat-icon-button (click)="changeViewType('grid', 33.3)">
+                    <mat-icon>view_module</mat-icon>
+                </button>
+                <button mat-icon-button (click)="changeViewType('grid', 25)">
+                    <mat-icon>view_comfy</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div *ngIf="viewType == 'grid'" fxLayout="row wrap" class="products-wrapper">
+            <div *ngFor="let product of products | paginate: { itemsPerPage: count, currentPage: page }" fxFlex="100" [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" class="col">
+                <mat-card class="product-item text-center">
+                    <mat-chip-list>
+                        <mat-chip class="product-badge" color="warn" selected="true" *ngIf="(product.promotion_name != null && product.promotion_name != '') || (product.volume_pricing_name != null && product.volume_pricing_name != '' || (product.economy_msg != null && product.economy_msg != '') || (product.standard_msg != null && product.standard_msg != '') || (product.expected_msg != null && product.expected_msg != '') || (product.twoday_msg != null && product.twoday_msg != '') || (product.overnight_msg != null && product.overnight_msg != '') || (product.promotional_msg != null && product.promotional_msg != '') || (product.saleEvent_name != null && product.saleEvent_name != ''))">
+                            <p *ngIf="product.promotion_name != null && product.promotion_name != ''">{{ product.promotion_name }}</p>
+                            <p class="volume-pricing-badge" *ngIf="product.volume_pricing_name != null && product.volume_pricing_name != ''">{{ product.volume_pricing_name }}</p>
+                            <p *ngIf="product.economy_msg != null && product.economy_msg != ''">{{ product.economy_msg }}</p>
+                            <p *ngIf="product.standard_msg != null && product.standard_msg != ''">{{ product.standard_msg }}</p>
+                            <p *ngIf="product.expected_msg != null && product.expected_msg != ''">{{ product.expected_msg }}</p>
+                            <p *ngIf="product.twoday_msg != null && product.twoday_msg != ''">{{ product.twoday_msg }}</p>
+                            <p *ngIf="product.overnight_msg != null && product.overnight_msg != ''">{{ product.overnight_msg }}</p>
+                            <p *ngIf="product.promotional_msg != null && product.promotional_msg != ''">{{ product.promotional_msg }}</p>
+                            <p *ngIf="product.saleEvent_name != null && product.saleEvent_name != ''">{{ product.saleEvent_name }}</p>
+                        </mat-chip>
+                    </mat-chip-list>
+                    <a [routerLink]="['/products', product.id, product.name]" class="image-link">
+                        <img [src]="product.thumnail_image" alt="" style="width : 250px; height : 250px;">
+                    </a>
+                    <h4 class="category text-muted">{{ product.category_name }}</h4>
+                    <a [routerLink]="['/products', product.id, product.name]" class="title text-truncate">
+                        {{product.name}}
+                    </a>
+                    <div fxLayout="row" fxLayoutAlign="space-between center" class="prices">
+                        <div fxLayout="column" fxLayoutAlign="center start">
+                            <p class="old-price text-muted"><span *ngIf="product.starting_price">AFCASH {{product.starting_price | number : '1.2-2'}}</span></p>
+                            <p class="new-price">AFCASH {{product.current_price | number : '1.2-2'}}</p>
+                        </div>
+                        <app-rating [ratingsCount]="product.ratings_count" [ratingsValue]="product.ratings_value" [direction]="'column'"></app-rating>
+                    </div>
+                    <p class="py-1 text-muted lh" *ngIf="product?.selling_format == 2">Time left {{ product.remain_second.split(':')[0] }} hr {{ product.remain_second.split(':')[1] }} min</p>
+                    <p class="py-1 text-muted lh" *ngIf="product?.selling_format != 2">Fixed Price</p>
+                    <div class="divider mt-2"></div>
+                    <div class="icons">
+                        <app-controls [product]="product" (onOpenProductDialog)="openProductDialog(product)"></app-controls>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+
+        <div *ngIf="viewType == 'list'" fxLayout="row wrap" class="products-wrapper">
+            <div *ngFor="let product of products | paginate: { itemsPerPage: count, currentPage: page }" fxFlex="100" class="col">
+                <mat-card class="product-item">
+                    <div fxLayout="row wrap">
+                        <div fxFlex="100" fxFlex.gt-xs="40" class="p-2">
+                            <mat-chip-list *ngIf="product.discount" class="list-view">
+                                <mat-chip color="warn" selected="true">{{product.discount_price}}% OFF</mat-chip>
+                            </mat-chip-list>
+                            <a [routerLink]="['/products', product.id, product.name]" class="image-link">
+                                <img [src]="product.thumnail_image" style="width: 300px; height : 300px;" alt="">
+                            </a>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-xs="60" class="p-2">
+                            <h4 class="category text-muted">{{ product.category_name }}</h4>
+                            <a [routerLink]="['/products', product.id, product.name]" class="title">
+                                {{product.name}}
+                            </a>
+                            <p class="py-1 text-muted lh">{{product.description}}</p>
+                            <div fxLayout="row" fxLayoutAlign="space-between center" class="prices">
+                                <div fxLayout="column" fxLayoutAlign="center start">
+                                    <p class="old-price text-muted"><span *ngIf="product.starting_price">AFCASH {{product.starting_price | number : '1.2-2'}}</span></p>
+                                    <p class="new-price">AFCASH {{product.current_price | number : '1.2-2'}}</p>
+                                </div>
+                                <app-rating [ratingsCount]="product.ratings_count" [ratingsValue]="product.ratings_value" [direction]="'column'"></app-rating>
+                            </div>
+                            <p class="py-1 text-muted lh" *ngIf="product?.selling_format == 2">Time left {{ product.remain_second.split(':')[0] }} hr {{ product.remain_second.split(':')[1] }} min</p>
+                            <p class="py-1 text-muted lh" *ngIf="product?.selling_format != 2">Fixed Price</p>
+                            <div class="divider"></div>
+                            <div class="icons">
+                                <app-controls [product]="product" (onOpenProductDialog)="openProductDialog(product)"></app-controls>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+
+        <div *ngIf="products.length > 0" fxLayout="row wrap">
+            <div fxFlex="100">
+                <mat-card class="p-0 text-center">
+                    <pagination-controls class="product-pagination" autoHide="true" maxSize="5" (pageChange)="onPageChanged($event)"></pagination-controls>
+                </mat-card>
+            </div>
+        </div>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

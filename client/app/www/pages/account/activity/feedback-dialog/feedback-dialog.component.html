@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Feedback</h1>
+<div mat-dialog-content style="margin-top:10px;">
+    <div fxLayout="row" class="ratings">
+        <button mat-icon-button (click)="resultData.rating=1" matTooltip="Very Dissatisfied" matTooltipPosition="above"><mat-icon class="mat-icon-lg">sentiment_very_dissatisfied</mat-icon></button>
+        <button mat-icon-button (click)="resultData.rating=2" matTooltip="Dissatisfied" matTooltipPosition="above"><mat-icon class="mat-icon-lg">sentiment_dissatisfied</mat-icon></button>
+        <button mat-icon-button (click)="resultData.rating=3" matTooltip="Neutral" matTooltipPosition="above"><mat-icon class="mat-icon-lg">sentiment_neutral</mat-icon></button>
+        <button mat-icon-button (click)="resultData.rating=4" matTooltip="Satisfied" matTooltipPosition="above"><mat-icon class="mat-icon-lg">sentiment_satisfied</mat-icon></button>
+        <button mat-icon-button (click)="resultData.rating=5" matTooltip="Very Satisfied" matTooltipPosition="above"><mat-icon class="mat-icon-lg">sentiment_very_satisfied</mat-icon></button>
+    </div>
+    <mat-form-field style="width:100%;">
+        <textarea matInput style="height:150px;" [(ngModel)]="resultData.content"></textarea>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <div style="width:100%;" align="right">
+        <button mat-raised-button (click)="onNoClick()" color="warn">Cancel</button>
+        <button mat-raised-button [mat-dialog-close]="resultData" color="primary" cdkFocusInitial>Ok</button>
+    </div>
+</div>

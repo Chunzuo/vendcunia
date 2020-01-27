@@ -1,0 +1,30 @@
+<h1>View Message</h1>
+<mat-card>
+    <mat-card-content>
+        <form [formGroup]="messageForm" (ngSubmit)="onMessageFormSubmit(messageForm.value)" fxLayout="row wrap">
+            <div class="row">
+                <mat-form-field class="w-100">
+                    <input matInput placeholder="To" formControlName="to" required readonly>
+                    <mat-error *ngIf="messageForm.controls.to.errors?.required">To is required</mat-error>
+                    <mat-error *ngIf="messageForm.controls.to.hasError('invalidEmail')">Invalid email address</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field class="w-100">
+                    <input matInput placeholder="Subject" formControlName="subject" required readonly>
+                    <mat-error *ngIf="messageForm.controls.to.errors?.required">Subject is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field class="w-100">
+                    <textarea matInput placeholder="Content" formControlName="content" required readonly></textarea>
+                    <mat-error *ngIf="messageForm.controls.content.errors?.required">Content is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row" *ngIf="isDiscountMessage">
+                <button mat-raised-button color="primary" (click)="accept()">Accept</button>
+                <button mat-raised-button color="primary" (click)="reject()" style="margin-left: 50px;">Reject</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

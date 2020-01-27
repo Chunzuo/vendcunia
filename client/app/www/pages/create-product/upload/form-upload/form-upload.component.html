@@ -1,0 +1,70 @@
+<!-- <div *ngIf="currentFileUpload" class="progress">
+  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+    aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+    {{progress.percentage}}%</div>
+</div>
+ 
+<label class="btn btn-default">
+  <input type="file" (change)="selectFile($event)">
+</label>
+ 
+<button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button> -->
+<div fxLayout="row">
+    <div fxFlex="50%" fxLayout="column" fxLayoutAlign="center center" class="border_div">
+        <img src="{{thumbnailImagePath}}" fxFlexFill />
+    </div>
+    <div fxFlex="50%" fxLayout="column">
+        <div fxLayout="row">
+            <div class="upload_cell" *ngFor="let item of [0, 1, 2]" style="width:150px;">
+                <div fxLayout="column" *ngIf="current_index > item" fxFlexFill>
+                    <span fxFlex="30%" fxFlexAlign="end" class="remove-image" (click)="removeImage(item)">X</span>
+                    <img fxFlex="70%" [src]="thumbImages[item]" />
+                </div>
+                <a class="addPicBtn" *ngIf="current_index == item" style="margin-top: 30px;">
+                    <i></i>
+                    <b>Add photos</b>
+                    <input class="upl-fileInp" type="file" name="d" value="" title="Add photos" multiple="" id="upl-1538455113913" (change)="selectFile($event)">
+                </a>
+            </div>
+        </div>
+        <div fxLayout="row">
+            <div class="upload_cell" *ngFor="let item of [3, 4, 5]" style="width:150px;">
+                <div fxLayout="column" *ngIf="current_index > item" fxFlexFill>
+                    <span fxFlex="30%" fxFlexAlign="end" class="remove-image" (click)="removeImage(item)">X</span>
+                    <img fxFlex="70%" [src]="thumbImages[item]" />
+                </div>
+                <a class="addPicBtn" *ngIf="current_index == item" style="margin-top: 30px;">
+                    <i></i>
+                    <b>Add photos</b>
+                    <input class="upl-fileInp" type="file" name="d" value="" title="Add photos" multiple="" id="upl-1538455113913" (change)="selectFile($event)">
+                </a>
+            </div>
+        </div>
+        <div fxLayout="row">
+            <div class="upload_cell" *ngFor="let item of [6, 7, 8]" style="width:150px;">
+                <div fxLayout="column" *ngIf="current_index > item" fxFlexFill>
+                    <span fxFlex="30%" fxFlexAlign="end" class="remove-image" (click)="removeImage(item)">X</span>
+                    <img fxFlex="70%" [src]="thumbImages[item]" />
+                </div>
+                <a class="addPicBtn" style="margin-top: 30px;" *ngIf="current_index == item">
+                    <i></i>
+                    <b>Add photos</b>
+                    <input class="upl-fileInp" type="file" name="d" value="" title="Add photos" multiple="" id="upl-1538455113913" (change)="selectFile($event)">
+                </a>
+            </div>
+        </div>
+        <div fxLayout="row">
+            <div class="upload_cell" *ngFor="let item of [9, 10, 11]" style="width:150px;">
+                <div fxLayout="column" *ngIf="current_index > item" fxFlexFill>
+                    <span fxFlex="30%" fxFlexAlign="end" class="remove-image" (click)="removeImage(item)">X</span>
+                    <img fxFlex="70%" [src]="thumbImages[item]" />
+                </div>
+                <a class="addPicBtn" style="margin-top: 30px;" *ngIf="current_index == item">
+                    <i></i>
+                    <b>Add photos</b>
+                    <input class="upl-fileInp" type="file" name="d" value="" title="Add photos" multiple="" id="upl-1538455113913" (change)="selectFile($event)">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

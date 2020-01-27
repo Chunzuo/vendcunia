@@ -1,0 +1,638 @@
+<div fxLayout="row">
+    <h2 style="width: 40%">Create an order discount</h2>
+</div>
+<mat-horizontal-stepper #horizontalStepper linear="true" class="mat-elevation-z2" fxShow="false" fxShow.gt-sm>
+    <mat-step [stepControl]="offerTypeForm" label="Set offer type">
+        <form [formGroup]="offerTypeForm">
+            <mat-card class="mt-10">
+                <mat-card-header>
+                    <mat-card-title>
+                        <h2>Select offer type</h2>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div fxLayout="row" class="mt-10">
+                        <mat-form-field class="example-user-input">
+                            <mat-select placeholder="Choose a category so we can recommend the best offer" formControlName="category">
+                                <mat-option *ngFor="let category of categoryList" [value]="category.id">
+                                    {{ category.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" class="mt-10">
+                        <p>What do you want to do?</p>
+                    </div>
+                    <div fxLayout="row" class="mt-10">
+                        <mat-form-field class="example-user-input">
+                            <mat-select id='matSelect' placeholder="Choose a object">
+                                <mat-option *ngFor="let offerType of offerTypeList" [value]="offerType.id">
+                                    {{ offerType.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <a style="color:#0654ba;cursor: pointer;margin:15px;">Reset to see all offer types</a>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="mt-10">
+                <mat-radio-group formControlName="discountType" (change)="onChangeType()">
+                    <div fxLayout="row" class="mt-10">
+                        <div class='field'>
+                            <label class='field_label'>Spend</label>
+                            <div class='field_control'>
+                                <fieldset>
+                                    <div fxLayout="row">
+                                        <div class="offertype-container">
+                                            <mat-radio-button value="1" style="float:left">Extra AFCASH</mat-radio-button>
+                                            <select formControlName="discountValue" style="float:left;margin-left:10px">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                      </select>
+                                            <p class="n_p"> off AFCASH</p>
+                                            <select formControlName="eventValue" style="float:left;margin-left:10px">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                                            <p class="n_p"> + </p>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <div class="offertype-container">
+                                            <mat-radio-button value="2" style="float:left">
+                                                Extra
+                                            </mat-radio-button>
+                                            <select formControlName="discountValue" style="float:left;margin-left:10px">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                      </select>
+                                            <p class="n_p"> % off AFCASH</p>
+                                            <select formControlName="eventValue" style="float:left;margin-left:10px">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                                            <p class="n_p"> + </p>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <div class="offertype-container">
+                                            <mat-radio-button value="3" style="float:left">
+                                                Save AFCASH
+                                            </mat-radio-button>
+                                            <select formControlName="discountValue" style="float:left;margin-left:10px">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                      </select>
+                                            <p class="n_p"> for everyday AFCASH</p>
+                                            <select formControlName="eventValue" style="float:left;margin-left:10px">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row" class="mt-10">
+                        <div class='field'>
+                            <label class='field_label'>Quantity</label>
+                            <div class='field_control'>
+                                <fieldset>
+                                    <div fxLayout="row">
+                                        <div class="offertype-container">
+                                            <mat-radio-button value="4" style="float:left">
+                                                Extra AFCASH
+                                            </mat-radio-button>
+                                            <select formControlName="discountValue" style="float:left;margin-left:10px">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                      </select>
+                                            <p class="n_p"> off </p>
+                                            <select formControlName="eventValue" style="float:left;margin-left:10px">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                                            <p class="n_p"> + items</p>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <div class="offertype-container">
+                                            <mat-radio-button value="5" style="float:left">
+                                                Extra
+                                            </mat-radio-button>
+                                            <select formControlName="discountValue" style="float:left;margin-left:10px">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                      </select>
+                                            <p class="n_p"> % off </p>
+                                            <select formControlName="eventValue" style="float:left;margin-left:10px">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                                            <p class="n_p"> + items </p>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <div class="offertype-container">
+                                            <mat-radio-button value="6" style="float:left">
+                                                Save AFCASH
+                                            </mat-radio-button>
+                                            <select formControlName="discountValue" style="float:left;margin-left:10px">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                      </select>
+                                            <p class="n_p"> for everyday AFCASH</p>
+                                            <select formControlName="eventValue" style="float:left;margin-left:10px">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                                            <p class="n_p"> items </p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row" class="mt-10">
+                        <div class='field'>
+                            <label class='field_label'>Buy one, get one</label>
+                            <div class='field_control'>
+                                <fieldset>
+                                    <div fxLayout="row">
+                                        <div class="offertype-container">
+                                            <mat-radio-button value="7" style="float:left">
+                                                Buy
+                                            </mat-radio-button>
+                                            <select formControlName="buyNumber" style="float:left;margin-left:10px">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
+                                            <p class="n_p"> ,get </p>
+                                            <select formControlName="getNumber" style="float:left;margin-left:10px">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
+                                            <p class="n_p"> free </p>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <div class="offertype-container">
+                                            <mat-radio-button value="8" style="float:left">
+                                                Buy
+                                            </mat-radio-button>
+                                            <select formControlName="buyNumber" style="float:left;margin-left:10px">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
+                                            <p class="n_p"> ,get </p>
+                                            <select formControlName="getNumber" style="float:left;margin-left:10px">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
+                                            <p class="n_p"> at </p>
+                                            <select formControlName="discountValue" style="float:left;margin-left:10px">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                      </select>
+                                            <p class="n_p"> % off </p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row" class="mt-10">
+                        <div class='field'>
+                            <label class='field_label'>No minimum purchase</label>
+                            <div class='field_control'>
+                                <fieldset>
+                                    <div fxLayout="row">
+                                        <div class="offertype-container">
+                                            <mat-radio-button value="11" style="float:left">
+                                                Extra AFCASH
+                                            </mat-radio-button>
+                                            <select formControlName="discountValue" style="float:left;margin-left:10px">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                      </select>
+                                            <p class="n_p"> off </p>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <div class="offertype-container">
+                                            <mat-radio-button value="12" style="float:left">
+                                                Extra
+                                            </mat-radio-button>
+                                            <select formControlName="discountValue" style="float:left;margin-left:10px">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                      </select>
+                                            <p class="n_p"> % off </p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                    </div>
+                </mat-radio-group>
+            </mat-card>
+
+            <div fxLayout="row" fxLayoutAlign="end" class="mt-2 p-1">
+                <button mat-raised-button matStepperNext color="primary" matTooltip="Select Items" matTooltipPosition="after">
+          Select Items
+        </button>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="selectItemsForm" label="Select items">
+
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" *ngIf="selectClick == 1">
+            <mat-card fxFlex="50%">
+                <mat-card-header fxLayoutAlign="center">
+                    <mat-card-title>
+                        <h3 click="selectItems()">Select items</h3>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content fxLayout="column">
+                    <p fxLayoutAlign="center">500 items max</p>
+                    <p fxLayoutAlign="center">Choose items from your live inventory.</p>
+                    <p fxLayoutAlign="center">You can add or remove them at any time.</p>
+                    <button mat-raised-button color="primary" class="mt-20" fxLayoutAlign="center" (click)="selectItems()">Select items</button>
+                    <a fxLayoutAlign="center" href="javascript:;" class="mt-20">
+            I want to enter specific SKUs or item IDs(advanced)
+          </a>
+                </mat-card-content>
+            </mat-card>
+
+            <!-- <mat-card fxFlex="50%">
+        <mat-card-header fxLayoutAlign="center">
+          <mat-card-title>
+            <h3>Create rules</h3>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content fxLayout="column">
+          <p fxLayoutAlign="center">No item limits</p>
+          <p fxLayoutAlign="center">Set rules using categories and filters.</p>
+          <p fxLayoutAlign="center">We'll include new items as they're listed.</p>
+          <button mat-raised-button color="primary" class="mt-20" fxLayoutAlign="center">Choose rules</button>
+        </mat-card-content>
+      </mat-card> -->
+        </div>
+
+        <div fxLayout="column" *ngIf="selectClick == 0">
+            <mat-card style="width:100%">
+                <mat-card-header>
+                    <h3>Select items</h3>
+                </mat-card-header>
+                <mat-card-content>
+                    <div fxLayout="row">
+                        <p>You select
+                            <span style="font-weight: bold; font-size: large;">{{selCategoryName}}</span> category</p>
+                        <!-- <mat-form-field class="example-user-input" style="width:200px;height: 20px">
+                    <mat-select>
+                      <mat-option *ngFor="let positionOption of positionOptions" [value]="positionOption">
+                          {{ positionOption }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+                        <!-- <span style="margin-top:15px;margin-left:10px"> PRICE AFCASH</span><input style="margin-top:15px;margin-left:10px"> -->
+                        <!-- <span style="margin-top:15px;margin-left:10px"> - AFCASH</span><input style="margin-top:15px;margin-left:10px"> -->
+                    </div>
+                    <div fxLayout="row">
+                        <mat-form-field style="margin-top:10px;height:20px">
+                            <input matInput placeholder="Search by item title" [(ngModel)]="searchKeyword">
+                        </mat-form-field>
+                        <button mat-raised-button color="primary" style="margin-top:15px;margin-left:20px;" (click)="onClickSearch()">Search</button>
+                    </div>
+                </mat-card-content>
+                <div fxLayout="row">
+                    <mat-card style="width:100%">
+                        <div fxLayout="row">
+                            <h4>Items found ({{count}})</h4>
+                        </div>
+                        <div fxLayout="row" class="table-header mt-10">
+                            <!-- <mat-checkbox fxFlex="10%" (click)="onClickCheckAll()"></mat-checkbox> -->
+                            <span fxFlex="10%"></span>
+                            <span fxFlex="40%">Item</span>
+                            <span fxFlex="10%">Shipping</span>
+                            <span fxFlex="10%">Price</span>
+                            <span fxFlex="10%">Views</span>
+                        </div>
+                        <div fxLayout="row" class="mg-5" *ngFor="let product of findProducts;let num=index">
+                            <mat-checkbox fxFlex="10%" (click)="onClickCheckBox(num)" [(ngModel)]="product.selected"></mat-checkbox>
+                            <span fxFlex="40%">{{product.title}}</span>
+                            <span fxFlex="10%">Free</span>
+                            <span fxFlex="10%">{{product.current_price}}</span>
+                            <span fxFlex="10%">0</span>
+                        </div>
+                        <div fxLayout="column">
+                        </div>
+                    </mat-card>
+                </div>
+            </mat-card>
+            <!--modified by U-->
+        </div>
+        <div fxLayout="column" *ngIf="selectClick == 2">
+            <mat-card style="width:100%">
+                <mat-card-content>
+                    <div fxLayout="row">
+                        <h4>Confirm you selection: </h4>
+                    </div>
+                    <div fxLayout="row">
+                        <span>Items selected &nbsp;</span>
+                        <span> ({{selectedCount}}) &nbsp;</span>
+                        <a style="cursor:pointer;color:blue" (click)="deleteAllFunc()">Delete all</a>
+                    </div>
+                    <div fxLayout="row" class="table-header mt-10">
+                        <!-- <mat-checkbox fxFlex="10%" (click)="onClickCheckAll()"></mat-checkbox> -->
+                        <span fxFlex="10%"></span>
+                        <span fxFlex="40%">Item</span>
+                        <span fxFlex="10%">Shipping</span>
+                        <span fxFlex="10%">Price</span>
+                        <span fxFlex="10%">Available</span>
+                        <span fxFlex="10%">Sold</span>
+                        <span fxFlex="10%">Views</span>
+                    </div>
+                    <div class="mt-5" *ngFor="let product of selectedProducts;let num=index">
+                        <div fxLayout="row" *ngIf="product.selected == true">
+                            <!-- <mat-checkbox fxFlex="10%" (click)="onClickCheckBox(num)"></mat-checkbox> -->
+                            <span fxFlex="10%"></span>
+                            <span fxFlex="40%">{{product.title}}</span>
+                            <span fxFlex="10%">Free</span>
+                            <span fxFlex="10%">{{product.current_price}}</span>
+                            <span fxFlex="10%">{{product.quantity}}</span>
+                            <span fxFlex="10%">0</span>
+                            <span fxFlex="10%">0</span>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxLayout="row" *ngIf="selectClick == 0">
+            <div class="sme-bottom-nav" id="w0-bottom-nav">
+                <button style="width:211px;color:#0654ba" mat-raised-button color="" class="nav-element cancel" fxLayoutAlign="center" (click)="prevClick()">Back</button>
+                <div class="nav-element draft throbber-container">
+                    <div class="throbber" id="w0-bottom-nav-draftThrobber">
+                        <span class="spinner" role="img" aria-label="Busy animation"></span>
+                    </div>
+                </div>
+                <div class="nav-element link">
+                    <span>{{selectedCount}}/{{count}}</span> selected
+                </div>
+                <div class="nav-element next throbber-container">
+                    <div class="throbber" id="w0-bottom-nav-nextThrobber" style="display: none;">
+                        <span class="spinner" role="img" aria-label="Busy animation"></span>
+                    </div>
+                    <button style="width:211px;color:white" mat-raised-button color="primary" class="nav-element cancel" fxLayoutAlign="center" (click)='confrimClick()'>Confirm selections</button>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="row" *ngIf="selectClick == 2">
+            <div class="sme-bottom-nav" id="w0-bottom-nav">
+                <button style="width:211px;color:white" mat-raised-button color="primary" class="nav-element cancel" fxLayoutAlign="center" (click)="onClickAddMore()">Add more items</button>
+                <div class="nav-element draft throbber-container">
+                    <div class="throbber" id="w0-bottom-nav-draftThrobber">
+                        <span class="spinner" role="img" aria-label="Busy animation"></span>
+                    </div>
+                </div>
+                <div class="nav-element link">
+                    <span>{{selectedCount}}/{{count}}</span> selected
+                </div>
+                <!-- <select placeholder="Save and select for next discount" style="width: 100px;">
+              <option>30 %</option>
+            </select> -->
+                <div class="nav-element next throbber-container">
+                    <div class="throbber" id="w0-bottom-nav-nextThrobber" style="display: none;">
+                        <span class="spinner" role="img" aria-label="Busy animation"></span>
+                    </div>
+                    <button style="width:211px;color:white" matStepperNext mat-raised-button color="primary" class="nav-element cancel" fxLayoutAlign="center" (click)='saveReview()'>Save and review</button>
+                </div>
+            </div>
+        </div>
+
+
+    </mat-step>
+
+    <mat-step [stepControl]="reviewForm" label="Review & lanunch">
+        <mat-card class="mt-20">
+            <mat-card-header>
+                <mat-card-title>
+                    <h2>Review your sale event</h2>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div fxLayout="row" class="mt-10">
+                    <div class='field'>
+                        <label class='field_label'>Sale event name*</label>
+                        <div class='field_control'>
+                            <div fxLayout="row">
+                                <mat-form-field>
+                                    <input matInput placeholder="Input" [(ngModel)]="saleEventName">
+                                </mat-form-field>
+                                <!-- <p class='t_p'>62/90</p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row">
+                    <p style="margin-left:190px;font-size:12px;color:gray">This will not be visible to buyers.</p>
+                </div>
+                <div fxLayout="row" class="mt-10">
+                    <div class='field'>
+                        <label class='field_label'>Discount type and items</label>
+                        <div class='field_control'>
+                            <fieldset>
+                                <div fxLayout="row">
+                                    <div class="offertype-container">
+                                        <div value="primary" style="float:left">
+                                            {{selectedCount}} selected
+                                        </div>
+                                        <button mat-raised-button matStepperPrevious color="primary" matTooltip="" matTooltipPosition="before" class="ml-1" (click)="onClickSelectItems()">
+                                          Add items
+                                        </button>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" style="margin-top: 10px;">
+                                    <div class="offertype-container">
+                                        <div value="primary" style="float:left;margin-top:7px;">
+                                            {{typeStr}}
+                                        </div>
+                                        <button mat-raised-button color="primary" matTooltip="" matTooltipPosition="before" class="ml-1" (click)="onClickEditTypes()">
+                                            Edit
+                                        </button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row" class="mt-10">
+                    <div class='field'>
+                        <label class='field_label'>Date range*</label>
+                        <div class='field_control'>
+                            <fieldset>
+                                <div fxLayout="row" style="margin-top: 10px;">
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="startPicker" placeholder="Choose a start date">
+                                        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #startPicker></mat-datepicker>
+                                    </mat-form-field>
+                                    <!-- <mat-form-field class="example-user-input">
+                                        <mat-select id='matSelect'>
+                                        </mat-select>
+                                    </mat-form-field> -->
+                                    <span class="dash">—</span>
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="endPicker" placeholder="Choose a end date">
+                                        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #endPicker></mat-datepicker>
+                                    </mat-form-field>
+                                    <!-- <mat-form-field class="example-user-input">
+                                        <mat-select id='matSelect1'>
+
+                                        </mat-select>
+                                    </mat-form-field> -->
+                                </div>
+                                <div fxLayout="row" style="margin-top: 10px;">
+                                    <!-- <a style='cursor:pointer;color:#436ac5;'>Show retail calendar</a> -->
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="mt-20">
+            <mat-card-header>
+                <mat-card-title>
+                    <h2>Sale event banner</h2>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div fxLayout="row" class="mt-10">
+                    <div class='field'>
+                        <label class='field_label'>Sale event description*</label>
+                        <div class='field_control'>
+                            <div fxLayout="row">
+                                <mat-form-field>
+                                    <input matInput placeholder="Input" [(ngModel)]="description" maxlength="50">
+                                </mat-form-field>
+                                <p class='t_p'>{{50 - description?.length}}/50</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row">
+                    <p style="margin-left:190px;font-size:12px;color:gray">Example: All handbags or Across all brands.</p>
+                </div>
+                <div fxLayout="row">
+                    <div>
+                        <label class='field_label'>Sale event image</label>
+                        <div class='field_control'>
+                            <fieldset>
+                                <div fxLayout="row">
+                                    <div class="offertype-container">
+                                        <!-- each product show -->
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutGap="20px" style="margin-top:20px;">
+                        <div *ngFor="let image of eventImages">
+                            <img src="{{ image }}" width="150px" height="150px" (click)="eventImagePath = image" />
+                        </div>
+
+                        <mat-card fxLayoutAlign="center center" style="height: 150px!important; width: 150px;min-height: 150px;">
+                            <a class="addPicBtn" style="font-size: 50px;color: #436ac5;text-decoration: none;">
+                                <b>Add photos</b>
+                                <input class="upl-fileInp" type="file" name="d" value="" title="Add photos" multiple="" id="upl-1538455113913" (change)="selectFile($event)">
+                            </a>
+                            <!-- <a href="javascript:;" style="font-size: 50px;color: #436ac5;text-decoration: none;">+</a> -->
+                        </mat-card>
+                    </div>
+                </div>
+                <div fxLayout="row" class="mt-10">
+                    <div>
+                        <label class='field_label'>Preview sale event banner</label>
+
+                        <!-- <div class='field_control'>
+                          <fieldset>
+                              
+                          </fieldset>
+                        </div> -->
+                    </div>
+                    <div id="image_section" style="border: 1px solid #d0d0d0;width: 380px;height: 180px; background-size: cover" [ngStyle]="{'background-image': 'url(' + eventImagePath + ')'}">
+                        <div fxLayout="row" style="margin-top: 16px;">
+                            <div style="text-align: right;">
+                                <p style="font-weight: bold; font-size:20px;float:left;color: red">{{typeStr}}</p>
+                            </div>
+                        </div>
+                        <p>{{description}}</p>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <div fxLayout="row">
+            <div class="sme-bottom-nav" id="w0-bottom-nav">
+                <button style="width:211px;color:white" mat-raised-button color="primary" class="nav-element cancel" fxLayoutAlign="center">Save for later</button>
+                <div class="nav-element draft throbber-container">
+                    <div class="throbber" id="w0-bottom-nav-draftThrobber">
+                        <span class="spinner" role="img" aria-label="Busy animation"></span>
+                    </div>
+                </div>
+                <div class="nav-element link">
+                    <span>By launching, I agree to the</span>
+                    <a href="http://pages.vendasity.com/specialoffers/sellerterms.html" target="_blank" id="w0-bottom-nav-w0">vendasity Promotions Manager Terms and Conditions
+          </a>
+                </div>
+                <div class="nav-element next throbber-container">
+                    <div class="throbber" id="w0-bottom-nav-nextThrobber" style="display: none;">
+                        <span class="spinner" role="img" aria-label="Busy animation"></span>
+                    </div>
+                    <button style="width:211px;color:white" matStepperNext mat-raised-button color="primary" class="nav-element cancel" fxLayoutAlign="center" (click)="onClickLaunch()">
+            Launch
+          </button>
+                </div>
+            </div>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>
+<div fxLayout="row" style="margin-top:50px;margin-bottom:50px">
+    <p>Copyright© 2018 Africunia Inc. All Rights Reserved. Accessibility, User Agreement, Privacy, Cookies and AdChoice</p>
+</div>

@@ -1,0 +1,365 @@
+@charset "UTF-8";
+div.breadcrumb {
+  padding-top: 4px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+div.breadcrumb > hr.middle-line {
+  border-color: #b7b5b5;
+  border-style: solid;
+  border-width: 1px 0 0;
+  position: absolute;
+  top: 22px;
+  width: 100%;
+}
+
+div.breadcrumb > ul {
+  list-style: none;
+  display: inline-block;
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+}
+
+div.breadcrumb > ul > li {
+  float: left;
+  text-align: center;
+  width: 250px;
+}
+
+div.breadcrumb > ul > li a[href='#'] {
+  cursor: default;
+  outline: 0;
+}
+
+div.breadcrumb > ul > li > a.current {
+  background: #000;
+  color: #fff;
+  cursor: default;
+  pointer-events: none;
+  font-weight: bold;
+  width: 35px;
+}
+
+div.breadcrumb > ul > li > a {
+  border: 1px solid #b7b5b5;
+  border-radius: 18px;
+  display: inline-block;
+  height: 35px;
+  line-height: 33px;
+  text-decoration: none;
+  background: #f3f3f3;
+}
+
+div.breadcrumb > ul > li > a.current + span {
+  color: #333;
+  font-weight: bold;
+}
+
+div.breadcrumb > ul > li > span {
+  display: block;
+  padding: 10px 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #767676;
+}
+
+div.breadcrumb > ul > li > a.future {
+  color: #767676;
+  cursor: default;
+  pointer-events: none;
+  width: 35px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.example-user-input {
+  width: 500px;
+}
+
+.offertype-container {
+  margin-bottom: 15px;
+}
+
+select {
+  padding: 8px;
+  width: 60px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+mat-radio-button {
+  margin-top: 7px;
+}
+
+.n_p {
+  margin-top: 7px;
+  float: left;
+  margin-left: 10px;
+}
+
+.review-order-table.mat-table {
+  display: block;
+  overflow-x: auto;
+}
+
+.review-order-table.mat-table .mat-row,
+.review-order-table.mat-table .mat-header-row {
+  display: flex;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 24px;
+  min-width: 760px;
+}
+
+.review-order-table.mat-table .mat-row {
+  min-height: 60px;
+}
+
+.review-order-table.mat-table .mat-cell,
+.review-order-table.mat-table .mat-header-cell {
+  flex: 1;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.review-order-table.mat-table .mat-header-cell {
+  font-size: 14px;
+}
+
+.review-order-table.mat-table .mat-cell img {
+  width: 60px;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.field {
+  width: 100%;
+}
+
+.field_label {
+  width: 185px;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.field_control {
+  margin-top: 10px;
+  display: inline-flex;
+}
+
+.n_p {
+  margin-top: 7px;
+  float: left;
+  margin-left: 10px;
+}
+
+.t_p {
+  margin-top: 20px;
+  float: left;
+  margin-left: 10px;
+}
+
+fieldset {
+  border: 0;
+}
+
+select {
+  padding: 8px;
+  width: 60px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.textbox {
+  font-size: 14px;
+  position: relative;
+}
+
+.textbox textarea {
+  width: 600px;
+}
+
+textarea.textbox__control {
+  min-height: 200px;
+  overflow: auto;
+  padding-bottom: 16px;
+  padding-top: 16px;
+  resize: vertical;
+  vertical-align: middle;
+}
+
+.dash {
+  margin-top: 10px;
+  line-height: 36px;
+  float: left;
+  padding: 0 5px;
+}
+
+.sme-bottom-nav {
+  z-index: 0;
+  background: #767676;
+  height: 70px;
+  width: 100%;
+  z-index: 1010;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+div.sme-bottom-nav .nav-element {
+  margin: 0 20px;
+}
+
+div.sme-bottom-nav .cancel {
+  margin-right: auto !important;
+}
+
+div.sme-bottom-nav .throbber {
+  padding: 0;
+  border-radius: 3px;
+}
+
+.throbber {
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: none;
+  height: 100%;
+  left: 0;
+  padding-top: 100px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.spinner[role="img"][aria-label] {
+  display: inline-block;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiP…wzLjQsMTAuNSw4LjFsNC0xQzI3LjgsNC44LDIxLjksMC4xLDE1LDAuMXoiLz4KPC9zdmc+Cg==) no-repeat center center;
+  background-size: cover;
+  -webkit-animation: spin 600ms linear infinite;
+  animation: spin 600ms linear infinite;
+  height: 30px;
+  width: 30px;
+}
+
+div.sme-bottom-nav .throbber > span {
+  vertical-align: middle;
+}
+
+div.sme-bottom-nav div.link {
+  color: #fff;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+div.sme-bottom-nav .nav-element {
+  margin: 0 20px;
+}
+
+div.sme-bottom-nav div.link a {
+  color: #fff;
+  text-decoration: underline;
+  display: block;
+}
+
+.btn.btn--primary {
+  color: #fff;
+  background-color: #0654ba;
+  border-color: #0654ba;
+}
+
+button.btn,
+input.btn,
+a:not([role]):not([href^="javascript"]).btn--faux.btn,
+a[role="button"]:not([href^="javascript"]).btn--hijax.btn {
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  display: inline-block;
+  font-weight: normal;
+  line-height: normal;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.table-header {
+  background: #f8f8f8;
+  font-size: 14px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.mt-5 {
+  margin-top: 5px;
+}
+
+.addPicBtn {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  z-index: 10;
+  color: #0654BA;
+  overflow: hidden;
+  padding: 0px;
+}
+
+.addPicBtn i {
+  display: block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url("https://ir.ebaystatic.com/rs/v/nrzkkzqriy4mtno1tk5ziida5ix.png") no-repeat -86.5px -14px/215px auto;
+  margin: 10px auto 0 auto;
+}
+
+.addPicBtn b {
+  margin: 8px auto 0 auto;
+  position: relative;
+  font-weight: normal;
+  font-size: 13px;
+  white-space: normal;
+}
+
+.upl-fileInp {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  position: absolute;
+  width: 100%;
+  cursor: pointer;
+  margin-left: -100px;
+}
+
+.remove-image {
+  cursor: pointer;
+}

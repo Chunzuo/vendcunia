@@ -1,0 +1,52 @@
+<div fxLayout="row">
+    <h2>Active Listings({{productList.length}})</h2>
+</div>
+<mat-card class="mt-20">
+    <mat-card-content>
+        <div fxLayout="row">
+            <table mat-table [dataSource]="dataSource" matSort style="width: 100%">
+
+                <ng-container matColumnDef="no">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> No </th>
+                    <td mat-cell *matCellDef="let row;">{{row.rowIdx}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                    <td mat-cell *matCellDef="let row">{{row.name}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="image">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Photo </th>
+                    <td mat-cell *matCellDef="let row"><img width="50" height="50" style="margin:10px 0;" src="{{row.images[0]}}" /></td>
+                </ng-container>
+
+                <ng-container matColumnDef="price">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+                    <td mat-cell *matCellDef="let row">{{row.current_price}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="rating">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Rating </th>
+                    <td mat-cell *matCellDef="let row">{{row.rating_value}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+                    <td mat-cell *matCellDef="let row">{{row.quantity}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="created_on">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> CreatedAt </th>
+                    <td mat-cell *matCellDef="let row">{{row.created_on}}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        <div fxLayout="row">
+            <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" style="float:right;"></mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

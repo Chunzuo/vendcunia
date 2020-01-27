@@ -1,0 +1,35 @@
+.signin-form {
+    max-width: 300px;
+    .signin-btn {
+        min-width: 200px;
+    }
+}
+.btn {
+    width: 55%;
+}
+.line{
+    border: 1px solid rgb(189, 186, 186);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    height: 50%;
+    margin-right:40%;
+}
+.text {
+    margin-left: -5px;
+}
+.google_btn{
+    background-color: white;
+    margin-left: 5%;
+    position: absolute;
+    top: 47%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.w3-ripple:active{opacity:0.5}
+.w3-ripple{transition:opacity 0s}
+#text{
+    color:black;
+    margin-top:-7%;
+}
