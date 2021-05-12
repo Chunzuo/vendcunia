@@ -55,7 +55,7 @@
         "ngx-spinner": "6.1.2",
         "ngx-swiper-wrapper": "6.4.0",
         "ngx-uploader": "^7.0.0",
-        "nodemailer": "^4.6.8",
+        "nodemailer": "^6.4.16",
         "nodemailer-express-handlebars": "^3.0.0",
         "pug": "^2.0.3",
         "rxjs": "6.3.1",
